@@ -14,7 +14,7 @@ main {
 
 .container {
     display: grid;
-    background: url("assets/bg.jpg") no-repeat;
+    background: url("../../../assets/bg.jpg") no-repeat;
     background-size: cover;
     opacity: 90%;
     grid-template-columns: 500px 500px;
@@ -96,7 +96,7 @@ h2 {
 }
 
 .invalid {
-    background: url("assets/icon-error.svg") no-repeat scroll 97% 10px;
+    background: url("../../../assets/icon-error.svg") no-repeat scroll 97% 10px;
     border: 2px solid hsl(0, 100%, 74%) !important;
 }
 
@@ -138,7 +138,7 @@ h2 {
 @media screen and (max-width: 700px) {
     .container {
         grid-template-columns: auto;
-        background-image: url("assets/bg-intro-mobile.png");
+        background-image: url("../../../assets/bg-intro-mobile.png");
         padding: 2rem 1rem;
     }
     .container > div {

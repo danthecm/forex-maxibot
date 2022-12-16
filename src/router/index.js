@@ -1,16 +1,21 @@
 import { createBrowserRouter } from "react-router-dom";
-import App from "../App";
-import Register from "../pages/Auth/register";
+import Auth from "../pages/Auth";
+import Login from "../pages/Auth/Login";
+import Register from "../pages/Auth/Register/index";
 
-const RouterConfig = createBrowserRouter([
+const routerConfig = createBrowserRouter([
     {
         path: '',
-        element: <App />,
+        element: <Auth />,
         children: [
             {
                 index: true,
                 element: <Register />
 
+            },
+            {
+                path: "/login",
+                element: <Login />
             }
         ]
 
@@ -18,4 +23,4 @@ const RouterConfig = createBrowserRouter([
     }
 ])
 
-export default RouterConfig
+export default routerConfig
