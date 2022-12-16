@@ -100,7 +100,11 @@ const Login = () => {
               disabled={!formIsValid || isFetching ? true : false}
               type="submit"
             >
-              {isFetching ? "...Please wait..." : "Login"}
+              {!isFetching && !formIsValid
+                ? "Enter your information"
+                : isFetching && formIsValid
+                ? "Please wait...."
+                : "Login"}
             </button>
             <p className={styles.terms}>
               By clicking the button, you are agreeing to our

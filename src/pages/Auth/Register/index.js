@@ -148,7 +148,7 @@ const Register = () => {
               disabled={!formIsValid || isFetching ? true : false}
               type="submit"
             >
-              {isFetching ? "Please wait" : "Register"}
+              {!isFetching && !formIsValid ? "Please the form correctly" : isFetching && formIsValid ? "Please wait" : "Register"}
             </button>
             <p className={styles.terms}>
               By clicking the button, you are agreeing to our
