@@ -9,7 +9,7 @@ const routerConfig = createBrowserRouter([
         element: <Auth />,
         children: [
             {
-                index: true,
+                path: "/register",
                 element: <Register />
 
             },

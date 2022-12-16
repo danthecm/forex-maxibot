@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import useInput from "../../../hooks/use-input";
+import { Link } from "react-router-dom";
 import styles from "./Login.module.css";
 
 const Login = () => {
@@ -104,6 +105,9 @@ const Login = () => {
             <p className={styles.terms}>
               By clicking the button, you are agreeing to our
               <span>Terms and Services</span>
+            </p>
+            <p className={styles.nextPage}>
+              Don't have an account register <Link to="/register">here</Link>{" "}
             </p>
           </form>
         </div>

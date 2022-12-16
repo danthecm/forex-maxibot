@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import useInput from "../../../hooks/use-input";
 
 import styles from "./Register.module.css";
@@ -152,6 +153,9 @@ const Register = () => {
             <p className={styles.terms}>
               By clicking the button, you are agreeing to our
               <span>Terms and Services</span>
+            </p>
+            <p className={styles.nextPage}>
+              Already registered Login <Link to="/login">here</Link>{" "}
             </p>
           </form>
         </div>
