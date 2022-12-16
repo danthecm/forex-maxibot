@@ -2,9 +2,9 @@ import axios from "axios";
 import { useState } from "react";
 import useInput from "../../../hooks/use-input";
 import { Link } from "react-router-dom";
-import styles from "./Login.module.css";
+import styles from "../Auth.module.css";
 
-const Login = () => {
+const Login = (props) => {
   const [isFetching, setIsFetching] = useState(false);
   const {
     value: enteredEmail,
@@ -110,7 +110,7 @@ const Login = () => {
               By clicking the button, you are agreeing to our
               <span>Terms and Services</span>
             </p>
-            <p className={styles.nextPage}>
+            <p className={styles.link}>
               Don't have an account register <Link to="/register">here</Link>{" "}
             </p>
           </form>

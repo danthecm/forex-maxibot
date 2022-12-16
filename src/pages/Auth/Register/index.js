@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import useInput from "../../../hooks/use-input";
 
-import styles from "./Register.module.css";
+import styles from "../Auth.module.css";
 
 const Register = () => {
   const [isFetching, setIsFetching] = useState(false);
@@ -154,7 +154,7 @@ const Register = () => {
               By clicking the button, you are agreeing to our
               <span>Terms and Services</span>
             </p>
-            <p className={styles.nextPage}>
+            <p className={styles.link}>
               Already registered Login <Link to="/login">here</Link>{" "}
             </p>
           </form>

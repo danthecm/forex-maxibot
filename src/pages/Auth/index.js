@@ -7,7 +7,7 @@ const Auth = () => {
         <main>
             <img className={styles.logo} src={logo} alt="Maxibot Logo" />
             <div className={styles.container}>
-            <Outlet />
+            <Outlet styles="My Styles" />
             </div>
         </main>
     )
