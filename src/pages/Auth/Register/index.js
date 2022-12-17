@@ -57,7 +57,7 @@ const Register = () => {
       );
       console.log("Your request data is:", sendData);
       toast.update(loading, {
-        render: "Successfully Registered",
+        render: "Verify your Email to continue",
         type: "success",
         isLoading: false,
         autoClose: true,
@@ -200,17 +200,17 @@ const Register = () => {
               type="submit"
             >
               {!isFetching && !formIsValid
-                ? "Please the form correctly"
+                ? "Register"
                 : isFetching && formIsValid
                 ? "Sending...."
                 : "Register"}
             </button>
+            <p className={styles.link}>
+              Already registered Login <Link to="/login">here</Link>{" "}
+            </p>
             <p className={styles.terms}>
               By clicking the button, you are agreeing to our{" "}
               <span>Terms and Services</span>
-            </p>
-            <p className={styles.link}>
-              Already registered Login <Link to="/login">here</Link>{" "}
             </p>
           </form>
         </div>

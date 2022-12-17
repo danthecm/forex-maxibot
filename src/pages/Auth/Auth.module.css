@@ -7,6 +7,8 @@ main {
     height: 100vh;
     grid-template-rows: .1fr auto none;
     width: 100vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 .logo {
     margin-top: 20px;
@@ -139,10 +141,6 @@ h2 {
 }
 
 @media screen and (max-width: 769px) {
-    .main {
-        height: 100vh;
-        overflow-y: scroll;
-    }
   .container {
     grid-template-columns: auto;
     padding: 0 2rem;

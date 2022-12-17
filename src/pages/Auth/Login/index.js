@@ -155,17 +155,17 @@ const Login = () => {
               type="submit"
             >
               {!isFetching && !formIsValid
-                ? "Enter your information"
+                ? "Login"
                 : isFetching && formIsValid
                 ? "Please wait...."
                 : "Login"}
             </button>
+            <p className={styles.link}>
+              Don't have an account register <Link to="/register">here</Link>
+            </p>
             <p className={styles.terms}>
               By clicking the button, you are agreeing to our{" "}
               <span>Terms and Services</span>
-            </p>
-            <p className={styles.link}>
-              Don't have an account register <Link to="/register">here</Link>
             </p>
           </form>
         </div>
