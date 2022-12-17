@@ -140,7 +140,7 @@ h2 {
 
 @media screen and (max-width: 769px) {
     .main {
-        height: auto;
+        height: 100vh;
     }
   .container {
     grid-template-columns: auto;
