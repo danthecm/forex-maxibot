@@ -146,10 +146,10 @@ h2 {
 }
 
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 769px) {
     .container {
         grid-template-columns: auto;
-        background-image: url("../../assets/bg-intro-mobile.png");
+        background-image: url("../../assets/mobile-bg.jpg");
         padding: 2rem 1rem;
     }
     .container > div {
