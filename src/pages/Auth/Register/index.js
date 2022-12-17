@@ -1,12 +1,18 @@
-import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
 import useInput from "../../../hooks/use-input";
+
+import "react-toastify/dist/ReactToastify.css";
 
 import styles from "../Auth.module.css";
 
 const Register = () => {
+  const navigate = useNavigate()
+
   const [isFetching, setIsFetching] = useState(false);
+
   const {
     value: enteredUsername,
     inputBlurHandler: usernameBlurHandler,
@@ -29,7 +35,7 @@ const Register = () => {
     valueChangedHandler: passwordChangedHandler,
     isValid: passwordIsValid,
     hasError: passwordHasError,
-  } = useInput((value) => value.length > 6);
+  } = useInput((value) => value.length > 3);
 
   const {
     value: enteredCPassword,
@@ -43,15 +49,57 @@ const Register = () => {
     usernameIsValid && emailIsValid && passwordIsValid && cPasswordIsValid;
 
   const sendFormData = async (data) => {
+    const loading = toast.loading("Registering....");
     try {
       const sendData = await axios.post(
-        "https://react-http-9e293-default-rtdb.firebaseio.com/cart.json",
+        "https://forex.themaxibot.com/register/",
         data
       );
-      console.log("Sent Data", sendData);
+      console.log("Your request data is:", sendData);
+      toast.update(loading, {
+        render: "Successfully Registered",
+        type: "success",
+        isLoading: false,
+      });
       setIsFetching(false);
     } catch (error) {
-      console.log("There was an error sending data", error);
+      const response = error.response;
+      const status = response.status;
+      switch (status) {
+        case 500:
+          toast.update(loading, {
+            render: "service unavailable, try later",
+            type: "error",
+            isLoading: false,
+            autoClose: true,
+            closeButton: true,
+          });
+          break;
+        case 400:
+          const data = response.data;
+          for (const key in data) {
+            if (Object.hasOwnProperty.call(data, key)) {
+              const element = data[key];
+              toast.update(loading, {
+                render: element[0],
+                type: "error",
+                isLoading: false,
+                autoClose: true,
+                closeButton: true,
+              });
+            }
+          }
+          break;
+        default:
+          toast.update(loading, {
+            render: "something went wrong, try later",
+            type: "error",
+            isLoading: false,
+            autoClose: true,
+            closeButton: true,
+          });
+          break;
+      }
       setIsFetching(false);
     }
   };
@@ -148,10 +196,14 @@ const Register = () => {
               disabled={!formIsValid || isFetching ? true : false}
               type="submit"
             >
-              {!isFetching && !formIsValid ? "Please the form correctly" : isFetching && formIsValid ? "Please wait" : "Register"}
+              {!isFetching && !formIsValid
+                ? "Please the form correctly"
+                : isFetching && formIsValid
+                ? "Sending...."
+                : "Register"}
             </button>
             <p className={styles.terms}>
-              By clicking the button, you are agreeing to our
+              By clicking the button, you are agreeing to our{" "}
               <span>Terms and Services</span>
             </p>
             <p className={styles.link}>

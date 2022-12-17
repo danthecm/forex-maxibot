@@ -16,7 +16,7 @@ main {
     display: grid;
     background: url("../../assets/bg.jpg") no-repeat;
     background-size: cover;
-    opacity: 90%;
+    opacity: 98%;
     grid-template-columns: 500px 500px;
     align-items: center;
     justify-content: space-around;

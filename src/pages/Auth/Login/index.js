@@ -4,7 +4,7 @@ import useInput from "../../../hooks/use-input";
 import { Link } from "react-router-dom";
 import styles from "../Auth.module.css";
 
-const Login = (props) => {
+const Login = () => {
   const [isFetching, setIsFetching] = useState(false);
   const {
     value: enteredEmail,
@@ -107,11 +107,11 @@ const Login = (props) => {
                 : "Login"}
             </button>
             <p className={styles.terms}>
-              By clicking the button, you are agreeing to our
+              By clicking the button, you are agreeing to our{" "}
               <span>Terms and Services</span>
             </p>
             <p className={styles.link}>
-              Don't have an account register <Link to="/register">here</Link>{" "}
+              Don't have an account register <Link to="/register">here</Link>
             </p>
           </form>
         </div>
