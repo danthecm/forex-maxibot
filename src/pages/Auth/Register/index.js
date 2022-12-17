@@ -62,6 +62,7 @@ const Register = () => {
         isLoading: false,
       });
       setIsFetching(false);
+      navigate("/login")
     } catch (error) {
       const response = error.response;
       const status = response.status;
