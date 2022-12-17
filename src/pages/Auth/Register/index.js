@@ -134,7 +134,7 @@ const Register = () => {
         </p>
       </div>
       <div>
-        <p className={styles.intro}>
+        <p>
           <span>Get Started</span> for free
         </p>
         <div className={styles.card}>
