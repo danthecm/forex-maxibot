@@ -141,6 +141,7 @@ h2 {
 @media screen and (max-width: 769px) {
     .main {
         height: 100vh;
+        overflow-y: scroll;
     }
   .container {
     grid-template-columns: auto;
