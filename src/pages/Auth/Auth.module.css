@@ -144,7 +144,7 @@ h2 {
     }
   .container {
     grid-template-columns: auto;
-    padding: 0 1rem;
+    padding: 0 2rem;
   }
   .container > div {
     text-align: center;
@@ -166,6 +166,6 @@ h2 {
 
 @media screen and (max-width: 375px) {
   .container {
-    padding: 2rem 0.2rem;
+    padding: 2rem 1rem;
   }
 }
