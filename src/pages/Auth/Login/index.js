@@ -1,18 +1,20 @@
 import axios from "axios";
 import { useState } from "react";
 import useInput from "../../../hooks/use-input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "../Auth.module.css";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [isFetching, setIsFetching] = useState(false);
   const {
-    value: enteredEmail,
-    inputBlurHandler: emailBlurHandler,
-    valueChangedHandler: emailChangedHandler,
-    isValid: emailIsValid,
-    hasError: emailHasError,
-  } = useInput((value) => value.includes("@"));
+    value: enteredUsername,
+    inputBlurHandler: usernameBlurHandler,
+    valueChangedHandler: usernameChangedHandler,
+    isValid: usernameIsValid,
+    hasError: usernameHasError,
+  } = useInput((value) => value.trim() !== "");
 
   const {
     value: enteredPassword,
@@ -20,20 +22,63 @@ const Login = () => {
     valueChangedHandler: passwordChangedHandler,
     isValid: passwordIsValid,
     hasError: passwordHasError,
-  } = useInput((value) => value.length > 6);
+  } = useInput((value) => value.length > 1);
 
-  const formIsValid = emailIsValid && passwordIsValid;
+  const formIsValid = usernameIsValid && passwordIsValid;
 
   const sendFormData = async (data) => {
+    const loading = toast.loading("Authenticating");
     try {
       const sendData = await axios.post(
-        "https://react-http-9e293-default-rtdb.firebaseio.com/cart.json",
+        "https://forex.themaxibot.com/login/",
         data
       );
-      console.log("Sent Data", sendData);
+      toast.update(loading, {
+        render: "Successfully Authenticated",
+        type: "success",
+        isLoading: false,
+        closeButton: true,
+      });
+      console.log("Your request data is:", sendData);
       setIsFetching(false);
+      const user = sendData.data;
+      localStorage.setItem("user", JSON.stringify(user));
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1000);
     } catch (error) {
-      console.log("There was an error sending data", error);
+      const response = error.response;
+      const status = response.status;
+      switch (status) {
+        case 500:
+          toast.update(loading, {
+            render: "service unavailable, try later",
+            type: "error",
+            isLoading: false,
+            autoClose: true,
+            closeButton: true,
+          });
+          break;
+        case 401:
+          const data = response.data;
+          toast.update(loading, {
+            render: data.detail,
+            type: "error",
+            isLoading: false,
+            autoClose: true,
+            closeButton: true,
+          });
+          break;
+        default:
+          toast.update(loading, {
+            render: "something went wrong, try later",
+            type: "error",
+            isLoading: false,
+            autoClose: true,
+            closeButton: true,
+          });
+          break;
+      }
       setIsFetching(false);
     }
   };
@@ -45,13 +90,12 @@ const Login = () => {
       return;
     }
     const user = {
-      email: enteredEmail,
+      username: enteredUsername,
       password: enteredPassword,
     };
     setIsFetching(true);
 
     sendFormData(user);
-    console.log(user);
   };
 
   return (
@@ -69,15 +113,15 @@ const Login = () => {
         <div className={styles.card}>
           <form onSubmit={formSubmitHandler} action="" method="post">
             <input
-              onChange={emailChangedHandler}
-              onBlur={emailBlurHandler}
-              name="email"
-              type="email"
-              placeholder="Email Address"
-              className={emailHasError ? "invalid" : ""}
+              onChange={usernameChangedHandler}
+              onBlur={usernameBlurHandler}
+              name="username"
+              type="text"
+              placeholder="Username"
+              className={usernameHasError ? styles.invalid : ""}
             />
-            {emailHasError ? (
-              <p className={styles.error}>Looks like this is not an email</p>
+            {usernameHasError ? (
+              <p className={styles.error}>Username cannot be empty</p>
             ) : (
               ""
             )}
@@ -88,7 +132,7 @@ const Login = () => {
               name="password"
               type="password"
               placeholder="Password"
-              className={passwordHasError ? "invalid" : ""}
+              className={passwordHasError ? styles.invalid : ""}
             />
             {passwordHasError ? (
               <p className={styles.error}>Password cannot be empty</p>

@@ -60,6 +60,8 @@ const Register = () => {
         render: "Successfully Registered",
         type: "success",
         isLoading: false,
+        autoClose: true,
+        closeButton: true,
       });
       setIsFetching(false);
       navigate("/login")
@@ -143,7 +145,7 @@ const Register = () => {
               name="username"
               type="text"
               placeholder="Username"
-              className={usernameHasError ? "invalid" : ""}
+              className={usernameHasError ? styles.invalid : ""}
             />
             {usernameHasError ? (
               <p className={styles.error}>First Name cannot be empty</p>
@@ -157,7 +159,7 @@ const Register = () => {
               name="email"
               type="email"
               placeholder="Email Address"
-              className={emailHasError ? "invalid" : ""}
+              className={emailHasError ? styles.invalid : ""}
             />
             {emailHasError ? (
               <p className={styles.error}>Looks like this is not an email</p>
@@ -171,7 +173,7 @@ const Register = () => {
               name="password"
               type="password"
               placeholder="Password"
-              className={passwordHasError ? "invalid" : ""}
+              className={passwordHasError ? styles.invalid : ""}
             />
             {passwordHasError ? (
               <p className={styles.error}>Password cannot be empty</p>
@@ -185,7 +187,7 @@ const Register = () => {
               name="cPassword"
               type="password"
               placeholder="Enter Password Again"
-              className={cPasswordHasError ? "invalid" : ""}
+              className={cPasswordHasError ? styles.invalid : ""}
             />
             {cPasswordHasError ? (
               <p className={styles.error}>Password must match</p>
