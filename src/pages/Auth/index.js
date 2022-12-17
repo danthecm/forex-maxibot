@@ -5,12 +5,12 @@ import styles from "./Auth.module.css";
 
 const Auth = () => {
     return (
-        <main>
+        <main className={styles.main}>
             <img className={styles.logo} src={logo} alt="Maxibot Logo" />
-            <ToastContainer position="top-center" autoClose={8000}  />
             <div className={styles.container}>
             <Outlet styles="My Styles" />
             </div>
+            <ToastContainer position="top-center" autoClose={5000}  />
         </main>
     )
 }

@@ -1,185 +1,171 @@
 main {
-    width: 100vw;
-    color: white;
-}
-
-.logo {
-    position: absolute;
-    z-index: 2;
-    top: 40px;
-    left: 50px;
-    height: 50px;
-    width: auto;
-}
-
-.container {
+    color: #fff;
     display: grid;
     background: url("../../assets/bg.jpg") no-repeat;
     background-size: cover;
     opacity: 98%;
-    grid-template-columns: 500px 500px;
-    align-items: center;
-    justify-content: space-around;
-    width: auto;
     height: 100vh;
-    padding: 2rem 4rem;
-    margin: auto;
+    grid-template-rows: .1fr auto none;
+    width: 100vw;
+}
+.logo {
+    margin-top: 20px;
+    margin-left: 30px;
+    height: 70px;
+  }
+
+.container {
+  display: grid;
+  grid-template-columns: 500px 500px;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  margin: auto;
 }
 
-
-.container > div {
-    margin: 10px 25px;
-}
 
 h2 {
-    font-size: 55px;
-    font-weight: 700;
-    margin: 2.5rem 0;
-    line-height: 35px;
+  font-size: 55px;
+  font-weight: 700;
+  margin: 2.5rem 0;
+  line-height: 35px;
 }
 
 .subText {
-    line-height: 30px;
-    text-align: justify;
+  line-height: 30px;
+  text-align: justify;
 }
 
 .title span {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .title {
-    background-color: #27AE60;
-    text-align: center;
-    font-size: 18px;
-    font-weight: 400;
-    padding: 1rem;
-    border-radius: 10px;
-    box-shadow: 1px 5px #E1F083;
+  background-color: #27ae60;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 400;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 1px 5px #e1f083;
 }
 
 .card {
-    width: auto;
-    height: auto;
-    border-radius: 10px;
-    background-color: #fff;
-    align-items: center;
-    justify-content: center;
-    margin: 1.6rem 0;
-    padding: 2rem;
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  background-color: #fff;
+  align-items: center;
+  justify-content: center;
+  margin: 1.6rem 0;
+  padding: 2rem;
 }
 
-.card  input {
-    display: inline-block;
-    width: 100%;
-    border-radius: 10px;
-    padding: 12pt;
-    border: 1px solid hsl(246, 25%, 77%);
-    font-weight: 500;
-    margin: 10px 0;
+.card input {
+  display: inline-block;
+  width: 100%;
+  border-radius: 10px;
+  padding: 12pt;
+  border: 1px solid hsl(246, 25%, 77%);
+  font-weight: 500;
+  margin: 10px 0;
 }
 
 .card input:focus {
-    outline: none;
+  outline: none;
 }
 
 .error {
-    color: hsl(0, 100%, 74%);
-    font-size: 10px;
-    font-weight: 600;
-    font-style: italic;
-    float: right;
-    margin-bottom: 10px;
+  color: hsl(0, 100%, 74%);
+  font-size: 10px;
+  font-weight: 600;
+  font-style: italic;
+  float: right;
+  margin-bottom: 10px;
 }
 
 .email_error::-webkit-input-placeholder {
-    color: hsl(0, 100%, 74%);
+  color: hsl(0, 100%, 74%);
 }
 
 .invalid {
-    background: url("../../assets/icon-error.svg") no-repeat scroll 97% 10px;
-    border: 2px solid hsl(0, 100%, 74%) !important;
+  background: url("../../assets/icon-error.svg") no-repeat scroll 97% 10px;
+  border: 2px solid hsl(0, 100%, 74%) !important;
 }
 
-.card  button {
-    margin: 5px 0;
-    padding: 1rem;
-    color: #fff;
-    background-color: #27AE60;
-    border: none;
-    border-radius: 7px;
-    font-weight: 600;
-    width: 100%;
+.card button {
+  margin: 5px 0;
+  padding: 1rem;
+  color: #fff;
+  background-color: #27ae60;
+  border: none;
+  border-radius: 7px;
+  font-weight: 600;
+  width: 100%;
 }
 
 .card button:hover {
-    cursor: pointer;
-    background-color: #6FCF97;
+  cursor: pointer;
+  background-color: #6fcf97;
 }
 
 .card button:disabled {
-    background-color: #a6a6a6;
-    cursor: not-allowed;
+  background-color: #a6a6a6;
+  cursor: not-allowed;
 }
 
 .terms {
-    margin: 10px 0;
-    text-align: center;
-    font-size: 10px;
-    font-weight: 400;
-    color: hsl(246, 25%, 77%);
+  margin: 10px 0;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 400;
+  color: hsl(246, 25%, 77%);
 }
 
 .terms > span {
-    color:#ff7979;
-    font-weight: 600;
+  color: #ff7979;
+  font-weight: 600;
 }
 
 .link {
-    font-size: 12px;
-    color: #000;
-    margin-top: 15px;
-    text-align: center;
+  font-size: 12px;
+  color: #000;
+  margin-top: 15px;
+  text-align: center;
 }
 .link a {
-    color: #27AE60;
-    text-decoration: none;
+  color: #27ae60;
+  text-decoration: none;
 }
 
-
 @media screen and (max-width: 769px) {
-    .container {
-        grid-template-columns: auto;
-        background-image: url("../../assets/mobile-bg.jpg");
-        padding: 3rem 1rem;
-        height: 100vh;
+    .main {
+        height: auto;
     }
-    .container > div {
-        text-align: center;
-    }
-    .logo {
-        position: absolute;
-        z-index: 2;
-        top: 10px;
-        left: 25%;
-        height: 70px;
-    }
-    .intro {
-        display: none;
-    }
-    h2 {
-        font-size: 24px;
-    }
-    .container > div > p {
-        margin-bottom: 20px;
-    }
-    
+  .container {
+    grid-template-columns: auto;
+    padding: 0 1rem;
+  }
+  .container > div {
+    text-align: center;
+  }
+  .logo {
+    height: 60px;
+    margin: 20px auto;
+  }
+  .intro {
+    display: none;
+  }
+  h2 {
+    font-size: 24px;
+  }
+  .container > div > p {
+    margin-bottom: 20px;
+  }
 }
 
 @media screen and (max-width: 375px) {
-    .container {
-        padding: 2rem 0.2rem;
-    }
-    .logo {
-        left: 20%;
-    }
+  .container {
+    padding: 2rem 0.2rem;
+  }
 }
