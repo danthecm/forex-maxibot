@@ -159,7 +159,7 @@ h2 {
     .logo {
         position: absolute;
         z-index: 2;
-        top: 40px;
+        top: 10px;
         left: 25%;
         height: 70px;
     }
