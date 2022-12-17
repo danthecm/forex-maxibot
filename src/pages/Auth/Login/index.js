@@ -49,6 +49,8 @@ const Login = () => {
     } catch (error) {
       const response = error.response;
       const status = response.status;
+      const data = response.data;
+      console.log("There was an error", error)
       switch (status) {
         case 500:
           toast.update(loading, {
@@ -60,7 +62,6 @@ const Login = () => {
           });
           break;
         case 401:
-          const data = response.data;
           toast.update(loading, {
             render: data.detail,
             type: "error",
@@ -69,6 +70,15 @@ const Login = () => {
             closeButton: true,
           });
           break;
+          case 406:
+            toast.update(loading, {
+              render: data.detail,
+              type: "error",
+              isLoading: false,
+              autoClose: true,
+              closeButton: true,
+            });
+            break;
         default:
           toast.update(loading, {
             render: "something went wrong, try later",
