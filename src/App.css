@@ -140,6 +140,8 @@ h2 {
         grid-template-columns: auto;
         background-image: url("assets/bg-intro-mobile.png");
         padding: 2rem 1rem;
+        height: auto;
+        width: 100vw;
     }
     .container > div {
         text-align: center;
