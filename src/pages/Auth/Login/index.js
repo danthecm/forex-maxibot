@@ -161,7 +161,7 @@ const Login = () => {
                 : "Login"}
             </button>
             <p className={styles.link}>
-              Don't have an account register <Link to="/register">here</Link>
+              Don't have an account? Register <Link to="/register">here</Link>
             </p>
             <p className={styles.terms}>
               By clicking the button, you are agreeing to our{" "}
