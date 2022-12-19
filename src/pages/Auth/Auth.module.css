@@ -152,11 +152,15 @@ h2 {
     height: 60px;
     margin: 20px auto;
   }
-  .intro {
+  .subText {
+    display: none;
+  }
+  .title {
     display: none;
   }
   h2 {
     font-size: 24px;
+    margin: 10px 0 5px 0;
   }
   .container > div > p {
     margin-bottom: 20px;
