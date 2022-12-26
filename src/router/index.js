@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import App from "../App";
 import Auth from "../pages/Auth";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register/index";
@@ -25,7 +26,7 @@ const routerConfig = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: <App />,
     children: [
       {
         index: true,

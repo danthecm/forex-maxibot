@@ -1,0 +1,32 @@
+.sidenav {
+    display: grid;
+    grid-template-rows: 80px auto;
+    height: 100vh;
+    background: #1D1D1D;
+    color: #fff;
+    justify-content: center;
+    padding: 50px 0;
+}
+
+.sidenav > img {
+    margin: auto
+}
+
+.nav__list {
+    display: grid;
+    max-height: 450px;
+    justify-content: center;
+}
+li {
+    display: flex;
+    align-items: center;
+}
+li > img {
+    margin-right: 20px;
+    width: 25px;
+    height: auto;
+}
+
+li.active {
+    font-weight: bold;
+}
