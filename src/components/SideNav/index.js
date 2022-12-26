@@ -3,7 +3,7 @@ import styles from "./SideNav.module.css";
 import logo from "../../logo.svg";
 
 import dashboard__icon from "../../assets/Icons/dashboard.svg";
-import profile__icon from "../../assets/Icons/user.svg";
+import profile__icon from "../../assets/Icons/profile.svg";
 import security__icon from "../../assets/Icons/security.svg";
 import help__icon from "../../assets/Icons/help.svg";
 import exit__icon from "../../assets/Icons/exit.svg";

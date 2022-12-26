@@ -1,4 +1,40 @@
 .wrapper {
-    display: grid;
-    grid-template-columns: 250px auto;
+  display: grid;
+  grid-template-columns: 250px auto;
+}
+
+.main {
+    background: #F7FAFC;
+}
+
+.header {
+  display: grid;
+  padding: 20px;
+  background: #ffffff;
+  grid-template-columns: auto auto;
+  align-items: center;
+}
+
+.profile__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120px;
+}
+
+.username {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+
+  /* 700 */
+
+  color: #4a5568;
+}
+
+.profile__avatar {
+  width: 60px;
+  height: auto;
+  margin-bottom: 10px;
 }

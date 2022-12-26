@@ -5,7 +5,7 @@
     background: #1D1D1D;
     color: #fff;
     justify-content: center;
-    padding: 50px 0;
+    padding-top: 50px;
 }
 
 .sidenav > img {
@@ -16,10 +16,13 @@
     display: grid;
     max-height: 450px;
     justify-content: center;
+    align-items: center;
 }
 li {
     display: flex;
+    height: 30px;
     align-items: center;
+    cursor: pointer;
 }
 li > img {
     margin-right: 20px;
