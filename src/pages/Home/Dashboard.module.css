@@ -40,6 +40,7 @@
 }
 
 .main__content {
+  display: grid;
   background: #ffffff;
   padding: 10px 20px;
 }
@@ -108,3 +109,41 @@
   line-height: 19px;
   color: #f7fafc;
 }
+
+.table {
+  grid-column: span 2;
+  text-align: center;
+}
+
+.table__head {
+  height: 35px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #4a5568;
+  background: #EDF2F7;
+  text-transform: capitalize;
+}
+
+.tr {
+  height: 60px;
+  font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+
+/* 600 */
+
+color: #718096;
+
+}
+
+td {
+  border-bottom: 1px solid #E2E8F0;
+}
+
