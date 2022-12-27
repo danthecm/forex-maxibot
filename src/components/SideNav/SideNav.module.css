@@ -1,5 +1,7 @@
 .sidenav {
     display: grid;
+    overflow: hidden;
+    width: 100px;
     grid-template-rows: 80px auto;
     height: 100vh;
     background: #1D1D1D;
@@ -7,9 +9,25 @@
     justify-content: center;
     padding-top: 50px;
 }
+.sidenav span {
+    display: none;
+}
+.sidenav:hover {
+    width: 200px;
+}
+.sidenav:hover span {
+    display: contents;
+}
+.sidenav:hover .logo__large {
+    display: block;
+}
 
-.sidenav > img {
-    margin: auto
+.sidenav:hover .logo__small {
+    display: none;
+}
+
+.logo__large{
+    display: none;
 }
 
 .nav__list {
