@@ -115,8 +115,8 @@ const Dashboard = () => {
           </section>
         </main>
       </div>
-      <Modal title="New Bot" show={showModal} close={() => setShowModal(false)} >
-        <h2>This is a modal</h2>
+      <Modal title="NEW BOT" show={showModal} close={() => setShowModal(false)} >
+        <h3>This is the new bot modal should contain new bot inputs here</h3>
       </Modal>
     </>
   );

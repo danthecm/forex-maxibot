@@ -1,27 +1,47 @@
+import { useCallback, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 import { ReactComponent as CancelIcon } from "../../assets/cancel.svg";
 
-const Modal = ({show, close, title, children}) => {
-  
+const Modal = ({ show, close, title, children }) => {
+  const modalContentRef = useRef();
+
+  const handleClick = useCallback((e) => {
+    if (modalContentRef?.current.contains(e.target)) {
+      return;
+    }
+    close();
+  }, [close]);
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClick);
+    //  clean on unmount
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+    };
+  }, [show, handleClick]);
+
   return createPortal(
     <>
-    {show ? <StyledModal
-      role="dialog"
-      aria-labelledby="dialog1Title"
-      aria-describedby="dialog1Desc"
-    >
-      <ModalContent>
-        <ModalHeading>
-          <h2 id="dialog1Title">{title}</h2>
-          <CancelIcon onClick={close} />
-        </ModalHeading>
-        <ModalBody>
-          {children}
-        </ModalBody>
-      </ModalContent>
-    </StyledModal> : null}
+      {show ? (
+        <>
+          <StyledModal
+            role="dialog"
+            aria-labelledby="dialog1Title"
+            aria-describedby="dialog1Desc"
+          >
+            <ModalContent ref={modalContentRef}>
+              <ModalHeading>
+                <h2 id="dialog1Title">{title}</h2>
+                <CancelIcon onClick={close} />
+              </ModalHeading>
+              <ModalBody>{children}</ModalBody>
+            </ModalContent>
+          </StyledModal>
+          <ScrollDisabler />
+        </>
+      ) : null}
     </>,
     document.getElementById("modal")
   );
@@ -75,3 +95,10 @@ const ModalHeading = styled.div`
 `;
 
 const ModalBody = styled.div``;
+
+const ScrollDisabler = createGlobalStyle`
+body {
+  overflow-y: hidden;
+}
+`
+
