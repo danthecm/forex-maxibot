@@ -7,9 +7,11 @@ import profile__avatar from "../../assets/Icons/avatar.svg";
 import search__icon from "../../assets/Icons/search.svg";
 
 import filter__icon from "../../assets/Icons/filter.svg";
+import { useState } from "react";
 
 const Dashboard = () => {
   const user = JSON.parse(localStorage.getItem("user"));
+  const [showModal, setShowModal] = useState(false)
   if (!user) {
     return <Navigate to="/login" />;
   }

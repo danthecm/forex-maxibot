@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom"
 import { ToastContainer } from "react-toastify";
-import logo from "../../logo.svg";
+import { ReactComponent as Logo} from "../../logo.svg";
 import styles from "./Auth.module.css";
 
 const Auth = () => {
     return (
         <main className={styles.main}>
-            <img className={styles.logo} src={logo} alt="Maxibot Logo" />
+            <Logo className={styles.logo} />
             <div className={styles.container}>
             <Outlet styles="My Styles" />
             </div>

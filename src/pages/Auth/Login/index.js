@@ -111,7 +111,7 @@ const Login = () => {
   return (
     <>
       <div className={styles.intro}>
-        <h2>Welcome Back</h2>
+        <h2 className={styles.h2}>Welcome Back</h2>
         <p className={styles.subText}>
           We are glad to have you back, kindly fill in your details to continue
         </p>

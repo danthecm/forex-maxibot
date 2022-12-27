@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
+import Modal from "../components/Modal";
 import Auth from "../pages/Auth";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register/index";
@@ -31,6 +32,10 @@ const routerConfig = createBrowserRouter([
       {
         index: true,
         element: <Dashboard />,
+      }, 
+      {
+        path: "modal",
+        element: <Modal />
       }
     ],
   },

@@ -127,7 +127,7 @@ const Register = () => {
   return (
     <>
       <div className={styles.intro}>
-        <h2>Earn More</h2>
+        <h2 className={styles.h2}>Earn More</h2>
         <p className={styles.subText}>
           Maxibot takes away the stress of monitoring trades and helps you to
           place orders, monitor orders and maximise your profit.
