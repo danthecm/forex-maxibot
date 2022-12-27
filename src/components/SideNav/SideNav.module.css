@@ -1,7 +1,7 @@
 .sidenav {
     display: grid;
     overflow: hidden;
-    width: 100px;
+    width: 80px;
     grid-template-rows: 80px auto;
     height: 100vh;
     background: #1D1D1D;
