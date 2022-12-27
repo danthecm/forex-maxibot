@@ -1,11 +1,13 @@
 import { createPortal } from "react-dom";
 import styled from "styled-components";
 
-import { ReactComponent as Cancel } from "../../assets/cancel.svg";
+import { ReactComponent as CancelIcon } from "../../assets/cancel.svg";
 
-const Modal = ({show, hide, title, children}) => {
+const Modal = ({show, close, title, children}) => {
+  
   return createPortal(
-    <StyledModal
+    <>
+    {show ? <StyledModal
       role="dialog"
       aria-labelledby="dialog1Title"
       aria-describedby="dialog1Desc"
@@ -13,13 +15,14 @@ const Modal = ({show, hide, title, children}) => {
       <ModalContent>
         <ModalHeading>
           <h2 id="dialog1Title">{title}</h2>
-          <Cancel onClick={hide} />
+          <CancelIcon onClick={close} />
         </ModalHeading>
         <ModalBody>
-          <h1>This is an heading now it is going o be a long ttext</h1>
+          {children}
         </ModalBody>
       </ModalContent>
-    </StyledModal>,
+    </StyledModal> : null}
+    </>,
     document.getElementById("modal")
   );
 };
@@ -29,9 +32,11 @@ const StyledModal = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  top: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.5);
 `;
 
 const ModalContent = styled.div`
