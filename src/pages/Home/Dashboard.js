@@ -9,6 +9,7 @@ import search__icon from "../../assets/Icons/search.svg";
 import filter__icon from "../../assets/Icons/filter.svg";
 import { useState } from "react";
 import Modal from "../../components/Modal";
+import NewBot from "./components/NewBot";
 
 const Dashboard = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -51,17 +52,24 @@ const Dashboard = () => {
                   />
                 </div>
                 <img src={filter__icon} alt="filter icon" />
-                <button onClick={() => setShowModal(true)} className={styles.new__bot}>Add new</button>
+                <button
+                  onClick={() => setShowModal(true)}
+                  className={styles.new__bot}
+                >
+                  Add new
+                </button>
               </div>
               <table className={styles.table}>
                 <thead className={styles.table__head}>
-                  <th>#</th>
-                  <th>Pairs</th>
-                  <th>strategy</th>
-                  <th>quantity</th>
-                  <th>price</th>
-                  <th>status</th>
-                  <th></th>
+                  <tr>
+                    <th>#</th>
+                    <th>Pairs</th>
+                    <th>strategy</th>
+                    <th>quantity</th>
+                    <th>price</th>
+                    <th>status</th>
+                    <th></th>
+                  </tr>
                 </thead>
                 <tbody>
                   <tr className={styles.tr}>
@@ -115,8 +123,8 @@ const Dashboard = () => {
           </section>
         </main>
       </div>
-      <Modal title="NEW BOT" show={showModal} close={() => setShowModal(false)} >
-        <h3>This is the new bot modal should contain new bot inputs here</h3>
+      <Modal title="NEW BOT" show={showModal} close={() => setShowModal(false)}>
+        <NewBot />
       </Modal>
     </>
   );

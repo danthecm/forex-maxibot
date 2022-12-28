@@ -8,7 +8,7 @@ const Modal = ({ show, close, title, children }) => {
   const modalContentRef = useRef();
 
   const handleClick = useCallback((e) => {
-    if (modalContentRef?.current.contains(e.target)) {
+    if (modalContentRef?.current?.contains(e.target)) {
       return;
     }
     close();
@@ -26,7 +26,7 @@ const Modal = ({ show, close, title, children }) => {
     <>
       {show ? (
         <>
-          <StyledModal
+          <Overlay
             role="dialog"
             aria-labelledby="dialog1Title"
             aria-describedby="dialog1Desc"
@@ -38,7 +38,7 @@ const Modal = ({ show, close, title, children }) => {
               </ModalHeading>
               <ModalBody>{children}</ModalBody>
             </ModalContent>
-          </StyledModal>
+          </Overlay>
           <ScrollDisabler />
         </>
       ) : null}
@@ -48,7 +48,7 @@ const Modal = ({ show, close, title, children }) => {
 };
 export default Modal;
 
-const StyledModal = styled.div`
+const Overlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
