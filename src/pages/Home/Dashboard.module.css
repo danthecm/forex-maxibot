@@ -42,7 +42,10 @@
 .main__content {
   display: grid;
   background: #ffffff;
+  grid-template-columns: 1fr;
+  grid-template-rows: 20px auto;
   padding: 10px 20px;
+  row-gap: 40px;
 }
 
 .main__content h2 {

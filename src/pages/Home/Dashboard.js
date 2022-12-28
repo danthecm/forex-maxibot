@@ -59,67 +59,67 @@ const Dashboard = () => {
                   Add new
                 </button>
               </div>
-              <table className={styles.table}>
-                <thead className={styles.table__head}>
-                  <tr>
-                    <th>#</th>
-                    <th>Pairs</th>
-                    <th>strategy</th>
-                    <th>quantity</th>
-                    <th>price</th>
-                    <th>status</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className={styles.tr}>
-                    <td>1</td>
-                    <td>EURUSD</td>
-                    <td>Grid</td>
-                    <td>0.02</td>
-                    <td>0.9789</td>
-                    <td>Running</td>
-                    <td></td>
-                  </tr>
-                  <tr className={styles.tr}>
-                    <td>2</td>
-                    <td>EURUSD</td>
-                    <td>Grid</td>
-                    <td>0.02</td>
-                    <td>0.9789</td>
-                    <td>Running</td>
-                    <td></td>
-                  </tr>
-                  <tr className={styles.tr}>
-                    <td>3</td>
-                    <td>EURUSD</td>
-                    <td>Grid</td>
-                    <td>0.02</td>
-                    <td>0.9789</td>
-                    <td>Running</td>
-                    <td></td>
-                  </tr>
-                  <tr className={styles.tr}>
-                    <td>4</td>
-                    <td>EURUSD</td>
-                    <td>Grid</td>
-                    <td>0.02</td>
-                    <td>0.9789</td>
-                    <td>Running</td>
-                    <td></td>
-                  </tr>
-                  <tr className={styles.tr}>
-                    <td>5</td>
-                    <td>EURUSD</td>
-                    <td>Grid</td>
-                    <td>0.02</td>
-                    <td>0.9789</td>
-                    <td>Running</td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
+            <table className={styles.table}>
+              <thead className={styles.table__head}>
+                <tr>
+                  <th>#</th>
+                  <th>Pairs</th>
+                  <th>strategy</th>
+                  <th>quantity</th>
+                  <th>price</th>
+                  <th>status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className={styles.tr}>
+                  <td>1</td>
+                  <td>EURUSD</td>
+                  <td>Grid</td>
+                  <td>0.02</td>
+                  <td>0.9789</td>
+                  <td>Running</td>
+                  <td></td>
+                </tr>
+                <tr className={styles.tr}>
+                  <td>2</td>
+                  <td>EURUSD</td>
+                  <td>Grid</td>
+                  <td>0.02</td>
+                  <td>0.9789</td>
+                  <td>Running</td>
+                  <td></td>
+                </tr>
+                <tr className={styles.tr}>
+                  <td>3</td>
+                  <td>EURUSD</td>
+                  <td>Grid</td>
+                  <td>0.02</td>
+                  <td>0.9789</td>
+                  <td>Running</td>
+                  <td></td>
+                </tr>
+                <tr className={styles.tr}>
+                  <td>4</td>
+                  <td>EURUSD</td>
+                  <td>Grid</td>
+                  <td>0.02</td>
+                  <td>0.9789</td>
+                  <td>Running</td>
+                  <td></td>
+                </tr>
+                <tr className={styles.tr}>
+                  <td>5</td>
+                  <td>EURUSD</td>
+                  <td>Grid</td>
+                  <td>0.02</td>
+                  <td>0.9789</td>
+                  <td>Running</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
           </section>
         </main>
       </div>
