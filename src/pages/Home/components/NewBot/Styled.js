@@ -16,7 +16,7 @@ export const Input = styled.input`
 
   background: rgba(225, 240, 131, 0.37);
   border-radius: 6px;
-  border: ${props => props.error ? "2px solid hsl(0, 100%, 74%) ": "none"};
+  border: ${({error}) => error ? "2px solid hsl(0, 100%, 74%) ": "none"};
 
   &::placeholder {
     color: rgba(39, 174, 96, 0.6);
@@ -55,7 +55,7 @@ border-radius: 6px;
 border: none;
 
 &:disabled {
-    background: rgba(39, 174, 96, 0.4);
+    background: #a6a6a6;;
     cursor: not-allowed;
 }
 
