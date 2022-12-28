@@ -45,7 +45,7 @@ export const InputError = styled.p`
   margin-bottom: 10px;
 `;
 
-export const AddNew = styled.button`
+export const AddButton = styled.button`
 width: 100%;
 text-align: center;
 padding: 17px 0;

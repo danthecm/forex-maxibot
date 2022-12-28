@@ -1,5 +1,5 @@
 import useInput from "../../../../hooks/use-input";
-import { StyledNewBot, Input, InputError, AddNew } from "./Styled";
+import { StyledNewBot, Input, InputError, AddButton } from "./Styled";
 
 const NewBot = () => {
   const {
@@ -91,9 +91,9 @@ const NewBot = () => {
           ""
         )}
 
-        <AddNew disabled={!formIsValid} type="submit">
+        <AddButton disabled={!formIsValid} type="submit">
           Add New
-        </AddNew>
+        </AddButton>
       </form>
     </StyledNewBot>
   );
