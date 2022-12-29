@@ -1,15 +1,18 @@
 import styled from "styled-components";
 
 const Verify = () => {
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+  }
   return (
     <StyledVerify>
-      <h1>Enter Email Verification Code</h1>
-      <form>
+      <h1>Enter Verification Code</h1>
+      <form onSubmit={formSubmitHandler}>
         <InputWrapper>
-          <input type="number" max="1" />
-          <input type="number" max="1" />
-          <input type="number" max="1" />
-          <input type="number" max="1" />
+          <input type="text" pattern="\d*" maxlength="1"/>
+          <input  type="text" pattern="\d*" maxlength="1" />
+          <input  type="text" pattern="\d*" maxlength="1" />
+          <input  type="text" pattern="\d*" maxlength="1" />
         </InputWrapper>
         <button type="submit">Verify</button>
       </form>
@@ -22,7 +25,7 @@ const StyledVerify = styled.div`
   grid-column: span 2;
   justify-self: center;
   height: 300px;
-  width: 600px;
+  width: 550px;
   background: #fff;
   border-radius: 20px;
   color: #718096;
@@ -54,7 +57,9 @@ const InputWrapper = styled.form`
     width: 50px;
     height: 50px;
     text-align: center;
-    border: 1px solid #27ae60;
+    background: #FBFBFB;
+    border: 0.5px solid #27ae60;
+    border-radius: 8px;
     font-size: 28px;
     color: #4a5568;
   }
