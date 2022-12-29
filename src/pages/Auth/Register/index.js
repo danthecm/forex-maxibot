@@ -7,6 +7,7 @@ import useInput from "../../../hooks/use-input";
 import "react-toastify/dist/ReactToastify.css";
 
 import styles from "../Auth.module.css";
+import { BASE_URL } from "../../../config";
 
 const Register = () => {
   const navigate = useNavigate()
@@ -52,7 +53,7 @@ const Register = () => {
     const loading = toast.loading("Registering....");
     try {
       const sendData = await axios.post(
-        "https://forex.themaxibot.com/register/",
+        `${BASE_URL}register/`,
         data
       );
       console.log("Your request data is:", sendData);

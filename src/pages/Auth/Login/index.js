@@ -4,6 +4,7 @@ import useInput from "../../../hooks/use-input";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "../Auth.module.css";
 import { toast } from "react-toastify";
+import { BASE_URL } from "../../../config";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const Login = () => {
     const loading = toast.loading("Authenticating");
     try {
       const sendData = await axios.post(
-        "https://forex.themaxibot.com/login/",
+        `${BASE_URL}login/`,
         data
       );
       toast.update(loading, {

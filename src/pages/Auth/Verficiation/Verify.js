@@ -3,16 +3,59 @@ import styled from "styled-components";
 const Verify = () => {
   const formSubmitHandler = (e) => {
     e.preventDefault();
-  }
+    const element = e.target;
+    const codes =
+      element["code1"].value +
+      element["code2"].value +
+      element["code3"].value +
+      element["code4"].value;
+
+    console.log("The code is: ", codes)
+  };
+
+  const inputChangedHandler = (e) => {
+    const element = e.target;
+    if (element.value === "") {
+      return;
+    }
+    element.nextSibling ? element.nextSibling.focus() : element.blur();
+  };
   return (
     <StyledVerify>
       <h1>Enter Verification Code</h1>
       <form onSubmit={formSubmitHandler}>
         <InputWrapper>
-          <input type="text" pattern="\d*" maxlength="1"/>
-          <input  type="text" pattern="\d*" maxlength="1" />
-          <input  type="text" pattern="\d*" maxlength="1" />
-          <input  type="text" pattern="\d*" maxlength="1" />
+          <input
+            name="code1"
+            type="text"
+            pattern="\d*"
+            maxLength="1"
+            onChange={inputChangedHandler}
+            required
+          />
+          <input
+            name="code2"
+            type="text"
+            pattern="\d*"
+            maxLength="1"
+            onChange={inputChangedHandler}
+            required
+          />
+          <input
+            name="code3"
+            type="text"
+            pattern="\d*"
+            maxLength="1"
+            onChange={inputChangedHandler}
+            required
+          />
+          <input
+            name="code4"
+            type="text"
+            pattern="\d*"
+            maxLength="1"
+            required
+          />
         </InputWrapper>
         <button type="submit">Verify</button>
       </form>
@@ -47,7 +90,7 @@ const StyledVerify = styled.div`
   }
 `;
 
-const InputWrapper = styled.form`
+const InputWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   margin-bottom: 40px;
@@ -57,7 +100,7 @@ const InputWrapper = styled.form`
     width: 50px;
     height: 50px;
     text-align: center;
-    background: #FBFBFB;
+    background: #fbfbfb;
     border: 0.5px solid #27ae60;
     border-radius: 8px;
     font-size: 28px;
