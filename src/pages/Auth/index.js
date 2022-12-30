@@ -10,7 +10,7 @@ const Auth = () => {
             <div className={styles.container}>
             <Outlet styles="My Styles" />
             </div>
-            <ToastContainer position="top-right" autoClose={5000}  />
+            <ToastContainer position="top-right" autoClose={4000}  />
         </main>
     )
 }

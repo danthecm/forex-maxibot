@@ -1,16 +1,59 @@
 import styled from "styled-components";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useState } from "react";
+import { BASE_URL } from "../../../config";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Verify = () => {
+  const [isFetching, setIsFetching] = useState(false);
+  let location = useLocation();
+  let searchParams = new URLSearchParams(location.search);
+  const username = searchParams.get('username');
+  console.log("username: " + username)
+  const navigate = useNavigate();
+
   const formSubmitHandler = (e) => {
     e.preventDefault();
     const element = e.target;
-    const codes =
+    const code =
       element["code1"].value +
       element["code2"].value +
       element["code3"].value +
       element["code4"].value;
 
-    console.log("The code is: ", codes)
+    verifyCode(code);
+  };
+
+  const verifyCode = async (code) => {
+    setIsFetching(true);
+    const loading = toast.loading("Verifying....");
+    console.log("verifyCode", code);
+    try {
+      const sendVerificiation = await axios.get(`${BASE_URL}verify/${username}`, {
+        params: { code },
+      });
+      console.log(sendVerificiation.data);
+      toast.update(loading, {
+        render: "Verified Successfully",
+        type: "success",
+        isLoading: false,
+        autoClose: 2000,
+        closeButton: true,
+      });
+      setIsFetching(false);
+      setTimeout(() => navigate("/dashboard"), 2000);
+    } catch (error) {
+      console.log(error);
+      setIsFetching(false);
+      toast.update(loading, {
+        render: "Error verifying please try again",
+        type: "error",
+        isLoading: false,
+        autoClose: true,
+        closeButton: true,
+      });
+    }
   };
 
   const inputChangedHandler = (e) => {
@@ -26,11 +69,13 @@ const Verify = () => {
       <form onSubmit={formSubmitHandler}>
         <InputWrapper>
           <input
+            autoFocus={true}
             name="code1"
             type="text"
             pattern="\d*"
             maxLength="1"
             onChange={inputChangedHandler}
+            title="only numbers are allowed"
             required
           />
           <input
@@ -39,6 +84,7 @@ const Verify = () => {
             pattern="\d*"
             maxLength="1"
             onChange={inputChangedHandler}
+            title="only numbers are allowed"
             required
           />
           <input
@@ -47,6 +93,7 @@ const Verify = () => {
             pattern="\d*"
             maxLength="1"
             onChange={inputChangedHandler}
+            title="only numbers are allowed"
             required
           />
           <input
@@ -54,10 +101,13 @@ const Verify = () => {
             type="text"
             pattern="\d*"
             maxLength="1"
+            title="only numbers are allowed"
             required
           />
         </InputWrapper>
-        <button type="submit">Verify</button>
+        <button disabled={isFetching} type="submit">
+          Verify
+        </button>
       </form>
     </StyledVerify>
   );
@@ -87,6 +137,11 @@ const StyledVerify = styled.div`
     background: rgba(39, 174, 96, 0.7);
     border-radius: 6px;
     border: none;
+  }
+
+  button:disabled {
+    background-color: #a6a6a6;
+    cursor: not-allowed;
   }
 `;
 

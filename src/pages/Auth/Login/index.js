@@ -79,6 +79,7 @@ const Login = () => {
               autoClose: true,
               closeButton: true,
             });
+            navigate(`/verify?username=${enteredUsername}`)
             break;
         default:
           toast.update(loading, {
