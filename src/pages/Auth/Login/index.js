@@ -6,7 +6,7 @@ import styles from "../Auth.module.css";
 import { toast } from "react-toastify";
 import InputField from "../../../components/InputField";
 
-const LOGIN_URL = "login/"
+const LOGIN_URL = "login/";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -21,7 +21,10 @@ const Login = () => {
   const sendFormData = async (data) => {
     const loading = toast.loading("Authenticating");
     try {
-      const sendData = await axios.post(LOGIN_URL, data);
+      const sendData = await axios.post(LOGIN_URL, data, {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      });
       toast.update(loading, {
         render: "Successfully Authenticated",
         type: "success",
