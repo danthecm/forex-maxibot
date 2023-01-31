@@ -1,16 +1,15 @@
 import styled from "styled-components";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import { BASE_URL } from "../../../config";
+import axios from "../../../config/axios";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Verify = () => {
   const [isFetching, setIsFetching] = useState(false);
   let location = useLocation();
   let searchParams = new URLSearchParams(location.search);
-  const username = searchParams.get('username');
-  console.log("username: " + username)
+  const username = searchParams.get("username");
+  console.log("username: " + username);
   const navigate = useNavigate();
 
   const formSubmitHandler = (e) => {
@@ -30,9 +29,12 @@ const Verify = () => {
     const loading = toast.loading("Verifying....");
     console.log("verifyCode", code);
     try {
-      const sendVerificiation = await axios.get(`${BASE_URL}verify/${username}`, {
-        params: { code },
-      });
+      const sendVerificiation = await axios.get(
+        `verify/${username}`,
+        {
+          params: { code },
+        }
+      );
       console.log(sendVerificiation.data);
       toast.update(loading, {
         render: "Verified Successfully",
