@@ -5,35 +5,22 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "../Auth.module.css";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../../../config";
+import InputField from "../../../components/InputField";
 
 const Login = () => {
   const navigate = useNavigate();
   const [isFetching, setIsFetching] = useState(false);
-  const {
-    value: enteredUsername,
-    inputBlurHandler: usernameBlurHandler,
-    valueChangedHandler: usernameChangedHandler,
-    isValid: usernameIsValid,
-    hasError: usernameHasError,
-  } = useInput((value) => value.trim() !== "");
-
-  const {
-    value: enteredPassword,
-    inputBlurHandler: passwordBlurHandler,
-    valueChangedHandler: passwordChangedHandler,
-    isValid: passwordIsValid,
-    hasError: passwordHasError,
-  } = useInput((value) => value.length > 1);
+  const userNameHook = useInput((value) => value.trim() !== "");
+  const { value: enteredUsername, isValid: usernameIsValid } = userNameHook;
+  const passwordHook = useInput((value) => value.length > 1);
+  const { value: enteredPassword, isValid: passwordIsValid } = passwordHook;
 
   const formIsValid = usernameIsValid && passwordIsValid;
 
   const sendFormData = async (data) => {
     const loading = toast.loading("Authenticating");
     try {
-      const sendData = await axios.post(
-        `${BASE_URL}login/`,
-        data
-      );
+      const sendData = await axios.post(`${BASE_URL}login/`, data);
       toast.update(loading, {
         render: "Successfully Authenticated",
         type: "success",
@@ -51,7 +38,7 @@ const Login = () => {
       const response = error.response;
       const status = response.status;
       const data = response.data;
-      console.log("There was an error", error)
+      console.log("There was an error", error);
       switch (status) {
         case 500:
           toast.update(loading, {
@@ -71,16 +58,16 @@ const Login = () => {
             closeButton: true,
           });
           break;
-          case 406:
-            toast.update(loading, {
-              render: data.detail,
-              type: "error",
-              isLoading: false,
-              autoClose: true,
-              closeButton: true,
-            });
-            navigate(`/verify?username=${enteredUsername}`)
-            break;
+        case 406:
+          toast.update(loading, {
+            render: data.detail,
+            type: "error",
+            isLoading: false,
+            autoClose: true,
+            closeButton: true,
+          });
+          navigate(`/verify?username=${enteredUsername}`);
+          break;
         default:
           toast.update(loading, {
             render: "something went wrong, try later",
@@ -112,45 +99,33 @@ const Login = () => {
 
   return (
     <>
-      <div className={styles.intro}>
+      <section className={styles.intro}>
         <h2 className={styles.h2}>Welcome Back</h2>
         <p className={styles.subText}>
           We are glad to have you back, kindly fill in your details to continue
         </p>
-      </div>
-      <div>
+      </section>
+      <main>
         <p className={styles.title}>
           <span>Login</span> to continue
         </p>
         <div className={styles.card}>
-          <form onSubmit={formSubmitHandler} action="" method="post">
-            <input
-              onChange={usernameChangedHandler}
-              onBlur={usernameBlurHandler}
+          <form onSubmit={formSubmitHandler} method="post">
+            <InputField
               name="username"
               type="text"
               placeholder="Username"
-              className={usernameHasError ? styles.invalid : ""}
+              message="Username cannot be empty"
+              hook={userNameHook}
             />
-            {usernameHasError ? (
-              <p className={styles.error}>Username cannot be empty</p>
-            ) : (
-              ""
-            )}
 
-            <input
-              onChange={passwordChangedHandler}
-              onBlur={passwordBlurHandler}
+            <InputField
               name="password"
               type="password"
               placeholder="Password"
-              className={passwordHasError ? styles.invalid : ""}
+              message="Password cannot be empty"
+              hook={passwordHook}
             />
-            {passwordHasError ? (
-              <p className={styles.error}>Password cannot be empty</p>
-            ) : (
-              ""
-            )}
 
             <button
               disabled={!formIsValid || isFetching ? true : false}
@@ -171,7 +146,7 @@ const Login = () => {
             </p>
           </form>
         </div>
-      </div>
+      </main>
     </>
   );
 };

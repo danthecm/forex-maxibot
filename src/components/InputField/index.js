@@ -1,0 +1,21 @@
+import React from "react";
+import styles from "../../pages/Auth/Auth.module.css";
+
+const InputField = ({ name, type, hook, message, placeholder }) => {
+  const { inputBlurHandler, valueChangedHandler, hasError } = hook;
+  return (
+    <>
+      <input
+        className={hasError ? styles.invalid : ""}
+        placeholder={placeholder}
+        type={type}
+        name={name}
+        onChange={valueChangedHandler}
+        onBlur={inputBlurHandler}
+      />
+      {hasError ? <p className={styles.error}>{message}</p> : ""}
+    </>
+  );
+};
+
+export default InputField;
