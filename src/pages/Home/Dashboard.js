@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SideNav from "../../components/SideNav";
 
 import styles from "./Dashboard.module.css";
@@ -7,16 +7,40 @@ import profile__avatar from "../../assets/Icons/avatar.svg";
 import search__icon from "../../assets/Icons/search.svg";
 
 import filter__icon from "../../assets/Icons/filter.svg";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Modal from "../../components/Modal";
 import NewBot from "./components/NewBot";
+import { BASE_URL } from "../../config";
+import BotTable from "./components/BotTable";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
+  const token = useMemo(() => user?.access_token, [user]) 
   const [showModal, setShowModal] = useState(false);
+  const [bots, setBots] = useState([]);
   if (!user) {
-    return <Navigate to="/login" />;
+    navigate("/login");
   }
+
+  useEffect(() => {
+    const fetchBots = async () => {
+      const bot = await fetch(`${BASE_URL}bot`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+     if (bot.status !== 200) {
+      return;
+     }
+     const data = await bot.json()
+     setBots(data)
+    };
+
+    fetchBots();
+  }, [token]);
+
   return (
     <>
       <div className={styles.wrapper}>
@@ -60,66 +84,7 @@ const Dashboard = () => {
                 </button>
               </div>
             </div>
-            <table className={styles.table}>
-              <thead className={styles.table__head}>
-                <tr>
-                  <th>#</th>
-                  <th>Pairs</th>
-                  <th>strategy</th>
-                  <th>quantity</th>
-                  <th>price</th>
-                  <th>status</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className={styles.tr}>
-                  <td>1</td>
-                  <td>EURUSD</td>
-                  <td>Grid</td>
-                  <td>0.02</td>
-                  <td>0.9789</td>
-                  <td>Running</td>
-                  <td></td>
-                </tr>
-                <tr className={styles.tr}>
-                  <td>2</td>
-                  <td>EURUSD</td>
-                  <td>Grid</td>
-                  <td>0.02</td>
-                  <td>0.9789</td>
-                  <td>Running</td>
-                  <td></td>
-                </tr>
-                <tr className={styles.tr}>
-                  <td>3</td>
-                  <td>EURUSD</td>
-                  <td>Grid</td>
-                  <td>0.02</td>
-                  <td>0.9789</td>
-                  <td>Running</td>
-                  <td></td>
-                </tr>
-                <tr className={styles.tr}>
-                  <td>4</td>
-                  <td>EURUSD</td>
-                  <td>Grid</td>
-                  <td>0.02</td>
-                  <td>0.9789</td>
-                  <td>Running</td>
-                  <td></td>
-                </tr>
-                <tr className={styles.tr}>
-                  <td>5</td>
-                  <td>EURUSD</td>
-                  <td>Grid</td>
-                  <td>0.02</td>
-                  <td>0.9789</td>
-                  <td>Running</td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
+            <BotTable bots={bots} />
           </section>
         </main>
       </div>
