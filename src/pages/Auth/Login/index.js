@@ -1,15 +1,19 @@
 import axios from "../../../config/axios";
 import { useState } from "react";
 import useInput from "../../../hooks/use-input";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "../Auth.module.css";
 import { toast } from "react-toastify";
 import InputField from "../../../components/InputField";
+import useAuth from "../../../hooks/use-auth";
 
 const LOGIN_URL = "login/";
 
 const Login = () => {
+  const { setAuth } = useAuth()
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const [isFetching, setIsFetching] = useState(false);
   const userNameHook = useInput((value) => value.trim() !== "");
   const { value: enteredUsername, isValid: usernameIsValid } = userNameHook;
@@ -23,7 +27,7 @@ const Login = () => {
     try {
       const sendData = await axios.post(LOGIN_URL, data, {
         headers: { "Content-Type": "application/json" },
-        withCredentials: true,
+        // withCredentials: true,
       });
       toast.update(loading, {
         render: "Successfully Authenticated",
@@ -34,9 +38,10 @@ const Login = () => {
       console.log("Your request data is:", sendData);
       setIsFetching(false);
       const user = sendData.data;
+      setAuth({user: user, access_token: sendData.access_token})
       localStorage.setItem("user", JSON.stringify(user));
       setTimeout(() => {
-        navigate("/dashboard");
+        navigate(from, {replace: true});
       }, 1000);
     } catch (error) {
       const response = error?.response;
@@ -48,6 +53,7 @@ const Login = () => {
           autoClose: true,
           closeButton: true,
         });
+        setIsFetching(false);
         return;
       }
       const data = response?.data;
