@@ -1,14 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
-import routerConfig from './router';
-import { RouterProvider } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+import routerConfig from "./router";
+import { RouterProvider } from "react-router-dom";
+import { AuthProvider } from "./context/AuthProvider";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={routerConfig} />
+    <AuthProvider>
+      <RouterProvider router={routerConfig} />
+    </AuthProvider>
   </React.StrictMode>
 );
 
