@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { AuthProvider } from "../../context/AuthProvider";
+import { AuthProvider } from "../../context/authProvider";
 import useAuth from "../../hooks/use-auth";
 
 const RequireAuth = () => {
