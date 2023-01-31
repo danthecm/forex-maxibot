@@ -1,7 +1,7 @@
 import React from "react";
 import { Table, TD, TR } from "./Styled";
 
-const BotTable = ({ bots }) => {
+const BotTable = ({ bots, isFetching }) => {
   return (
     <Table>
       <thead>
@@ -16,19 +16,27 @@ const BotTable = ({ bots }) => {
         </tr>
       </thead>
       <tbody>
-        {bots.length > 0
-          ? bots.map((bot, index) => (
-              <TR key={bot.id}>
-                <TD>{index + 1}</TD>
-                <TD>{bot.symbol}</TD>
-                <TD>{bot.strategy || "Grid"}</TD>
-                <TD>{bot.volume}</TD>
-                <TD>{bot.grid_interval}</TD>
-                <TD>{bot.status}</TD>
-                <TD>Edit</TD>
-              </TR>
-            ))
-          : <TR><TD colSpan={6}>You do not have any bots</TD></TR>}
+        {isFetching ? (
+          <TR>
+            <TD colSpan={6}>Loading...</TD>
+          </TR>
+        ) : bots.length ? (
+          bots.map((bot, index) => (
+            <TR key={bot.id}>
+              <TD>{index + 1}</TD>
+              <TD>{bot.symbol}</TD>
+              <TD>{bot.strategy || "Grid"}</TD>
+              <TD>{bot.volume}</TD>
+              <TD>{bot.grid_interval}</TD>
+              <TD>{bot.status}</TD>
+              <TD><button>Edit</button></TD>
+            </TR>
+          ))
+        ) : (
+          <TR>
+            <TD colSpan={6}>You do not have any bots</TD>
+          </TR>
+        )}
       </tbody>
     </Table>
   );

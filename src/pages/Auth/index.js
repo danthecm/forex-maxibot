@@ -8,7 +8,7 @@ const Auth = () => {
         <section className={styles.main}>
             <Logo className={styles.logo} />
             <main className={styles.container}>
-            <Outlet styles="My Styles" />
+            <Outlet/>
             </main>
             <ToastContainer position="top-right" autoClose={4000}  />
         </section>

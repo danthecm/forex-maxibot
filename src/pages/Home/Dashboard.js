@@ -10,35 +10,49 @@ import filter__icon from "../../assets/Icons/filter.svg";
 import { useEffect, useMemo, useState } from "react";
 import Modal from "../../components/Modal";
 import NewBot from "./components/NewBot";
-import { BASE_URL } from "../../config";
+import axios from "../../config/axios";
 import BotTable from "./components/BotTable";
+
+const BOT_URL = "bot/";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
-  const token = useMemo(() => user?.access_token, [user]) 
+  const token = useMemo(() => user?.access_token, [user]);
   const [showModal, setShowModal] = useState(false);
   const [bots, setBots] = useState([]);
+  const [isFetching, setIsFetching] = useState(false);
   if (!user) {
     navigate("/login");
   }
 
   useEffect(() => {
+    setIsFetching(true);
+    let isMounted = true;
+    const controller = new AbortController();
+
     const fetchBots = async () => {
-      const bot = await fetch(`${BASE_URL}bot`, {
-        method: "GET",
+      const botReq = await axios.get(BOT_URL, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
+        signal: controller.signal,
       });
-     if (bot.status !== 200) {
-      return;
-     }
-     const data = await bot.json()
-     setBots(data)
+      if (botReq.status !== 200) {
+        setIsFetching(false);
+        return;
+      }
+      const data = await botReq.data;
+      setBots(data);
+      setIsFetching(false);
     };
 
     fetchBots();
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
   }, [token]);
 
   return (
@@ -84,7 +98,7 @@ const Dashboard = () => {
                 </button>
               </div>
             </div>
-            <BotTable bots={bots} />
+            <BotTable isFetching={isFetching} bots={bots} />
           </section>
         </main>
       </div>
