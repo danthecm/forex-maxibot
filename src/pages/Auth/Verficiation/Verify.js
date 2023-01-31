@@ -4,6 +4,8 @@ import { useState } from "react";
 import axios from "../../../config/axios";
 import { useLocation, useNavigate } from "react-router-dom";
 
+const VERIFY_URL = "verify/"
+
 const Verify = () => {
   const [isFetching, setIsFetching] = useState(false);
   let location = useLocation();
@@ -30,7 +32,7 @@ const Verify = () => {
     console.log("verifyCode", code);
     try {
       const sendVerificiation = await axios.get(
-        `verify/${username}`,
+        `${VERIFY_URL}${username}`,
         {
           params: { code },
         }

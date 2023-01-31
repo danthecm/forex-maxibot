@@ -7,6 +7,7 @@ import useInput from "../../../hooks/use-input";
 import styles from "../Auth.module.css";
 
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{5,34}$/;
+const REGISTER_URL = "register/"
 
 const Register = () => {
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ const Register = () => {
   const sendFormData = async (data) => {
     const loading = toast.loading("Registering....");
     try {
-      await axios.post("register/", data);
+      await axios.post(REGISTER_URL, data);
       toast.update(loading, {
         render: "Verify your Email to continue",
         type: "success",
