@@ -39,11 +39,20 @@ const Login = () => {
         navigate("/dashboard");
       }, 1000);
     } catch (error) {
-      const response = error.response;
-      const status = response.status;
-      const data = response.data;
+      const response = error?.response;
+      if (!response) {
+        toast.update(loading, {
+          render: "No Server Response",
+          type: "error",
+          isLoading: false,
+          autoClose: true,
+          closeButton: true,
+        });
+        return;
+      }
+      const data = response?.data;
       console.log("There was an error", error);
-      switch (status) {
+      switch (response?.status) {
         case 500:
           toast.update(loading, {
             render: "service unavailable, try later",
