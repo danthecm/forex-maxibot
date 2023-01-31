@@ -10,6 +10,8 @@ const InputField = ({ name, type, hook, message, placeholder }) => {
         placeholder={placeholder}
         type={type}
         name={name}
+        aria-invalid={hasError}
+        aria-describedby={message}
         onChange={valueChangedHandler}
         onBlur={inputBlurHandler}
       />
