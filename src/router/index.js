@@ -36,7 +36,7 @@ const routerConfig = createBrowserRouter([
     element: <RequireAuth />,
     children: [
       {
-        path: "/dashboard",
+        path: "/",
         element: <App />,
         children: [
           {
