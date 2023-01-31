@@ -5,13 +5,13 @@ import styles from "./Auth.module.css";
 
 const Auth = () => {
     return (
-        <main className={styles.main}>
+        <section className={styles.main}>
             <Logo className={styles.logo} />
-            <div className={styles.container}>
+            <main className={styles.container}>
             <Outlet styles="My Styles" />
-            </div>
+            </main>
             <ToastContainer position="top-right" autoClose={4000}  />
-        </main>
+        </section>
     )
 }
 

@@ -104,7 +104,7 @@ const Login = () => {
           We are glad to have you back, kindly fill in your details to continue
         </p>
       </section>
-      <main>
+      <section>
         <p className={styles.title}>
           <span>Login</span> to continue
         </p>
@@ -145,7 +145,7 @@ const Login = () => {
             </p>
           </form>
         </div>
-      </main>
+      </section>
     </>
   );
 };
