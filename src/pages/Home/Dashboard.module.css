@@ -7,7 +7,7 @@
   background: #f7fafc;
   display: grid;
   grid-template-rows: 130px auto;
-  row-gap: 40px;
+  row-gap: 70px;
 }
 
 .header {
@@ -43,9 +43,10 @@
   display: grid;
   background: #ffffff;
   grid-template-columns: 1fr;
-  grid-template-rows: 20px auto;
+  grid-template-rows: 70px auto;
   padding: 10px 20px;
-  row-gap: 40px;
+  row-gap: 15px;
+  align-items: start;
 }
 
 .main__content h2 {
