@@ -4,8 +4,6 @@ import { toast } from "react-toastify";
 import axios from "../../../config/axios";
 import useInput from "../../../hooks/use-input";
 
-import "react-toastify/dist/ReactToastify.css";
-
 import styles from "../Auth.module.css";
 
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{5,34}$/;
