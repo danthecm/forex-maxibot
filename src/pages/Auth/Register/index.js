@@ -9,8 +9,10 @@ import "react-toastify/dist/ReactToastify.css";
 import styles from "../Auth.module.css";
 import { BASE_URL } from "../../../config";
 
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{5,34}$/;
+
 const Register = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [isFetching, setIsFetching] = useState(false);
 
@@ -36,7 +38,7 @@ const Register = () => {
     valueChangedHandler: passwordChangedHandler,
     isValid: passwordIsValid,
     hasError: passwordHasError,
-  } = useInput((value) => value.length > 3);
+  } = useInput((value) => PWD_REGEX.test(value));
 
   const {
     value: enteredCPassword,
@@ -52,10 +54,7 @@ const Register = () => {
   const sendFormData = async (data) => {
     const loading = toast.loading("Registering....");
     try {
-      const sendData = await axios.post(
-        `${BASE_URL}register/`,
-        data
-      );
+      const sendData = await axios.post(`${BASE_URL}register/`, data);
       console.log("Your request data is:", sendData);
       toast.update(loading, {
         render: "Verify your Email to continue",
@@ -65,7 +64,7 @@ const Register = () => {
         closeButton: true,
       });
       setIsFetching(false);
-      navigate("/login")
+      navigate("/login");
     } catch (error) {
       const response = error.response;
       const status = response.status;
@@ -177,7 +176,15 @@ const Register = () => {
               className={passwordHasError ? styles.invalid : ""}
             />
             {passwordHasError ? (
-              <p className={styles.error}>Password cannot be empty</p>
+              <p className={styles.error}>
+                Must be 5 to 34 characters and includes uppercase, lowercase, a
+                number, and special character. Allowed special characters:{" "}
+                <span aria-label="exclamation mark">!</span>{" "}
+                <span aria-label="at symbol">@</span>{" "}
+                <span aria-label="hashtag">#</span>{" "}
+                <span aria-label="dollar sign">$</span>{" "}
+                <span aria-label="percent">%</span>
+              </p>
             ) : (
               ""
             )}
