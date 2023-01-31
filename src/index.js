@@ -4,15 +4,12 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import routerConfig from "./router";
 import { RouterProvider } from "react-router-dom";
-import { AuthProvider } from "./context/AuthProvider";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <AuthProvider>
       <RouterProvider router={routerConfig} />
-    </AuthProvider>
   </React.StrictMode>
 );
 
