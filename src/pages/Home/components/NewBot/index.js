@@ -1,5 +1,5 @@
 import useInput from "../../../../hooks/use-input";
-import { StyledNewBot, Input, InputError, AddButton } from "./Styled";
+import { StyledNewBot, Input, InputError, AddButton, Form } from "./Styled";
 
 const NewBot = () => {
   const {
@@ -39,7 +39,7 @@ const NewBot = () => {
 
   return (
     <StyledNewBot>
-      <form>
+      <Form>
         <Input
           error={gridIntHasError}
           onChange={gridIntChangedHandler}
@@ -94,7 +94,7 @@ const NewBot = () => {
         <AddButton disabled={!formIsValid} type="submit">
           Add New
         </AddButton>
-      </form>
+      </Form>
     </StyledNewBot>
   );
 };

@@ -60,3 +60,10 @@ border: none;
 }
 
 `
+
+export const Form = styled.form`
+display: grid;
+grid-template-columns: auto;
+justify-content: center;
+
+`
