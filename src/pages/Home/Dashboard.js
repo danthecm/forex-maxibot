@@ -32,6 +32,7 @@ const Dashboard = () => {
     const controller = new AbortController();
 
     const fetchBots = async () => {
+      console.log("isMounted", isMounted)
       const botReq = await axios.get(BOT_URL, {
         headers: {
           Authorization: `Bearer ${token}`,
