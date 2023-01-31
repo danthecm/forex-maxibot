@@ -53,8 +53,7 @@ const Register = () => {
   const sendFormData = async (data) => {
     const loading = toast.loading("Registering....");
     try {
-      const sendData = await axios.post('register/', data);
-      console.log("Your request data is:", sendData);
+      await axios.post("register/", data);
       toast.update(loading, {
         render: "Verify your Email to continue",
         type: "success",
@@ -65,9 +64,18 @@ const Register = () => {
       setIsFetching(false);
       navigate("/login");
     } catch (error) {
+      if (!error?.response) {
+        toast.update(loading, {
+          render: "No Server Response",
+          type: "error",
+          isLoading: false,
+          autoClose: true,
+          closeButton: true,
+        });
+        return;
+      }
       const response = error.response;
-      const status = response.status;
-      switch (status) {
+      switch (response?.status) {
         case 500:
           toast.update(loading, {
             render: "service unavailable, try later",
@@ -120,7 +128,6 @@ const Register = () => {
     setIsFetching(true);
 
     sendFormData(user);
-    console.log(user);
   };
 
   return (
