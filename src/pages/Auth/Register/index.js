@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import axios from "axios";
+import axios from "../../../config/axios";
 import useInput from "../../../hooks/use-input";
 
 import "react-toastify/dist/ReactToastify.css";
 
 import styles from "../Auth.module.css";
-import { BASE_URL } from "../../../config";
 
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{5,34}$/;
 
@@ -54,7 +53,7 @@ const Register = () => {
   const sendFormData = async (data) => {
     const loading = toast.loading("Registering....");
     try {
-      const sendData = await axios.post(`${BASE_URL}register/`, data);
+      const sendData = await axios.post('register/', data);
       console.log("Your request data is:", sendData);
       toast.update(loading, {
         render: "Verify your Email to continue",

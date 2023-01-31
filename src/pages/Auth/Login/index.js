@@ -1,10 +1,9 @@
-import axios from "axios";
+import axios from "../../../config/axios";
 import { useState } from "react";
 import useInput from "../../../hooks/use-input";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "../Auth.module.css";
 import { toast } from "react-toastify";
-import { BASE_URL } from "../../../config";
 import InputField from "../../../components/InputField";
 
 const Login = () => {
@@ -20,7 +19,7 @@ const Login = () => {
   const sendFormData = async (data) => {
     const loading = toast.loading("Authenticating");
     try {
-      const sendData = await axios.post(`${BASE_URL}login/`, data);
+      const sendData = await axios.post('login/', data);
       toast.update(loading, {
         render: "Successfully Authenticated",
         type: "success",
