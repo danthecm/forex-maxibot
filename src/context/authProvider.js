@@ -12,7 +12,9 @@ export const AuthProvider = ({ children }) => {
       return;
     }
   }
-
+  setTimeout(() => {
+    localStorage.removeItem("user")
+  }, 30000)
   return (
     <authContext.Provider value={{ auth, setAuth }}>
       {children}
