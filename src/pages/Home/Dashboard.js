@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import SideNav from "../../components/SideNav";
 
 import styles from "./Dashboard.module.css";
@@ -7,24 +6,21 @@ import profile__avatar from "../../assets/Icons/avatar.svg";
 import search__icon from "../../assets/Icons/search.svg";
 
 import filter__icon from "../../assets/Icons/filter.svg";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect,  useState } from "react";
 import Modal from "../../components/Modal";
 import NewBot from "./components/NewBot";
 import axios from "../../config/axios";
 import BotTable from "./components/BotTable";
+import useAuth from "../../hooks/use-auth";
 
 const BOT_URL = "bot/";
 
 const Dashboard = () => {
-  const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("user"));
-  const token = useMemo(() => user?.access_token, [user]);
+  const { auth } = useAuth()
+  const token = auth.accessToken
   const [showModal, setShowModal] = useState(false);
   const [bots, setBots] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
-  if (!user) {
-    navigate("/login");
-  }
 
   useEffect(() => {
     setIsFetching(true);
@@ -32,20 +28,24 @@ const Dashboard = () => {
     const controller = new AbortController();
 
     const fetchBots = async () => {
-      console.log("isMounted", isMounted)
-      const botReq = await axios.get(BOT_URL, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        signal: controller.signal,
-      });
-      if (botReq.status !== 200) {
+      console.log("isMounted", isMounted);
+      try {
+        const botReq = await axios.get(BOT_URL, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          // signal: controller.signal,
+        });
+        if (botReq.status !== 200) {
+          setIsFetching(false);
+          return;
+        }
+        const data = await botReq.data;
+        setBots(data);
         setIsFetching(false);
-        return;
+      } catch (error) {
+        console.log("Error loading bot", error);
       }
-      const data = await botReq.data;
-      setBots(data);
-      setIsFetching(false);
     };
 
     fetchBots();
@@ -69,7 +69,7 @@ const Dashboard = () => {
                 alt="profile avatar"
               />
               <p className={styles.username}>
-                {user.user.username.toUpperCase()}
+                {auth.user.username.toUpperCase()}
               </p>
             </div>
             <h1>Welcome to TheMaxibot Forex</h1>
