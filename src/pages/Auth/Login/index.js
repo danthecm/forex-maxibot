@@ -10,7 +10,7 @@ import useAuth from "../../../hooks/use-auth";
 const LOGIN_URL = "login/";
 
 const Login = () => {
-  const { setAuth } = useAuth()
+  const { setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -35,11 +35,10 @@ const Login = () => {
         isLoading: false,
         closeButton: true,
       });
-      console.log("Your request data is:", sendData);
-      setIsFetching(false);
       const user = sendData.data;
-      setAuth({user: user, access_token: sendData.access_token})
+      setAuth({user: user.user, accessToken: user.access_token})
       localStorage.setItem("user", JSON.stringify(user));
+      setIsFetching(false);
       setTimeout(() => {
         navigate(from, {replace: true});
       }, 1000);
@@ -135,6 +134,7 @@ const Login = () => {
               type="text"
               placeholder="Username"
               message="Username cannot be empty"
+              autoComplete="false"
               hook={userNameHook}
             />
 
@@ -143,6 +143,7 @@ const Login = () => {
               type="password"
               placeholder="Password"
               message="Password cannot be empty"
+              autoComplete="false"
               hook={passwordHook}
             />
 

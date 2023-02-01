@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../../pages/Auth/Auth.module.css";
 
-const InputField = ({ name, type, hook, message, placeholder }) => {
+const InputField = ({ name, type, hook, message, placeholder, autoComplete }) => {
   const { inputBlurHandler, valueChangedHandler, hasError } = hook;
   return (
     <>
@@ -14,6 +14,7 @@ const InputField = ({ name, type, hook, message, placeholder }) => {
         aria-describedby={message}
         onChange={valueChangedHandler}
         onBlur={inputBlurHandler}
+        autoComplete={autoComplete}
       />
       {hasError ? <p className={styles.error}>{message}</p> : ""}
     </>
