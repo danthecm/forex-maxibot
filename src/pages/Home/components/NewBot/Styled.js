@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledNewBot = styled.div`
+export const StyledNewBot = styled.section`
   margin-top: 20px;
   width: 365px;
 `;
@@ -33,6 +33,10 @@ export const Input = styled.input`
   /* Firefox */
   &[type="number"] {
     -moz-appearance: textfield;
+  }
+
+  &[type="text"] {
+    text-transform: capitalize;
   }
 `;
 

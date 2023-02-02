@@ -16,7 +16,6 @@ export const Table = styled.table`
     background: #edf2f7;
     text-transform: capitalize;
   }
-
 `;
 
 export const TR = styled.tr`
@@ -34,5 +33,18 @@ export const TR = styled.tr`
 `;
 
 export const TD = styled.td`
- border-bottom: 1px solid #e2e8f0;
-`
+  border-bottom: 1px solid #e2e8f0;
+
+  button {
+    padding: 10px 15px;
+    background: #27ae60;
+    border: none;
+    border-radius: 4px;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #f7fafc;
+  }
+`;

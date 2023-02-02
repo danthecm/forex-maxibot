@@ -45,6 +45,7 @@ const Dashboard = () => {
         setIsFetching(false);
       } catch (error) {
         console.log("Error loading bot", error);
+        setIsFetching(false);
       }
     };
 
