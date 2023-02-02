@@ -4,7 +4,7 @@ import Modal from "../../../../components/Modal";
 import EditBot from "../EditBot";
 
 const BotTable = ({ bots, isFetching }) => {
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [bot, setBot] = useState({});
   const editButtonHandler = (event) => {
     const editBot = JSON.parse(event?.target?.value);

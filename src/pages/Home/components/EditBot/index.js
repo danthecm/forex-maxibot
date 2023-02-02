@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import useInput from "../../../../hooks/use-input";
 import {
   StyledNewBot,
@@ -49,8 +48,21 @@ const EditBot = ({ bot }) => {
     hasError: statusHasError,
   } = useInput((value) => value.trim() !== "", `${bot.status}`);
 
+  const {
+    value: enteredPipMargin,
+    inputBlurHandler: pipMarginBlurHandler,
+    valueChangedHandler: pipMarginChangedHandler,
+    isValid: pipMarginIsValid,
+    hasError: pipMarginHasError,
+  } = useInput((value) => value.trim() !== "", `${bot.pip_margin}`);
+
   const formIsValid =
-    gridIntIsValid && volumeIsValid && tpIsValid && tradeCloseIsValid && statusIsValid;
+    gridIntIsValid &&
+    volumeIsValid &&
+    tpIsValid &&
+    tradeCloseIsValid &&
+    pipMarginIsValid &&
+    statusIsValid;
 
   return (
     <StyledNewBot>
@@ -69,7 +81,7 @@ const EditBot = ({ bot }) => {
         ) : (
           ""
         )}
-        <label>Volume</label>
+        <label>Volume:</label>
         <Input
           error={volumeHasError}
           onChange={volumeChangedHandler}
@@ -80,7 +92,7 @@ const EditBot = ({ bot }) => {
           step="0.01"
         />
         {volumeHasError ? <InputError>Volume cannot be empty</InputError> : ""}
-        <label>Take Profit</label>
+        <label>Take Profit:</label>
         <Input
           error={tpHasError}
           onChange={tpChangedHandler}
@@ -106,6 +118,22 @@ const EditBot = ({ bot }) => {
         ) : (
           ""
         )}
+        <label>Pip Margin:</label>
+        <Input
+          error={pipMarginHasError}
+          onChange={pipMarginChangedHandler}
+          onBlur={pipMarginBlurHandler}
+          value={enteredPipMargin}
+          type="number"
+          placeholder="Enter Pip Margin"
+          step="0.01"
+        />
+        {pipMarginHasError ? (
+          <InputError>Trade Close Margin cannot be empty</InputError>
+        ) : (
+          ""
+        )}
+
         <label>Status</label>
         <Input
           error={statusHasError}
