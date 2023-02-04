@@ -11,10 +11,7 @@ const useAxiosPrivate = () => {
     const requestInterceptor = axiosPrivate.interceptors.request.use(
       (config) => {
         if (!config.headers["Authorization"]) {
-          console.log("this is a normal request");
           config.headers["Authorization"] = `Bearer ${auth?.accessToken}`;
-        } else {
-          console.log("This request was sent before")
         }
         return config;
       },
@@ -29,7 +26,6 @@ const useAxiosPrivate = () => {
         if (error?.response?.status === 401 && !prevRequest.sent) {
           prevRequest.sent = true;
           const newAccessToken = await refresh();
-          console.log("This is a try on prev request");
           prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
           return axiosPrivate(prevRequest);
         }
