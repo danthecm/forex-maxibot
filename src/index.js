@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import routerConfig from "./router";
 import { RouterProvider } from "react-router-dom";
 import { AuthProvider } from "./context/authProvider";
+import { ToastContainer } from "react-toastify";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -12,6 +13,7 @@ root.render(
     <AuthProvider>
       <RouterProvider router={routerConfig}></RouterProvider>
     </AuthProvider>
+    <ToastContainer position="top-right" autoClose={4000}  />
   </React.StrictMode>
 );
 

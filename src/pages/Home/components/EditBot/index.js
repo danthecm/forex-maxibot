@@ -1,4 +1,7 @@
 import useInput from "../../../../hooks/use-input";
+import useAuth from "../../../../hooks/use-auth";
+import axios from "../../../../config/axios";
+import { toast } from "react-toastify";
 import {
   StyledNewBot,
   Input,
@@ -7,7 +10,8 @@ import {
   Form,
 } from "../NewBot/Styled";
 
-const EditBot = ({ bot }) => {
+const EditBot = ({ bot, close }) => {
+  const { auth } = useAuth();
   const {
     value: enteredGridInt,
     inputBlurHandler: gridIntBlurHandler,
@@ -64,10 +68,60 @@ const EditBot = ({ bot }) => {
     pipMarginIsValid &&
     statusIsValid;
 
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+    if (!formIsValid) {
+      return;
+    }
+    const updating = toast.loading("Updating...");
+    const botInfo = {
+      grid_interval: enteredGridInt,
+      close_trade: enteredTradeClose,
+      pip_margin: enteredPipMargin,
+      volume: enteredVolume,
+      take_profit: enteredTP,
+      status: enteredStatus,
+    };
+
+    const updateBot = async () => {
+      try {
+        const updateReq = await axios.patch(`bot/${bot.id}/`, botInfo, {
+          headers: {
+            Authorization: "Bearer " + auth.accessToken,
+          },
+          withCredentials: true,
+        });
+        toast.update(updating, {
+          render: "Successfully Updated Bot",
+          type: "success",
+          isLoading: false,
+          autoClose: true,
+          closeButton: true,
+        });
+        console.log(updateReq.status, updateReq.data);
+        setTimeout(() => {
+          window.location.reload();
+        }, 4000)
+      } catch (e) {
+        toast.update(updating, {
+          render: "Error Updating Bot",
+          type: "error",
+          isLoading: false,
+          closeButton: true,
+          autoClose: true,
+        });
+      }
+    };
+    updateBot();
+    close()
+
+
+  };
+
   return (
     <StyledNewBot>
-      <Form>
-        <label>Grid Interval</label>
+      <Form onSubmit={formSubmitHandler}>
+        <label>Grid Interval:</label>
         <Input
           error={gridIntHasError}
           onChange={gridIntChangedHandler}
@@ -103,7 +157,7 @@ const EditBot = ({ bot }) => {
           step="0.01"
         />
         {tpHasError ? <InputError>Take Profit cannot be empty</InputError> : ""}
-        <label>Close Margin</label>
+        <label>Close Margin:</label>
         <Input
           error={tradeCloseHasError}
           onChange={tradeCloseChangedHandler}

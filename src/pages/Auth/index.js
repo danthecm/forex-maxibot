@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom"
-import { ToastContainer } from "react-toastify";
 import { ReactComponent as Logo} from "../../logo.svg";
 import styles from "./Auth.module.css";
 
@@ -10,7 +9,7 @@ const Auth = () => {
             <main className={styles.container}>
             <Outlet/>
             </main>
-            <ToastContainer position="top-right" autoClose={4000}  />
+
         </section>
     )
 }

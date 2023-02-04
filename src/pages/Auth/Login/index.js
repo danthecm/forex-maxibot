@@ -27,15 +27,17 @@ const Login = () => {
     try {
       const sendData = await axios.post(LOGIN_URL, data, {
         headers: { "Content-Type": "application/json" },
-        // withCredentials: true,
+        withCredentials: true,
       });
       toast.update(loading, {
         render: "Successfully Authenticated",
         type: "success",
         isLoading: false,
+        autoClose: true,
         closeButton: true,
       });
       const user = sendData.data;
+      console.log("the user data is: ", user)
       setAuth({user: user.user, accessToken: user.access_token})
       localStorage.setItem("user", JSON.stringify(user));
       setIsFetching(false);

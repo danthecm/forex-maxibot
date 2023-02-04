@@ -64,7 +64,12 @@ const BotTable = ({ bots, isFetching }) => {
         }}
         title="EDIT BOT"
       >
-        <EditBot bot={bot} />
+        <EditBot
+          close={() => {
+            setShowModal(false);
+          }}
+          bot={bot}
+        />
       </Modal>
     </>
   );

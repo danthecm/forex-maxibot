@@ -6,7 +6,7 @@ import profile__avatar from "../../assets/Icons/avatar.svg";
 import search__icon from "../../assets/Icons/search.svg";
 
 import filter__icon from "../../assets/Icons/filter.svg";
-import { useEffect,  useState } from "react";
+import { useEffect,  useMemo,  useState } from "react";
 import Modal from "../../components/Modal";
 import NewBot from "./components/NewBot";
 import axios from "../../config/axios";
@@ -17,7 +17,7 @@ const BOT_URL = "bot/";
 
 const Dashboard = () => {
   const { auth } = useAuth()
-  const token = auth.accessToken
+  const token = useMemo(() => auth.accessToken, [auth]) 
   const [showModal, setShowModal] = useState(false);
   const [bots, setBots] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
@@ -34,6 +34,7 @@ const Dashboard = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
+          withCredentials: true,
           // signal: controller.signal,
         });
         if (botReq.status !== 200) {
