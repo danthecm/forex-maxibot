@@ -9,11 +9,13 @@ import profile__icon from "../../assets/Icons/profile.svg";
 import security__icon from "../../assets/Icons/security.svg";
 import help__icon from "../../assets/Icons/help.svg";
 import exit__icon from "../../assets/Icons/exit.svg";
+import { toast } from "react-toastify";
 
 const LOGOUT_URL = "logout/"
 
 const SideNav = () => {
   const logoutClickHandler = async () => {
+    const loggingOut = toast.loading("Logging out...");
     try{
       const logoutReq = await axios.get(LOGOUT_URL, {
         withCredentials: true,
@@ -31,7 +33,13 @@ const SideNav = () => {
     } catch(err) {
       console.log("Error logging out", err);
     }
-    
+    toast.update(loggingOut, {
+      render: "Successfully logged out",
+          type: "success",
+          isLoading: false,
+          autoClose: true,
+          closeButton: true,
+    })
   }
   return (
     <nav className={styles.sidenav}>
