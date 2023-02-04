@@ -1,6 +1,4 @@
 import useInput from "../../../../hooks/use-input";
-import useAuth from "../../../../hooks/use-auth";
-import axios from "../../../../config/axios";
 import { toast } from "react-toastify";
 import {
   StyledNewBot,
@@ -9,9 +7,10 @@ import {
   AddButton,
   Form,
 } from "../NewBot/Styled";
+import useAxiosPrivate from "../../../../hooks/use-axios-private";
 
 const EditBot = ({ bot, close }) => {
-  const { auth } = useAuth();
+  const axiosPrivate = useAxiosPrivate();
   const {
     value: enteredGridInt,
     inputBlurHandler: gridIntBlurHandler,
@@ -85,12 +84,7 @@ const EditBot = ({ bot, close }) => {
 
     const updateBot = async () => {
       try {
-        const updateReq = await axios.patch(`bot/${bot.id}/`, botInfo, {
-          headers: {
-            Authorization: "Bearer " + auth.accessToken,
-          },
-          withCredentials: true,
-        });
+        const updateReq = await axiosPrivate.patch(`bot/${bot.id}/`, botInfo);
         toast.update(updating, {
           render: "Successfully Updated Bot",
           type: "success",
@@ -101,7 +95,7 @@ const EditBot = ({ bot, close }) => {
         console.log(updateReq.status, updateReq.data);
         setTimeout(() => {
           window.location.reload();
-        }, 4000)
+        }, 4000);
       } catch (e) {
         toast.update(updating, {
           render: "Error Updating Bot",
@@ -113,9 +107,7 @@ const EditBot = ({ bot, close }) => {
       }
     };
     updateBot();
-    close()
-
-
+    close();
   };
 
   return (

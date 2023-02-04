@@ -6,18 +6,19 @@ import profile__avatar from "../../assets/Icons/avatar.svg";
 import search__icon from "../../assets/Icons/search.svg";
 
 import filter__icon from "../../assets/Icons/filter.svg";
-import { useEffect,  useMemo,  useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Modal from "../../components/Modal";
 import NewBot from "./components/NewBot";
-import axios from "../../config/axios";
 import BotTable from "./components/BotTable";
 import useAuth from "../../hooks/use-auth";
+import useAxiosPrivate from "../../hooks/use-axios-private";
 
 const BOT_URL = "bot/";
 
 const Dashboard = () => {
-  const { auth } = useAuth()
-  const token = useMemo(() => auth.accessToken, [auth]) 
+  const { auth } = useAuth();
+  const axiosPrivate = useAxiosPrivate();
+  const token = useMemo(() => auth.accessToken, [auth]);
   const [showModal, setShowModal] = useState(false);
   const [bots, setBots] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
@@ -29,13 +30,7 @@ const Dashboard = () => {
 
     const fetchBots = async () => {
       try {
-        const botReq = await axios.get(BOT_URL, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          withCredentials: true,
-          // signal: controller.signal,
-        });
+        const botReq = await axiosPrivate.get(BOT_URL);
         if (botReq.status !== 200) {
           setIsFetching(false);
           return;
@@ -55,7 +50,7 @@ const Dashboard = () => {
       isMounted = false;
       controller.abort();
     };
-  }, [token]);
+  }, [token, axiosPrivate]);
 
   return (
     <>

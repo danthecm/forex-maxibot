@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
   setTimeout(() => {
     localStorage.removeItem("user")
     window.location.reload(false)
-  }, 300000)
+  }, 3000000)
   return (
     <authContext.Provider value={{ auth, setAuth }}>
       {children}
