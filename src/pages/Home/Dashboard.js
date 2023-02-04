@@ -28,7 +28,6 @@ const Dashboard = () => {
     const controller = new AbortController();
 
     const fetchBots = async () => {
-      console.log("isMounted", isMounted);
       try {
         const botReq = await axios.get(BOT_URL, {
           headers: {
@@ -42,7 +41,7 @@ const Dashboard = () => {
           return;
         }
         const data = await botReq.data;
-        setBots(data);
+        isMounted && setBots(data);
         setIsFetching(false);
       } catch (error) {
         console.log("Error loading bot", error);
