@@ -17,7 +17,7 @@ const BOT_URL = "bot/";
 
 const Dashboard = () => {
   const { auth } = useAuth();
-  const axiosPrivate = useAxiosPrivate();
+  const axiosPrivate =  useAxiosPrivate();
   const token = useMemo(() => auth.accessToken, [auth]);
   const [showModal, setShowModal] = useState(false);
   const [bots, setBots] = useState([]);
@@ -25,8 +25,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     setIsFetching(true);
-    let isMounted = true;
-    const controller = new AbortController();
 
     const fetchBots = async () => {
       try {
@@ -36,7 +34,7 @@ const Dashboard = () => {
           return;
         }
         const data = await botReq.data;
-        isMounted && setBots(data);
+        setBots(data);
         setIsFetching(false);
       } catch (error) {
         console.log("Error loading bot", error);
@@ -46,10 +44,6 @@ const Dashboard = () => {
 
     fetchBots();
 
-    return () => {
-      isMounted = false;
-      controller.abort();
-    };
   }, [token, axiosPrivate]);
 
   return (
