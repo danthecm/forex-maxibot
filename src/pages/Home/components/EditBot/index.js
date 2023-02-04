@@ -9,7 +9,7 @@ import {
 } from "../NewBot/Styled";
 import useAxiosPrivate from "../../../../hooks/use-axios-private";
 
-const EditBot = ({ bot, close }) => {
+const EditBot = ({ bot, close, setBots }) => {
   const axiosPrivate = useAxiosPrivate();
   const {
     value: enteredGridInt,
@@ -84,7 +84,12 @@ const EditBot = ({ bot, close }) => {
 
     const updateBot = async () => {
       try {
-        const updateReq = await axiosPrivate.patch(`bot/${bot.id}/`, botInfo);
+        await axiosPrivate.patch(`bot/${bot.id}/`, botInfo);
+        setBots((prev) => {
+          const newBot = prev.filter((value) => value.id !== bot.id);
+          newBot.push({ ...bot, ...botInfo });
+          return newBot;
+        });
         toast.update(updating, {
           render: "Successfully Updated Bot",
           type: "success",
@@ -92,10 +97,6 @@ const EditBot = ({ bot, close }) => {
           autoClose: true,
           closeButton: true,
         });
-        console.log(updateReq.status, updateReq.data);
-        setTimeout(() => {
-          window.location.reload();
-        }, 4000);
       } catch (e) {
         toast.update(updating, {
           render: "Error Updating Bot",

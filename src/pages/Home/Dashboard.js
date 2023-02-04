@@ -1,6 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import useAuth from "../../hooks/use-auth";
-import useAxiosPrivate from "../../hooks/use-axios-private";
 
 import SideNav from "../../components/SideNav";
 import Modal from "../../components/Modal";
@@ -13,39 +12,9 @@ import filter__icon from "../../assets/Icons/filter.svg";
 
 import styles from "./Dashboard.module.css";
 
-
-const BOT_URL = "bot/";
-
 const Dashboard = () => {
-  const { auth } = useAuth();
-  const axiosPrivate =  useAxiosPrivate();
-  const token = useMemo(() => auth.accessToken, [auth]);
   const [showModal, setShowModal] = useState(false);
-  const [bots, setBots] = useState([]);
-  const [isFetching, setIsFetching] = useState(false);
-
-  useEffect(() => {
-    setIsFetching(true);
-
-    const fetchBots = async () => {
-      try {
-        const botReq = await axiosPrivate.get(BOT_URL);
-        if (botReq.status !== 200) {
-          setIsFetching(false);
-          return;
-        }
-        const data = await botReq.data;
-        setBots(data);
-        setIsFetching(false);
-      } catch (error) {
-        console.log("Error loading bot", error);
-        setIsFetching(false);
-      }
-    };
-
-    fetchBots();
-
-  }, [token, axiosPrivate]);
+  const { auth } = useAuth();
 
   return (
     <>
@@ -90,7 +59,7 @@ const Dashboard = () => {
                 </button>
               </div>
             </div>
-            <BotTable isFetching={isFetching} bots={bots} />
+            <BotTable />
           </section>
         </main>
       </div>
