@@ -13,6 +13,7 @@ const useRefreshToken = () => {
             setAuth((prev) => {
                 return {...prev, accessToken: token}
             })
+            return token
         } catch (err) {
             console.error(err)
             localStorage.removeItem("user")
