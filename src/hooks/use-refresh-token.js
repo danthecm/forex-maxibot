@@ -5,13 +5,20 @@ const useRefreshToken = () => {
     const { setAuth }= useAuth()
 
     const refresh = async () => {
-        const response = await axios.get("refresh/", {
-            withCredentials: true,
-        })
-        const token = response?.data?.access_token
-        setAuth((prev) => {
-            return {...prev, accessToken: token}
-        })
+        try {
+            const response = await axios.get("refresh/", {
+                withCredentials: true,
+            })
+            const token = response?.data?.access_token
+            setAuth((prev) => {
+                return {...prev, accessToken: token}
+            })
+        } catch (err) {
+            console.error(err)
+            localStorage.removeItem("user")
+            window.location.reload(false)
+        }
+        
     }
   return refresh
 }
