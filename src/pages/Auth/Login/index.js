@@ -37,7 +37,6 @@ const Login = () => {
         closeButton: true,
       });
       const user = sendData.data;
-      console.log("the user data is: ", user)
       setAuth({user: user.user, accessToken: user.access_token})
       localStorage.setItem("user", JSON.stringify(user));
       setIsFetching(false);

@@ -31,7 +31,6 @@ const SideNav = () => {
         render: "Successfully logged out",
             type: "success",
             isLoading: false,
-            autoClose: true,
             closeButton: true,
       })
       window.location.reload(false);
