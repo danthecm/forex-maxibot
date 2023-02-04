@@ -1,17 +1,18 @@
-import SideNav from "../../components/SideNav";
-
-import styles from "./Dashboard.module.css";
-
-import profile__avatar from "../../assets/Icons/avatar.svg";
-import search__icon from "../../assets/Icons/search.svg";
-
-import filter__icon from "../../assets/Icons/filter.svg";
 import { useEffect, useMemo, useState } from "react";
+import useAuth from "../../hooks/use-auth";
+import useAxiosPrivate from "../../hooks/use-axios-private";
+
+import SideNav from "../../components/SideNav";
 import Modal from "../../components/Modal";
 import NewBot from "./components/NewBot";
 import BotTable from "./components/BotTable";
-import useAuth from "../../hooks/use-auth";
-import useAxiosPrivate from "../../hooks/use-axios-private";
+
+import profile__avatar from "../../assets/Icons/avatar.svg";
+import search__icon from "../../assets/Icons/search.svg";
+import filter__icon from "../../assets/Icons/filter.svg";
+
+import styles from "./Dashboard.module.css";
+
 
 const BOT_URL = "bot/";
 
