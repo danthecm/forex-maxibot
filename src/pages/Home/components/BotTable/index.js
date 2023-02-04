@@ -19,7 +19,7 @@ const BotTable = () => {
     const editBot = JSON.parse(event?.target?.value);
     setBot(editBot);
     setShowModal(true);
-    console.log("Edit bot", editBot);
+
   };
 
   useEffect(() => {
