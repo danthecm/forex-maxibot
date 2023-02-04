@@ -13,6 +13,8 @@ const useAxiosPrivate = () => {
         if (!config.headers["Authorization"]) {
           console.log("this is a normal request");
           config.headers["Authorization"] = `Bearer ${auth?.accessToken}`;
+        } else {
+          console.log("This request was sent before")
         }
         return config;
       },
