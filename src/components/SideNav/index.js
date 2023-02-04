@@ -27,19 +27,18 @@ const SideNav = () => {
       const data = await logoutReq.data
       console.log("Logout request retuned", data);
       localStorage.removeItem("user");
+      toast.update(loggingOut, {
+        render: "Successfully logged out",
+            type: "success",
+            isLoading: false,
+            autoClose: true,
+            closeButton: true,
+      })
       window.location.reload(false);
-
-
     } catch(err) {
       console.log("Error logging out", err);
     }
-    toast.update(loggingOut, {
-      render: "Successfully logged out",
-          type: "success",
-          isLoading: false,
-          autoClose: true,
-          closeButton: true,
-    })
+
   }
   return (
     <nav className={styles.sidenav}>
