@@ -142,9 +142,13 @@
 }
 
 @media screen and (max-width: 769px) {
+  .main {
+    height: 100%;
+  }
   .container {
     grid-template-columns: auto;
     padding: 0 2rem;
+    height: auto;
   }
   .container > div {
     text-align: center;
