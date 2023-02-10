@@ -10,55 +10,79 @@ import security__icon from "../../assets/Icons/security.svg";
 import help__icon from "../../assets/Icons/help.svg";
 import exit__icon from "../../assets/Icons/exit.svg";
 import { toast } from "react-toastify";
+import { NavLink } from "react-router-dom";
 
-const LOGOUT_URL = "logout/"
+const LOGOUT_URL = "logout/";
 
 const SideNav = () => {
   const logoutClickHandler = async () => {
     const loggingOut = toast.loading("Logging out...");
-    try{
+    try {
       const logoutReq = await axios.get(LOGOUT_URL, {
         withCredentials: true,
-      })
+      });
 
       if (logoutReq.status !== 200) {
         throw new Error(logoutReq.status);
       }
-      const data = await logoutReq.data
+      const data = await logoutReq.data;
       console.log("Logout request retuned", data);
       localStorage.removeItem("user");
       toast.update(loggingOut, {
         render: "Successfully logged out",
-            type: "success",
-            isLoading: false,
-            closeButton: true,
-      })
+        type: "success",
+        isLoading: false,
+        closeButton: true,
+      });
       window.location.reload(false);
-    } catch(err) {
+    } catch (err) {
       console.log("Error logging out", err);
     }
-
-  }
+  };
   return (
     <nav className={styles.sidenav}>
       <img className={styles.logo__large} src={logo} alt="Maxibot Logo" />
-      <img className={styles.logo__small} src={logo__small} alt="Maxibot Logo" />
+      <img
+        className={styles.logo__small}
+        src={logo__small}
+        alt="Maxibot Logo"
+      />
       <ul className={styles.nav__list}>
-        <li className={styles.active}>
-          <img src={dashboard__icon} alt="dashboard icon" />
-          <span>Dashboard</span>
+        <li>
+          <NavLink
+            className={({ isActive }) => (isActive ? styles.active : "")}
+            to="/"
+          >
+            <img src={dashboard__icon} alt="dashboard icon" />
+            <span>Dashboard</span>
+          </NavLink>
         </li>
         <li>
-          <img src={profile__icon} alt="profile icon" />
-          <span>Profile</span>
+          <NavLink
+            className={({ isActive }) => (isActive ? styles.active : "")}
+            to="/profile"
+          >
+            <img src={profile__icon} alt="profile icon" />
+            <span>Profile</span>
+          </NavLink>
         </li>
         <li>
-          <img src={security__icon} alt="security icon" />
-          <span>Security</span>
+          <NavLink
+            className={({ isActive }) => (isActive ? styles.active : "")}
+            to="/security"
+          >
+            <img src={security__icon} alt="security icon" />
+            <span>Security</span>
+          </NavLink>
         </li>
         <li>
-          <img src={help__icon} alt="help icon" />
-          <span>Help Guide</span>
+          <NavLink
+            className={({ isActive }) => (isActive ? styles.active : "")}
+            to="/help"
+          >
+            <img src={help__icon} alt="help icon" />
+            <span>Help Guide</span>
+          </NavLink>
         </li>
         <li onClick={logoutClickHandler}>
           <img src={exit__icon} alt="exit icon" />
