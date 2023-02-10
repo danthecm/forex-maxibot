@@ -219,7 +219,7 @@ const Register = () => {
                 : "Register"}
             </button>
             <p className={styles.link}>
-              Already registered? Login <Link to="/login">here</Link>{" "}
+              Already registered? Login <Link to="../login">here</Link>{" "}
             </p>
             <p className={styles.terms}>
               By clicking the button, you are agreeing to our{" "}

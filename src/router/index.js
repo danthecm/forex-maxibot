@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import Modal from "../components/Modal";
 import RequireAuth from "../components/RequireAuth";
 import Auth from "../pages/Auth";
 import Login from "../pages/Auth/Login";
@@ -10,19 +9,19 @@ import Dashboard from "../pages/Home/Dashboard";
 
 const routerConfig = createBrowserRouter([
   {
-    path: "",
+    path: "auth",
     element: <Auth />,
     children: [
       {
-        path: "/register",
+        path: "register",
         element: <Register />,
       },
       {
-        path:"/verify",
-        element: <Verify />
+        path: "verify",
+        element: <Verify />,
       },
       {
-        path: "/login",
+        path: "login",
         element: <Login />,
       },
     ],
@@ -37,15 +36,10 @@ const routerConfig = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Dashboard />
+            element: <Dashboard />,
           },
-          {
-            path: "modal",
-            element: <Modal />
-          }
-        ]
-      }, 
-      
+        ],
+      },
     ],
   },
 ]);
