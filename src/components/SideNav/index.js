@@ -85,8 +85,10 @@ const SideNav = () => {
           </NavLink>
         </li>
         <li onClick={logoutClickHandler}>
-          <img src={exit__icon} alt="exit icon" />
-          <span>Logout</span>
+          <NavLink>
+            <img src={exit__icon} alt="exit icon" />
+            <span>Logout</span>
+          </NavLink>
         </li>
       </ul>
     </nav>

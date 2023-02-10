@@ -41,18 +41,18 @@
     justify-content: center;
     align-items: center;
 }
-li {
+li a {
     display: flex;
     height: 30px;
     align-items: center;
     cursor: pointer;
 }
-li > img {
+li a > img {
     margin-right: 20px;
     width: 25px;
     height: auto;
 }
 
-li.active {
+li a.active {
     font-weight: bold;
 }
