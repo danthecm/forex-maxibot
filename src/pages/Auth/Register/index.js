@@ -61,7 +61,7 @@ const Register = () => {
         closeButton: true,
       });
       setIsFetching(false);
-      navigate("/login");
+      navigate("../login");
     } catch (error) {
       if (!error?.response) {
         toast.update(loading, {
