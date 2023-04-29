@@ -16,7 +16,7 @@ export const Input = styled.input`
 
   background: rgba(225, 240, 131, 0.37);
   border-radius: 6px;
-  border: ${({error}) => error ? "2px solid hsl(0, 100%, 74%) ": "none"};
+  border: ${({ error }) => (error ? "2px solid hsl(0, 100%, 74%) " : "none")};
 
   &::placeholder {
     color: rgba(39, 174, 96, 0.6);
@@ -40,6 +40,37 @@ export const Input = styled.input`
   }
 `;
 
+export const Select = styled.select`
+  /* width: 100%; */
+  font-family: "Montserrat Alternates";
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: rgba(39, 174, 96, 0.6);
+  padding: 18px 35px;
+  margin-bottom: 10px;
+
+  background: rgba(225, 240, 131, 0.37);
+  border-radius: 6px;
+  border: ${({ error }) => (error ? "2px solid hsl(0, 100%, 74%) " : "none")};
+
+  &::placeholder {
+    color: rgba(39, 174, 96, 0.6);
+  }
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+  option {
+    text-align: center;
+  }
+`;
+
 export const InputError = styled.p`
   color: hsl(0, 100%, 74%);
   font-size: 10px;
@@ -50,24 +81,22 @@ export const InputError = styled.p`
 `;
 
 export const AddButton = styled.button`
-width: 100%;
-text-align: center;
-padding: 17px 0;
-color: #fff;
-background: rgba(39, 174, 96, 0.7);
-border-radius: 6px;
-border: none;
+  width: 100%;
+  text-align: center;
+  padding: 17px 0;
+  color: #fff;
+  background: rgba(39, 174, 96, 0.7);
+  border-radius: 6px;
+  border: none;
 
-&:disabled {
-    background: #a6a6a6;;
+  &:disabled {
+    background: #a6a6a6;
     cursor: not-allowed;
-}
-
-`
+  }
+`;
 
 export const Form = styled.form`
-display: grid;
-grid-template-columns: auto;
-justify-content: center;
-
-`
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: center;
+`;
