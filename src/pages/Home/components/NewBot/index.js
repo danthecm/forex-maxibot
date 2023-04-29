@@ -83,6 +83,7 @@ const NewBot = () => {
           onBlur={symbolIsBlured}
           onChange={symbolIsChanged}
           value={enteredSymbol}
+          error={symbolHasError}
         >
           <option value="DEFAULT" disabled hidden>
             --Select Pair---
