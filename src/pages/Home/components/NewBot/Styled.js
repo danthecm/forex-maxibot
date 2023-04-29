@@ -42,6 +42,7 @@ export const Input = styled.input`
 
 export const Select = styled.select`
   /* width: 100%; */
+  text-align: center;
   font-family: "Montserrat Alternates";
   font-weight: 500;
   font-size: 20px;
@@ -64,10 +65,6 @@ export const Select = styled.select`
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
-  }
-
-  option {
-    text-align: center;
   }
 `;
 
