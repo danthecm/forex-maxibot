@@ -65,7 +65,7 @@ const EditBot = ({ bot, close, setBots }) => {
     valueChangedHandler: profitMarginChangedHandler,
     isValid: profitMarginIsValid,
     hasError: profitMarginHasError,
-  } = useInput((value) => value.trim() !== "", `${bot.min_combo}`);
+  } = useInput((value) => value.trim() !== "", `${bot.profit_margin}`);
 
   const {
     value: enteredEquity,
@@ -81,7 +81,7 @@ const EditBot = ({ bot, close, setBots }) => {
     valueChangedHandler: minComboChangedHandler,
     isValid: minComboIsValid,
     hasError: minComboHasError,
-  } = useInput((value) => value.trim() !== "", `${bot.equity}`);
+  } = useInput((value) => value.trim() !== "", `${bot.min_combo}`);
 
   const formIsValid =
     gridIntIsValid &&
@@ -142,7 +142,7 @@ const EditBot = ({ bot, close, setBots }) => {
   };
 
   return (
-    <StyledNewBot width="800px">
+    <StyledNewBot width="600px">
       <Form layout="1fr 1fr" onSubmit={formSubmitHandler}>
         <div>
           <label>Grid Interval:</label>
@@ -287,11 +287,7 @@ const EditBot = ({ bot, close, setBots }) => {
             placeholder="Set Bot Status"
           />
         </div>
-        {statusHasError ? (
-          <InputError>Trade Close Margin cannot be empty</InputError>
-        ) : (
-          ""
-        )}
+        {statusHasError ? <InputError>Status cannot be empty</InputError> : ""}
 
         <AddButton disabled={!formIsValid} type="submit">
           Edit
