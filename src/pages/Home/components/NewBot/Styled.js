@@ -6,20 +6,22 @@ export const StyledNewBot = styled.section`
 `;
 
 export const Input = styled.input`
-  font-family: "Montserrat Alternates";
+  font-family: "Work Sans";
+  font-style: normal;
   font-weight: 500;
-  font-size: 20px;
-  line-height: 24px;
-  color: rgba(39, 174, 96, 0.6);
-  padding: 18px 35px;
-  margin-bottom: 10px;
+  font-size: 18px;
+  line-height: 35px;
 
-  background: rgba(225, 240, 131, 0.37);
-  border-radius: 6px;
+  padding: 6px 16px;
+  margin-bottom: 16px;
+
+  background: #f1f1f1;
+  border-radius: 5px;
   border: ${({ error }) => (error ? "2px solid hsl(0, 100%, 74%) " : "none")};
+  color: #3f567a;
 
   &::placeholder {
-    color: rgba(39, 174, 96, 0.6);
+    color: #a69d9d;
   }
   &:focus {
     outline: none;
@@ -42,20 +44,23 @@ export const Input = styled.input`
 
 export const Select = styled.select`
   text-align: center;
-  font-family: "Montserrat Alternates";
+  font-family: "Work Sans";
+  font-style: normal;
   font-weight: 500;
-  font-size: 20px;
-  line-height: 24px;
-  color: rgba(39, 174, 96, 0.6);
-  padding: 18px 35px;
-  margin-bottom: 10px;
+  font-size: 18px;
+  line-height: 35px;
 
-  background: rgba(225, 240, 131, 0.37);
-  border-radius: 6px;
+  padding: 6px 16px;
+  margin-bottom: 16px;
+
+  background: #f1f1f1;
+  border-radius: 5px;
+  color: #3f567a;
+
   border: ${({ error }) => (error ? "2px solid hsl(0, 100%, 74%) " : "none")};
 
   &::placeholder {
-    color: rgba(39, 174, 96, 0.6);
+    color: #a69d9d;
   }
   &:focus {
     outline: none;
@@ -95,10 +100,15 @@ export const Form = styled.form`
   display: grid;
   width: 100%;
   grid-template-columns: ${({ layout }) => (layout ? layout : "auto")};
-  gap: 10px;
+  column-gap: 20px;
   justify-content: center;
 
   button {
     grid-column: ${({ layout }) => (layout ? "span 2" : "1")};
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
   }
 `;
