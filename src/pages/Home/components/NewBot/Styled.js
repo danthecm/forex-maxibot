@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledNewBot = styled.section`
   margin-top: 20px;
-  width: 365px;
+  width: ${({ width }) => (width ? width : "365px")};
 `;
 
 export const Input = styled.input`
@@ -41,7 +41,6 @@ export const Input = styled.input`
 `;
 
 export const Select = styled.select`
-  /* width: 100%; */
   text-align: center;
   font-family: "Montserrat Alternates";
   font-weight: 500;
@@ -94,6 +93,12 @@ export const AddButton = styled.button`
 
 export const Form = styled.form`
   display: grid;
-  grid-template-columns: auto;
+  width: 100%;
+  grid-template-columns: ${({ layout }) => (layout ? layout : "auto")};
+  gap: 10px;
   justify-content: center;
+
+  button {
+    grid-column: ${({ layout }) => (layout ? "span 2" : "1")};
+  }
 `;
