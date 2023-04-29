@@ -7,12 +7,15 @@ import { ReactComponent as CancelIcon } from "../../assets/cancel.svg";
 const Modal = ({ show, close, title, children }) => {
   const modalContentRef = useRef();
 
-  const handleClick = useCallback((e) => {
-    if (modalContentRef?.current?.contains(e.target)) {
-      return;
-    }
-    close();
-  }, [close]);
+  const handleClick = useCallback(
+    (e) => {
+      if (modalContentRef?.current?.contains(e.target)) {
+        return;
+      }
+      close();
+    },
+    [close]
+  );
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClick);
@@ -72,6 +75,7 @@ const ModalContent = styled.div`
 const ModalHeading = styled.div`
   display: flex;
   justify-content: space-between;
+
   border-bottom: 1px solid #e2e8f0;
   padding: 5px 0;
   margin-bottom: 5px;
@@ -86,11 +90,16 @@ const ModalHeading = styled.div`
   }
 
   h2 {
-    font-family: "Montserrat Alternates";
+    font-family: "Work Sans";
+    font-style: normal;
     font-weight: 700;
     font-size: 28px;
+    line-height: 35px;
+    /* identical to box height, or 126% */
 
-    color: #6fcf97;
+    letter-spacing: -0.655062px;
+
+    color: #5ec394;
   }
 `;
 
@@ -100,5 +109,4 @@ const ScrollDisabler = createGlobalStyle`
 body {
   overflow-y: hidden;
 }
-`
-
+`;
