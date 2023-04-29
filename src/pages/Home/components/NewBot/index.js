@@ -1,7 +1,25 @@
 import useInput from "../../../../hooks/use-input";
-import { StyledNewBot, Input, InputError, AddButton, Form } from "./Styled";
+import {
+  StyledNewBot,
+  Input,
+  InputError,
+  AddButton,
+  Form,
+  Select,
+} from "./Styled";
 
 const NewBot = () => {
+  const {
+    value: enteredSymbol,
+    inputBlurHandler: symbolIsBlured,
+    valueChangedHandler: symbolIsChanged,
+    isValid: symbolIsValid,
+    hasError: symbolHasError,
+  } = useInput(
+    (value) => value.trim() !== "" && value !== "DEFAULT",
+    "DEFAULT"
+  );
+
   const {
     value: enteredGridInt,
     inputBlurHandler: gridIntBlurHandler,
@@ -27,19 +45,53 @@ const NewBot = () => {
   } = useInput((value) => value.trim() !== "");
 
   const {
-    value: enteredTradeClose,
-    inputBlurHandler: tradeCloseBlurHandler,
-    valueChangedHandler: tradeCloseChangedHandler,
-    isValid: tradeCloseIsValid,
-    hasError: tradeCloseHasError,
+    value: enteredTradeSkip,
+    inputBlurHandler: tradeSkipBlurHandler,
+    valueChangedHandler: tradeSkipChangedHanlder,
+    isValid: tradeSkipIsValid,
+    hasError: tradeSkipHasError,
+  } = useInput((value) => value.trim() !== "");
+
+  const {
+    value: enteredProfitMargin,
+    inputBlurHandler: profitMarginBlurHandler,
+    valueChangedHandler: profitMarginChangedHandler,
+    isValid: profitMarginIsValid,
+    hasError: profitMarginHasError,
+  } = useInput((value) => value.trim() !== "");
+
+  const {
+    value: enteredPipMargin,
+    inputBlurHandler: pipMarginBlurHandler,
+    valueChangedHandler: pipMarginChangedHandler,
+    isValid: pipMarginIsValid,
+    hasError: pipMarginHasError,
   } = useInput((value) => value.trim() !== "");
 
   const formIsValid =
-    gridIntIsValid && volumeIsValid && tpIsValid && tradeCloseIsValid;
+    gridIntIsValid &&
+    volumeIsValid &&
+    tpIsValid &&
+    tradeSkipIsValid &&
+    pipMarginIsValid &&
+    profitMarginIsValid;
 
   return (
     <StyledNewBot>
       <Form>
+        <Select
+          onBlur={symbolIsBlured}
+          onChange={symbolIsChanged}
+          value={enteredSymbol}
+        >
+          <option value="DEFAULT" disabled hidden>
+            --Select Pair---
+          </option>
+          <option value="EURUSD">EURUSD</option>
+          <option value="GBPUSD">GBPUSD</option>
+          <option value="EURJPY">EURJPY</option>
+        </Select>
+        {symbolHasError ? <InputError>Please select a symbol</InputError> : ""}
         <Input
           error={gridIntHasError}
           onChange={gridIntChangedHandler}
@@ -60,7 +112,7 @@ const NewBot = () => {
           onBlur={volumeBlurHandler}
           value={enteredVolume}
           type="number"
-          placeholder="Enter Volume/Quantity"
+          placeholder="Enter Volume / Size"
           step="0.01"
         />
         {volumeHasError ? <InputError>Volume cannot be empty</InputError> : ""}
@@ -77,16 +129,46 @@ const NewBot = () => {
         {tpHasError ? <InputError>Take Profit cannot be empty</InputError> : ""}
 
         <Input
-          error={tradeCloseHasError}
-          onChange={tradeCloseChangedHandler}
-          onBlur={tradeCloseBlurHandler}
-          value={enteredTradeClose}
+          error={tradeSkipHasError}
+          onChange={tradeSkipChangedHanlder}
+          onBlur={tradeSkipBlurHandler}
+          value={enteredTradeSkip}
           type="number"
-          placeholder="Enter Trade Close Margin"
+          placeholder="Enter Trade Skip"
           step="0.01"
         />
-        {tradeCloseHasError ? (
+        {tradeSkipHasError ? (
           <InputError>Trade Close Margin cannot be empty</InputError>
+        ) : (
+          ""
+        )}
+
+        <Input
+          error={profitMarginHasError}
+          onChange={profitMarginChangedHandler}
+          onBlur={profitMarginBlurHandler}
+          value={enteredProfitMargin}
+          type="number"
+          placeholder="Enter Profit Margin"
+          step="0.01"
+        />
+        {profitMarginHasError ? (
+          <InputError>Trade Close Margin cannot be empty</InputError>
+        ) : (
+          ""
+        )}
+
+        <Input
+          error={pipMarginHasError}
+          onChange={pipMarginChangedHandler}
+          onBlur={pipMarginBlurHandler}
+          value={enteredPipMargin}
+          type="number"
+          placeholder="Enter Pip Margin"
+          step="0.01"
+        />
+        {pipMarginHasError ? (
+          <InputError>Pip Margin cannot be empty</InputError>
         ) : (
           ""
         )}
