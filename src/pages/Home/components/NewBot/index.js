@@ -74,7 +74,8 @@ const NewBot = () => {
     tpIsValid &&
     tradeSkipIsValid &&
     pipMarginIsValid &&
-    profitMarginIsValid;
+    profitMarginIsValid &&
+    symbolIsValid;
 
   return (
     <StyledNewBot>
