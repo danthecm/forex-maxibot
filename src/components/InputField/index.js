@@ -1,12 +1,19 @@
 import React from "react";
-import styles from "../../pages/Auth/Auth.module.css";
+import { Error } from "../Auth/Styled";
 
-const InputField = ({ name, type, hook, message, placeholder, autoComplete }) => {
+const InputField = ({
+  name,
+  type,
+  hook,
+  message,
+  placeholder,
+  autoComplete,
+}) => {
   const { inputBlurHandler, valueChangedHandler, hasError } = hook;
   return (
     <>
       <input
-        className={hasError ? styles.invalid : ""}
+        className={hasError ? "invalid" : ""}
         placeholder={placeholder}
         type={type}
         name={name}
@@ -16,7 +23,7 @@ const InputField = ({ name, type, hook, message, placeholder, autoComplete }) =>
         onBlur={inputBlurHandler}
         autoComplete={autoComplete}
       />
-      {hasError ? <p className={styles.error}>{message}</p> : ""}
+      {hasError ? <Error>{message}</Error> : ""}
     </>
   );
 };

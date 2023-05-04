@@ -1,145 +1,16 @@
-.main {
-    color: #fff;
-    display: grid;
-    background: url("../../assets/bg.jpg") no-repeat;
-    background-size: cover;
-    opacity: 98%;
-    height: 100vh;
-    grid-template-rows: .1fr auto none;
-    width: 100vw;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-.logo {
-    margin-top: 20px;
-    margin-left: 30px;
-    height: 70px;
-  }
-
-.container {
-  display: grid;
-  grid-template-columns: 500px 500px;
-  align-items: center;
-  justify-content: space-around;
-  width: 100vw;
-  height: 100vh;
-  margin: auto;
-}
 
 
-.h2 {
-  font-size: 55px;
-  font-weight: 700;
-  margin: 2.5rem 0;
-  line-height: 35px;
-}
 
-.subText {
-  line-height: 30px;
-  text-align: justify;
-}
 
-.title span {
-  font-weight: 600;
-}
 
-.title {
-  background-color: #27ae60;
-  text-align: center;
-  font-size: 18px;
-  font-weight: 400;
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 1px 5px #e1f083;
-}
-
-.card {
-  width: auto;
-  height: auto;
-  border-radius: 10px;
-  background-color: #fff;
-  align-items: center;
-  justify-content: center;
-  margin: 1.6rem 0;
-  padding: 2rem;
-}
-
-.card input {
-  display: inline-block;
-  width: 100%;
-  border-radius: 10px;
-  padding: 12pt;
-  border: 1px solid hsl(246, 25%, 77%);
-  font-weight: 500;
-  margin: 10px 0;
-}
-
-.card input:focus {
-  outline: none;
-}
-
-.error {
-  color: hsl(0, 100%, 74%);
-  font-size: 10px;
-  font-weight: 600;
-  font-style: italic;
-  float: right;
-  margin-bottom: 10px;
-}
 
 .email_error::-webkit-input-placeholder {
   color: hsl(0, 100%, 74%);
 }
 
-.invalid {
-  background: url("../../assets/icon-error.svg") no-repeat scroll 97% 10px;
-  border: 2px solid hsl(0, 100%, 74%) !important;
-}
 
-.card button {
-  margin: 5px 0;
-  padding: 1rem;
-  color: #fff;
-  background-color: #27ae60;
-  border: none;
-  border-radius: 7px;
-  font-weight: 600;
-  width: 100%;
-}
 
-.card button:hover {
-  cursor: pointer;
-  background-color: #6fcf97;
-}
 
-.card button:disabled {
-  background-color: #a6a6a6;
-  cursor: not-allowed;
-}
-
-.terms {
-  margin: 10px 0;
-  text-align: center;
-  font-size: 10px;
-  font-weight: 400;
-  color: hsl(246, 25%, 77%);
-}
-
-.terms > span {
-  color: #ff7979;
-  font-weight: 600;
-}
-
-.link {
-  font-size: 14px;
-  color: #000;
-  margin-top: 15px;
-  text-align: center;
-}
-.link a {
-  color: #27ae60;
-  text-decoration: none;
-}
 
 @media screen and (max-width: 769px) {
   .main {

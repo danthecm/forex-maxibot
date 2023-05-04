@@ -1,17 +1,16 @@
-import { Outlet } from "react-router-dom"
-import { ReactComponent as Logo} from "../../logo.svg";
-import styles from "./Auth.module.css";
+import { Outlet } from "react-router-dom";
+import { ReactComponent as Logo } from "../../logo.svg";
+import { AuthContainer, Main } from "../../components/Auth/Styled";
 
 const Auth = () => {
-    return (
-        <section className={styles.main}>
-            <Logo className={styles.logo} />
-            <main className={styles.container}>
-            <Outlet/>
-            </main>
+  return (
+    <Main>
+      <Logo className="logo" />
+      <AuthContainer>
+        <Outlet />
+      </AuthContainer>
+    </Main>
+  );
+};
 
-        </section>
-    )
-}
-
-export default Auth
+export default Auth;
