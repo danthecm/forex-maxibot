@@ -1,47 +1,17 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import { Table, TD, TR } from "./Styled";
 import Modal from "../../../../components/Modal";
 import EditBot from "../EditBot";
-import useAxiosPrivate from "../../../../hooks/use-axios-private";
-import useAuth from "../../../../hooks/use-auth";
 
-const BOT_URL = "bot/";
-
-const BotTable = () => {
+const BotTable = ({ bots, setBots, isFetching }) => {
   const [showModal, setShowModal] = useState(false);
   const [bot, setBot] = useState({});
-  const [bots, setBots] = useState([]);
-  const [isFetching, setIsFetching] = useState(false);
-  const axiosPrivate = useAxiosPrivate();
-  const { auth } = useAuth();
-  const token = useMemo(() => auth.accessToken, [auth]);
+
   const editButtonHandler = (event) => {
     const editBot = JSON.parse(event?.target?.value);
     setBot(editBot);
     setShowModal(true);
   };
-
-  useEffect(() => {
-    setIsFetching(true);
-
-    const fetchBots = async () => {
-      try {
-        const botReq = await axiosPrivate.get(BOT_URL);
-        if (botReq.status !== 200) {
-          setIsFetching(false);
-          return;
-        }
-        const data = await botReq.data;
-        setBots(data);
-        setIsFetching(false);
-      } catch (error) {
-        console.log("Error loading bot", error);
-        setIsFetching(false);
-      }
-    };
-
-    fetchBots();
-  }, [token, axiosPrivate]);
 
   return (
     <>

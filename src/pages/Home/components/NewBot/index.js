@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 import useInput from "../../../../hooks/use-input";
+import useAxiosPrivate from "../../../../hooks/use-axios-private";
 import {
   StyledNewBot,
   Input,
@@ -8,9 +9,14 @@ import {
   Form,
   Select,
 } from "./Styled";
-import { axiosPrivate } from "../../../../config/axios";
+import useAuth from "../../../../hooks/use-auth";
+import { BOT_URL } from "../../../../config/urls";
 
-const NewBot = () => {
+const NewBot = ({ close }) => {
+  const { auth } = useAuth();
+
+  const axiosPrivate = useAxiosPrivate();
+
   const {
     value: enteredSymbol,
     inputBlurHandler: symbolIsBlured,
@@ -47,14 +53,6 @@ const NewBot = () => {
   } = useInput((value) => value.trim() !== "");
 
   const {
-    value: enteredTradeSkip,
-    inputBlurHandler: tradeSkipBlurHandler,
-    valueChangedHandler: tradeSkipChangedHanlder,
-    isValid: tradeSkipIsValid,
-    hasError: tradeSkipHasError,
-  } = useInput((value) => value.trim() !== "");
-
-  const {
     value: enteredProfitMargin,
     inputBlurHandler: profitMarginBlurHandler,
     valueChangedHandler: profitMarginChangedHandler,
@@ -74,39 +72,43 @@ const NewBot = () => {
     gridIntIsValid &&
     volumeIsValid &&
     tpIsValid &&
-    tradeSkipIsValid &&
     pipMarginIsValid &&
     profitMarginIsValid &&
     symbolIsValid;
 
-  const formSubmitHandler = () => {
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
     if (!formIsValid) {
       return;
     }
     const botInfo = {
+      symbol: enteredSymbol,
       grid_interval: enteredGridInt,
       pip_margin: enteredPipMargin,
       volume: enteredVolume,
       take_profit: enteredTP,
       status: "running",
       profit_margin: enteredProfitMargin,
+      profile: auth.user.trade_profile[0].id,
     };
     botRequest(botInfo);
   };
 
   const botRequest = async (botInfo) => {
-    const updating = toast.loading("Updating...");
+    const sending = toast.loading("Creating...");
     try {
-      await axiosPrivate.post(`bot/`, botInfo);
-      toast.update(updating, {
-        render: "Successfully Updated Bot",
+      await axiosPrivate.post(BOT_URL, botInfo);
+      toast.update(sending, {
+        render: "Successfully Created Bot",
         type: "success",
         isLoading: false,
         autoClose: true,
         closeButton: true,
       });
+      close();
     } catch (e) {
-      toast.update(updating, {
+      console.log("there was an error sending ", e);
+      toast.update(sending, {
         render: "Error Updating Bot",
         type: "error",
         isLoading: false,
@@ -168,21 +170,6 @@ const NewBot = () => {
           step="0.01"
         />
         {tpHasError ? <InputError>Take Profit cannot be empty</InputError> : ""}
-
-        <Input
-          error={tradeSkipHasError}
-          onChange={tradeSkipChangedHanlder}
-          onBlur={tradeSkipBlurHandler}
-          value={enteredTradeSkip}
-          type="number"
-          placeholder="Enter Trade Skip"
-          step="0.01"
-        />
-        {tradeSkipHasError ? (
-          <InputError>Trade Close Margin cannot be empty</InputError>
-        ) : (
-          ""
-        )}
 
         <Input
           error={profitMarginHasError}
