@@ -106,10 +106,10 @@ const NewBot = ({ close }) => {
         closeButton: true,
       });
       close();
+      window.location.reload();
     } catch (e) {
-      console.log("there was an error sending ", e);
       toast.update(sending, {
-        render: "Error Updating Bot",
+        render: "Error Creating Bot",
         type: "error",
         isLoading: false,
         closeButton: true,
