@@ -20,6 +20,14 @@ const EditBot = ({ bot, close, setBots }) => {
   } = useInput((value) => value.trim() !== "", `${bot.grid_interval}`);
 
   const {
+    value: enteredSymbol,
+    inputBlurHandler: symbolBluredHandler,
+    valueChangedHandler: symbolChangedHandler,
+    isValid: symbolIsValid,
+    hasError: symbolHasError,
+  } = useInput((value) => value.trim() !== "", `${bot.symbol}`);
+
+  const {
     value: enteredVolume,
     inputBlurHandler: volumeBlurHandler,
     valueChangedHandler: volumeChangedHandler,
@@ -92,7 +100,8 @@ const EditBot = ({ bot, close, setBots }) => {
     statusIsValid &&
     equityIsValid &&
     profitMarginIsValid &&
-    minComboIsValid;
+    minComboIsValid &&
+    symbolIsValid;
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
@@ -110,6 +119,7 @@ const EditBot = ({ bot, close, setBots }) => {
       equity: enteredEquity,
       profit_margin: enteredProfitMargin,
       min_combo: enteredMinCombo,
+      symbol: enteredSymbol,
     };
 
     const updateBot = async () => {
@@ -145,6 +155,23 @@ const EditBot = ({ bot, close, setBots }) => {
     <StyledNewBot width="600px">
       <Form layout="1fr 1fr" onSubmit={formSubmitHandler}>
         <div>
+          <label>Symbol:</label>
+          <Input
+            error={symbolHasError}
+            onChange={symbolChangedHandler}
+            onBlur={symbolBluredHandler}
+            value={enteredSymbol}
+            type="text"
+            placeholder="Enter Symbol"
+          />
+          {symbolHasError ? (
+            <InputError>Symbol cannot be empty</InputError>
+          ) : (
+            ""
+          )}
+        </div>
+
+        <div>
           <label>Grid Interval:</label>
           <Input
             error={gridIntHasError}
@@ -154,12 +181,13 @@ const EditBot = ({ bot, close, setBots }) => {
             type="number"
             placeholder="Enter Grid Interval"
           />
+          {gridIntHasError ? (
+            <InputError>Grid Interval cannot be empty</InputError>
+          ) : (
+            ""
+          )}
         </div>
-        {gridIntHasError ? (
-          <InputError>Grid Interval cannot be empty</InputError>
-        ) : (
-          ""
-        )}
+
         <div>
           <label>Volume:</label>
           <Input
