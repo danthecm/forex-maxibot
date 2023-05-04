@@ -5,7 +5,7 @@ import Auth from "../pages/Auth";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register/index";
 import Verify from "../pages/Auth/Verficiation/Verify";
-import Dashboard from "../pages/Home/Dashboard";
+import Dashboard from "../pages/Home/";
 
 const routerConfig = createBrowserRouter([
   {
