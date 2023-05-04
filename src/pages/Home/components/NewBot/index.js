@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import useInput from "../../../../hooks/use-input";
 import {
   StyledNewBot,
@@ -7,6 +8,7 @@ import {
   Form,
   Select,
 } from "./Styled";
+import { axiosPrivate } from "../../../../config/axios";
 
 const NewBot = () => {
   const {
@@ -77,9 +79,46 @@ const NewBot = () => {
     profitMarginIsValid &&
     symbolIsValid;
 
+  const formSubmitHandler = () => {
+    if (!formIsValid) {
+      return;
+    }
+    const botInfo = {
+      grid_interval: enteredGridInt,
+      pip_margin: enteredPipMargin,
+      volume: enteredVolume,
+      take_profit: enteredTP,
+      status: "running",
+      profit_margin: enteredProfitMargin,
+    };
+    botRequest(botInfo);
+  };
+
+  const botRequest = async (botInfo) => {
+    const updating = toast.loading("Updating...");
+    try {
+      await axiosPrivate.post(`bot/`, botInfo);
+      toast.update(updating, {
+        render: "Successfully Updated Bot",
+        type: "success",
+        isLoading: false,
+        autoClose: true,
+        closeButton: true,
+      });
+    } catch (e) {
+      toast.update(updating, {
+        render: "Error Updating Bot",
+        type: "error",
+        isLoading: false,
+        closeButton: true,
+        autoClose: true,
+      });
+    }
+  };
+
   return (
     <StyledNewBot>
-      <Form>
+      <Form onSubmit={formSubmitHandler}>
         <Select
           onBlur={symbolIsBlured}
           onChange={symbolIsChanged}
