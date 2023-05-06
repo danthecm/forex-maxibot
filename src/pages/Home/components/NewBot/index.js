@@ -1,4 +1,3 @@
-import { toast } from "react-toastify";
 import useInput from "../../../../hooks/use-input";
 import useAxiosPrivate from "../../../../hooks/use-axios-private";
 import {
@@ -10,7 +9,7 @@ import {
   Select,
 } from "./Styled";
 import useAuth from "../../../../hooks/use-auth";
-import { BOT_URL } from "../../../../config/urls";
+import { newBotReq } from "../../../../services/botServices";
 
 const NewBot = ({ close }) => {
   const { auth } = useAuth();
@@ -91,31 +90,7 @@ const NewBot = ({ close }) => {
       profit_margin: enteredProfitMargin,
       profile: auth.user.trade_profile[0].id,
     };
-    botRequest(botInfo);
-  };
-
-  const botRequest = async (botInfo) => {
-    const sending = toast.loading("Creating...");
-    try {
-      await axiosPrivate.post(BOT_URL, botInfo);
-      toast.update(sending, {
-        render: "Successfully Created Bot",
-        type: "success",
-        isLoading: false,
-        autoClose: true,
-        closeButton: true,
-      });
-      close();
-      window.location.reload();
-    } catch (e) {
-      toast.update(sending, {
-        render: "Error Creating Bot",
-        type: "error",
-        isLoading: false,
-        closeButton: true,
-        autoClose: true,
-      });
-    }
+    newBotReq(axiosPrivate, botInfo);
   };
 
   return (

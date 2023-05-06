@@ -1,5 +1,4 @@
 import useInput from "../../../../hooks/use-input";
-import { toast } from "react-toastify";
 import {
   StyledNewBot,
   Input,
@@ -8,6 +7,7 @@ import {
   Form,
 } from "../NewBot/Styled";
 import useAxiosPrivate from "../../../../hooks/use-axios-private";
+import { updateBotReq } from "../../../../services/botServices";
 
 const EditBot = ({ bot, close, setBots }) => {
   const axiosPrivate = useAxiosPrivate();
@@ -108,7 +108,6 @@ const EditBot = ({ bot, close, setBots }) => {
     if (!formIsValid) {
       return;
     }
-    const updating = toast.loading("Updating...");
     const botInfo = {
       grid_interval: enteredGridInt,
       skip: enteredSkip,
@@ -122,32 +121,7 @@ const EditBot = ({ bot, close, setBots }) => {
       symbol: enteredSymbol,
     };
 
-    const updateBot = async () => {
-      try {
-        await axiosPrivate.patch(`bot/${bot.id}/`, botInfo);
-        setBots((prev) => {
-          const newBot = prev.filter((value) => value.id !== bot.id);
-          newBot.push({ ...bot, ...botInfo });
-          return newBot;
-        });
-        toast.update(updating, {
-          render: "Successfully Updated Bot",
-          type: "success",
-          isLoading: false,
-          autoClose: true,
-          closeButton: true,
-        });
-      } catch (e) {
-        toast.update(updating, {
-          render: "Error Updating Bot",
-          type: "error",
-          isLoading: false,
-          closeButton: true,
-          autoClose: true,
-        });
-      }
-    };
-    updateBot();
+    updateBotReq(axiosPrivate, bot.id, botInfo, setBots);
     close();
   };
 
