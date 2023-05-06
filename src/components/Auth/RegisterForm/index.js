@@ -1,11 +1,8 @@
 import { useState } from "react";
 import useInput from "../../../hooks/use-input";
 import { Link, useNavigate } from "react-router-dom";
-/* identical to box height, or 177% */
 import { AuthForm, Error } from "../Styled";
-import axios from "../../../config/axios";
-import { toast } from "react-toastify";
-import { REGISTER_URL } from "../../../config/urls";
+import { registerReq } from "../../../services/auth";
 
 export const PWD_REGEX =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{5,34}$/;
@@ -62,72 +59,9 @@ const RegisterForm = () => {
     };
     setIsFetching(true);
 
-    sendFormData(user);
+    registerReq(user, setIsFetching, navigate);
   };
 
-  const sendFormData = async (data) => {
-    const loading = toast.loading("Registering....");
-    try {
-      await axios.post(REGISTER_URL, data);
-      toast.update(loading, {
-        render: "Verify your Email to continue",
-        type: "success",
-        isLoading: false,
-        autoClose: true,
-        closeButton: true,
-      });
-      setIsFetching(false);
-      navigate("../login");
-    } catch (error) {
-      if (!error?.response) {
-        toast.update(loading, {
-          render: "No Server Response",
-          type: "error",
-          isLoading: false,
-          autoClose: true,
-          closeButton: true,
-        });
-        return;
-      }
-      const response = error.response;
-      switch (response?.status) {
-        case 500:
-          toast.update(loading, {
-            render: "service unavailable, try later",
-            type: "error",
-            isLoading: false,
-            autoClose: true,
-            closeButton: true,
-          });
-          break;
-        case 400:
-          const data = response.data;
-          for (const key in data) {
-            if (Object.hasOwnProperty.call(data, key)) {
-              const element = data[key];
-              toast.update(loading, {
-                render: element[0],
-                type: "error",
-                isLoading: false,
-                autoClose: true,
-                closeButton: true,
-              });
-            }
-          }
-          break;
-        default:
-          toast.update(loading, {
-            render: "something went wrong, try later",
-            type: "error",
-            isLoading: false,
-            autoClose: true,
-            closeButton: true,
-          });
-          break;
-      }
-      setIsFetching(false);
-    }
-  };
   return (
     <AuthForm onSubmit={formSubmitHandler}>
       <input
