@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import axios from "../config/axios";
-import { LOGIN_URL, REGISTER_URL } from "../config/urls";
+import { LOGIN_URL, REGISTER_URL, VERIFY_URL } from "../config/urls";
 
 export const loginReq = async (
   data,
@@ -148,5 +148,41 @@ export const registerReq = async (data, setIsFetching, navigate) => {
         break;
     }
     setIsFetching(false);
+  }
+};
+
+export const verifyCodeReq = async (
+  code,
+  username,
+  setIsFetching,
+  navigate
+) => {
+  setIsFetching(true);
+  const loading = toast.loading("Verifying....");
+  console.log("verifyCode", code);
+  try {
+    const sendVerificiation = await axios.get(`${VERIFY_URL}${username}`, {
+      params: { code },
+    });
+    console.log(sendVerificiation.data);
+    toast.update(loading, {
+      render: "Verified Successfully",
+      type: "success",
+      isLoading: false,
+      autoClose: 2000,
+      closeButton: true,
+    });
+    setIsFetching(false);
+    setTimeout(() => navigate("/dashboard"), 2000);
+  } catch (error) {
+    console.log(error);
+    setIsFetching(false);
+    toast.update(loading, {
+      render: "Error verifying please try again",
+      type: "error",
+      isLoading: false,
+      autoClose: true,
+      closeButton: true,
+    });
   }
 };

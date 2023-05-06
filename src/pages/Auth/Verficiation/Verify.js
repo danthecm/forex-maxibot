@@ -1,10 +1,8 @@
 import styled from "styled-components";
-import { toast } from "react-toastify";
 import { useState } from "react";
-import axios from "../../../config/axios";
 import { useLocation, useNavigate } from "react-router-dom";
-
-const VERIFY_URL = "verify/"
+import InputField from "../../../components/InputField";
+import { verifyCodeReq } from "../../../services/auth";
 
 const Verify = () => {
   const [isFetching, setIsFetching] = useState(false);
@@ -23,41 +21,7 @@ const Verify = () => {
       element["code3"].value +
       element["code4"].value;
 
-    verifyCode(code);
-  };
-
-  const verifyCode = async (code) => {
-    setIsFetching(true);
-    const loading = toast.loading("Verifying....");
-    console.log("verifyCode", code);
-    try {
-      const sendVerificiation = await axios.get(
-        `${VERIFY_URL}${username}`,
-        {
-          params: { code },
-        }
-      );
-      console.log(sendVerificiation.data);
-      toast.update(loading, {
-        render: "Verified Successfully",
-        type: "success",
-        isLoading: false,
-        autoClose: 2000,
-        closeButton: true,
-      });
-      setIsFetching(false);
-      setTimeout(() => navigate("/dashboard"), 2000);
-    } catch (error) {
-      console.log(error);
-      setIsFetching(false);
-      toast.update(loading, {
-        render: "Error verifying please try again",
-        type: "error",
-        isLoading: false,
-        autoClose: true,
-        closeButton: true,
-      });
-    }
+    verifyCodeReq(code, username, setIsFetching, navigate);
   };
 
   const inputChangedHandler = (e) => {
@@ -72,7 +36,7 @@ const Verify = () => {
       <h1>Enter Verification Code</h1>
       <form onSubmit={formSubmitHandler}>
         <InputWrapper>
-          <input
+          <InputField
             autoFocus={true}
             name="code1"
             type="text"
@@ -82,7 +46,7 @@ const Verify = () => {
             title="only numbers are allowed"
             required
           />
-          <input
+          <InputField
             name="code2"
             type="text"
             pattern="\d*"
@@ -91,7 +55,7 @@ const Verify = () => {
             title="only numbers are allowed"
             required
           />
-          <input
+          <InputField
             name="code3"
             type="text"
             pattern="\d*"
@@ -100,7 +64,7 @@ const Verify = () => {
             title="only numbers are allowed"
             required
           />
-          <input
+          <InputField
             name="code4"
             type="text"
             pattern="\d*"

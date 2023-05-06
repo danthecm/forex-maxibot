@@ -8,6 +8,7 @@ const InputField = ({
   message,
   placeholder,
   autoComplete,
+  pattern,
 }) => {
   const { inputBlurHandler, valueChangedHandler, hasError } = hook;
   return (
@@ -22,6 +23,7 @@ const InputField = ({
         onChange={valueChangedHandler}
         onBlur={inputBlurHandler}
         autoComplete={autoComplete}
+        pattern={pattern}
       />
       {hasError ? <Error>{message}</Error> : ""}
     </>
