@@ -7,7 +7,7 @@ import {
   Form,
 } from "../NewBot/Styled";
 import useAxiosPrivate from "../../../../hooks/use-axios-private";
-import { updateBotReq } from "../../../../services/botServices";
+import { updateBotReq } from "../../../../services/bot";
 
 const EditBot = ({ bot, close, setBots }) => {
   const axiosPrivate = useAxiosPrivate();

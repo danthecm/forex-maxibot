@@ -9,7 +9,7 @@ import {
   Select,
 } from "./Styled";
 import useAuth from "../../../../hooks/use-auth";
-import { newBotReq } from "../../../../services/botServices";
+import { newBotReq } from "../../../../services/bot";
 
 const NewBot = ({ close }) => {
   const { auth } = useAuth();
