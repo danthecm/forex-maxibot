@@ -1,6 +1,11 @@
 import { toast } from "react-toastify";
 import axios from "../config/axios";
-import { LOGIN_URL, REGISTER_URL, VERIFY_URL } from "../config/urls";
+import {
+  LOGIN_URL,
+  LOGOUT_URL,
+  REGISTER_URL,
+  VERIFY_URL,
+} from "../config/urls";
 
 export const loginReq = async (
   data,
@@ -148,6 +153,31 @@ export const registerReq = async (data, setIsFetching, navigate) => {
         break;
     }
     setIsFetching(false);
+  }
+};
+
+export const logoutReq = async () => {
+  const loggingOut = toast.loading("Logging out...");
+  try {
+    const logoutReq = await axios.get(LOGOUT_URL, {
+      withCredentials: true,
+    });
+
+    if (logoutReq.status !== 200) {
+      throw new Error(logoutReq.status);
+    }
+    const data = await logoutReq.data;
+    console.log("Logout request retuned", data);
+    localStorage.removeItem("user");
+    toast.update(loggingOut, {
+      render: "Successfully logged out",
+      type: "success",
+      isLoading: false,
+      closeButton: true,
+    });
+    window.location.reload(false);
+  } catch (err) {
+    console.log("Error logging out", err);
   }
 };
 

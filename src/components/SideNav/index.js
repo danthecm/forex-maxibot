@@ -11,34 +11,9 @@ import help__icon from "../../assets/Icons/help.svg";
 import exit__icon from "../../assets/Icons/exit.svg";
 import { toast } from "react-toastify";
 import { NavLink } from "react-router-dom";
-
-const LOGOUT_URL = "logout/";
+import { logoutReq } from "../../services/auth";
 
 const SideNav = () => {
-  const logoutClickHandler = async () => {
-    const loggingOut = toast.loading("Logging out...");
-    try {
-      const logoutReq = await axios.get(LOGOUT_URL, {
-        withCredentials: true,
-      });
-
-      if (logoutReq.status !== 200) {
-        throw new Error(logoutReq.status);
-      }
-      const data = await logoutReq.data;
-      console.log("Logout request retuned", data);
-      localStorage.removeItem("user");
-      toast.update(loggingOut, {
-        render: "Successfully logged out",
-        type: "success",
-        isLoading: false,
-        closeButton: true,
-      });
-      window.location.reload(false);
-    } catch (err) {
-      console.log("Error logging out", err);
-    }
-  };
   return (
     <nav className={styles.sidenav}>
       <img className={styles.logo__large} src={logo} alt="Maxibot Logo" />
@@ -84,7 +59,7 @@ const SideNav = () => {
             <span>Help Guide</span>
           </NavLink>
         </li>
-        <li onClick={logoutClickHandler}>
+        <li onClick={logoutReq}>
           <NavLink>
             <img src={exit__icon} alt="exit icon" />
             <span>Logout</span>
