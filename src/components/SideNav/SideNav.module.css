@@ -1,58 +1,67 @@
 .sidenav {
-    display: grid;
-    overflow: hidden;
-    width: 80px;
-    grid-template-rows: 80px auto;
-    height: 100vh;
-    background: #1D1D1D;
-    color: #fff;
-    justify-content: center;
-    padding-top: 50px;
-    transition: ease-in-out;
+  display: flex;
+  width: 80px;
+  height: 100vh;
+  background: #1d1d1d;
+  justify-content: flex-start;
+  color: #fff;
+  padding-top: 2rem;
+  padding-left: 1rem;
+  transition: width 0.5s ease-in-out;
 }
 .sidenav span {
-    display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease-in-out;
 }
-.sidenav:hover {
-    width: 200px;
-}
-.sidenav:hover span {
-    display: contents;
-}
-.sidenav:hover .logo__large {
-    display: block;
-}
-
-.sidenav:hover .logo__small {
-    display: none;
-}
-
-.logo__large{
-    display: none;
+.logo__large {
+  transition: opacity 0.5s ease-in-out;
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .logo__small {
-    width:28px;
+  position: absolute;
+  width: 28px;
+}
+
+.sidenav:hover {
+  width: 200px;
+}
+.sidenav:hover span {
+  opacity: 1;
+  pointer-events: visible;
+}
+.sidenav:hover .logo__large {
+  opacity: 1;
+  pointer-events: visible;
+}
+
+.sidenav:hover .logo__small {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .nav__list {
-    display: grid;
-    max-height: 450px;
-    justify-content: center;
-    align-items: center;
+  display: grid;
+  max-height: 450px;
+  margin-top: 5rem;
+  justify-content: center;
+  align-items: center;
 }
 li a {
-    display: flex;
-    height: 30px;
-    align-items: center;
-    cursor: pointer;
+  display: flex;
+  height: 30px;
+  align-items: center;
+  cursor: pointer;
 }
 li a > img {
-    margin-right: 20px;
-    width: 25px;
-    height: auto;
+  margin-right: 20px;
+  width: 25px;
+  height: auto;
 }
 
 li a.active {
-    font-weight: bold;
+  font-weight: bold;
 }

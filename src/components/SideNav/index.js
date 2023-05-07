@@ -2,14 +2,12 @@ import styles from "./SideNav.module.css";
 
 import logo from "../../logo.svg";
 import logo__small from "../../logo__small.svg";
-import axios from "../../config/axios";
 
 import dashboard__icon from "../../assets/Icons/dashboard.svg";
 import profile__icon from "../../assets/Icons/profile.svg";
 import security__icon from "../../assets/Icons/security.svg";
 import help__icon from "../../assets/Icons/help.svg";
 import exit__icon from "../../assets/Icons/exit.svg";
-import { toast } from "react-toastify";
 import { NavLink } from "react-router-dom";
 import { logoutReq } from "../../services/auth";
 
