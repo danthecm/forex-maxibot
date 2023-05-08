@@ -47,6 +47,7 @@ const AddPlatformForm = () => {
       user: auth?.user?.id,
     };
     setIsLoading(true);
+    console.log("The trade platoform is: ", tradeProfile);
     try {
       newProfileReq(axiosPrivate, tradeProfile);
       setIsLoading(false);

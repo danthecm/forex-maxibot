@@ -14,7 +14,7 @@ export const newProfileReq = async (axiosPrivate, profileInfo) => {
     });
   } catch (e) {
     toast.update(sending, {
-      render: "Error Creating Bot",
+      render: "Error Creating Trade Profile",
       type: "error",
       isLoading: false,
       closeButton: true,
