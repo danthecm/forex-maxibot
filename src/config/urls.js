@@ -4,5 +4,5 @@ export const LOGIN_URL = "login/";
 export const BOT_URL = "bot/";
 export const VERIFY_URL = "verify/";
 export const LOGOUT_URL = "logout/";
-export const NEW_PLATFORM_URL = "/trade_profile";
+export const NEW_PLATFORM_URL = "trade-profile/";
 // export const BASE_URL = "http://127.0.0.1:8000/"
