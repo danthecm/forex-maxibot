@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { AuthForm, Error } from "../Styled";
 import InputField from "../../InputField";
 import useInput from "../../../hooks/use-input";
+import useAuth from "../../../hooks/use-auth";
 
 import { AddButton } from "../../../pages/Home/components/NewBot/Styled";
 import { Select } from "../../FormContorls/";
+import { newProfileReq } from "../../../services/trade-profile";
+import { useNavigate } from "react-router-dom";
 
 const AddPlatformForm = () => {
+  const { auth } = useAuth();
+  const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(false);
   const {
     value: selectedServer,
     isValid: serverIsValid,
@@ -31,11 +38,20 @@ const AddPlatformForm = () => {
     if (!formIsValid) {
       return;
     }
-    // const user = {
-    //   username: enteredUsername,
-    //   password: enteredPassword,
-    // };
-    // setIsFetching(true);
+    const tradeProfile = {
+      mt5_login: enteredLogin,
+      mt5_password: enteredPassword,
+      mt5_server: selectedServer,
+      user: auth?.user?.id,
+    };
+    setIsLoading(true);
+    try {
+      newProfileReq(tradeProfile);
+      setIsLoading(false);
+      navigate("/");
+    } catch (error) {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -82,7 +98,7 @@ const AddPlatformForm = () => {
       />
 
       <AddButton disabled={!formIsValid} type="submit">
-        Add Platform
+        {isLoading ? "Please wait..." : "Add Profile"}
       </AddButton>
     </AuthForm>
   );
