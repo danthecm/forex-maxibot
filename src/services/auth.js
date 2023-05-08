@@ -7,16 +7,10 @@ import {
   VERIFY_URL,
 } from "../config/urls";
 
-export const loginReq = async (
-  data,
-  from,
-  setIsFetching,
-  setAuth,
-  navigate
-) => {
+export const loginReq = async (userInfo, from, setIsFetching, setAuth, navigate) => {
   const loading = toast.loading("Authenticating");
   try {
-    const sendData = await axios.post(LOGIN_URL, data, {
+    const sendData = await axios.post(LOGIN_URL, userInfo, {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     });
@@ -76,7 +70,7 @@ export const loginReq = async (
           autoClose: true,
           closeButton: true,
         });
-        navigate(`../verify?username=${data.username}`);
+        navigate(`../verify?username=${userInfo.username}`);
         break;
       default:
         toast.update(loading, {
@@ -104,7 +98,7 @@ export const registerReq = async (data, setIsFetching, navigate) => {
       closeButton: true,
     });
     setIsFetching(false);
-    navigate("../login");
+    navigate(`../verify?username=${data.username}`);
   } catch (error) {
     if (!error?.response) {
       toast.update(loading, {
@@ -203,7 +197,7 @@ export const verifyCodeReq = async (
       closeButton: true,
     });
     setIsFetching(false);
-    setTimeout(() => navigate("/dashboard"), 2000);
+    setTimeout(() => navigate("/"), 2000);
   } catch (error) {
     console.log(error);
     setIsFetching(false);
