@@ -1,95 +1,50 @@
-import useInput from "../../../../hooks/use-input";
-import {
-  StyledNewBot,
-  Input,
-  InputError,
-  AddButton,
-  Form,
-} from "../NewBot/Styled";
+import { StyledNewBot, AddButton, Form } from "../NewBot/Styled";
 import useAxiosPrivate from "../../../../hooks/use-axios-private";
 import { updateBotReq } from "../../../../services/bot";
+import InputField from "../../../../components/InputField";
+import useInput from "../../../../hooks/use-input";
 
 const EditBot = ({ bot, close, setBots }) => {
   const axiosPrivate = useAxiosPrivate();
-  const {
-    value: enteredGridInt,
-    inputBlurHandler: gridIntBlurHandler,
-    valueChangedHandler: gridIntChangedHandler,
-    isValid: gridIntIsValid,
-    hasError: gridIntHasError,
-  } = useInput((value) => value.trim() !== "", `${bot.grid_interval}`);
+  const gridIntHook = useInput(
+    (value) => value.trim() !== "",
+    `${bot.grid_interval}`
+  );
+  const { value: enteredGridInt, isValid: gridIntIsValid } = gridIntHook;
 
-  const {
-    value: enteredSymbol,
-    inputBlurHandler: symbolBluredHandler,
-    valueChangedHandler: symbolChangedHandler,
-    isValid: symbolIsValid,
-    hasError: symbolHasError,
-  } = useInput((value) => value.trim() !== "", `${bot.symbol}`);
+  const symbolHook = useInput((value) => value.trim() !== "", `${bot.symbol}`);
+  const { value: enteredSymbol, isValid: symbolIsValid } = symbolHook;
 
-  const {
-    value: enteredVolume,
-    inputBlurHandler: volumeBlurHandler,
-    valueChangedHandler: volumeChangedHandler,
-    isValid: volumeIsValid,
-    hasError: volumeHasError,
-  } = useInput((value) => value.trim() !== "", `${bot.volume}`);
+  const volumeHook = useInput((value) => value.trim() !== "", `${bot.volume}`);
+  const { value: enteredVolume, isValid: volumeIsValid } = volumeHook;
+  const tpHook = useInput((value) => value.trim() !== "", `${bot.take_profit}`);
+  const { value: enteredTP, isValid: tpIsValid } = tpHook;
+  const skipHook = useInput((value) => value.trim() !== "", `${bot.skip}`);
+  const { value: enteredSkip, isValid: skipIsValid } = skipHook;
+  const statusHook = useInput((value) => value.trim() !== "", `${bot.status}`);
+  const { value: enteredStatus, isValid: statusIsValid } = statusHook;
 
-  const {
-    value: enteredTP,
-    inputBlurHandler: tpBlurHandler,
-    valueChangedHandler: tpChangedHandler,
-    isValid: tpIsValid,
-    hasError: tpHasError,
-  } = useInput((value) => value.trim() !== "", `${bot.take_profit}`);
+  const pipMarginHook = useInput(
+    (value) => value.trim() !== "",
+    `${bot.pip_margin}`
+  );
+  const { value: enteredPipMargin, isValid: pipMarginIsValid } = pipMarginHook;
 
-  const {
-    value: enteredSkip,
-    inputBlurHandler: skipBlurHandler,
-    valueChangedHandler: skipChangedHandler,
-    isValid: skipIsValid,
-    hasError: skipHasError,
-  } = useInput((value) => value.trim() !== "", `${bot.skip}`);
+  const profitMarginHook = useInput(
+    (value) => value.trim() !== "",
+    `${bot.profit_margin}`
+  );
+  const { value: enteredProfitMargin, isValid: profitMarginIsValid } =
+    profitMarginHook;
 
-  const {
-    value: enteredStatus,
-    inputBlurHandler: statusBlurHandler,
-    valueChangedHandler: statusChangedHandler,
-    isValid: statusIsValid,
-    hasError: statusHasError,
-  } = useInput((value) => value.trim() !== "", `${bot.status}`);
+  const equityHook = useInput((value) => value.trim() !== "", `${bot.equity}`);
+  const { value: enteredEquity, isValid: equityIsValid } = equityHook;
 
-  const {
-    value: enteredPipMargin,
-    inputBlurHandler: pipMarginBlurHandler,
-    valueChangedHandler: pipMarginChangedHandler,
-    isValid: pipMarginIsValid,
-    hasError: pipMarginHasError,
-  } = useInput((value) => value.trim() !== "", `${bot.pip_margin}`);
-
-  const {
-    value: enteredProfitMargin,
-    inputBlurHandler: profitMarginBlurHandler,
-    valueChangedHandler: profitMarginChangedHandler,
-    isValid: profitMarginIsValid,
-    hasError: profitMarginHasError,
-  } = useInput((value) => value.trim() !== "", `${bot.profit_margin}`);
-
-  const {
-    value: enteredEquity,
-    inputBlurHandler: equityBlurHandler,
-    valueChangedHandler: equityChangedHandler,
-    isValid: equityIsValid,
-    hasError: equityHasError,
-  } = useInput((value) => value.trim() !== "", `${bot.equity}`);
-
-  const {
-    value: enteredMinCombo,
-    inputBlurHandler: minComboBlurHandler,
-    valueChangedHandler: minComboChangedHandler,
-    isValid: minComboIsValid,
-    hasError: minComboHasError,
-  } = useInput((value) => value.trim() !== "", `${bot.min_combo}`);
+  const minComboHook = useInput(
+    (value) => value.trim() !== "",
+    `${bot.min_combo}`
+  );
+  const { value: enteredMinCombo, isValid: minComboIsValid } = minComboHook;
 
   const formIsValid =
     gridIntIsValid &&
@@ -130,166 +85,119 @@ const EditBot = ({ bot, close, setBots }) => {
       <Form layout="1fr 1fr" onSubmit={formSubmitHandler}>
         <div>
           <label>Symbol:</label>
-          <Input
-            error={symbolHasError}
-            onChange={symbolChangedHandler}
-            onBlur={symbolBluredHandler}
+          <InputField
+            hook={symbolHook}
             value={enteredSymbol}
             type="text"
             placeholder="Enter Symbol"
+            message="Symbol cannot be empty"
           />
-          {symbolHasError ? (
-            <InputError>Symbol cannot be empty</InputError>
-          ) : (
-            ""
-          )}
         </div>
 
         <div>
           <label>Grid Interval:</label>
-          <Input
-            error={gridIntHasError}
-            onChange={gridIntChangedHandler}
-            onBlur={gridIntBlurHandler}
+          <InputField
+            hook={gridIntHook}
             value={enteredGridInt}
             type="number"
             placeholder="Enter Grid Interval"
+            message="Grid Int cannot be emptyW"
           />
-          {gridIntHasError ? (
-            <InputError>Grid Interval cannot be empty</InputError>
-          ) : (
-            ""
-          )}
         </div>
 
         <div>
           <label>Volume:</label>
-          <Input
-            error={volumeHasError}
-            onChange={volumeChangedHandler}
-            onBlur={volumeBlurHandler}
+          <InputField
+            hook={volumeHook}
             value={enteredVolume}
             type="number"
             placeholder="Enter Volume/Quantity"
             step="0.01"
+            message="Volume cannot be empty"
           />
         </div>
-        {volumeHasError ? <InputError>Volume cannot be empty</InputError> : ""}
+
         <div>
           <label>Take Profit:</label>
-          <Input
-            error={tpHasError}
-            onChange={tpChangedHandler}
-            onBlur={tpBlurHandler}
+          <InputField
+            hook={tpHook}
             value={enteredTP}
             type="number"
             placeholder="Enter Take Profit"
             step="0.01"
+            message="Take Profit cannot be empty"
           />
         </div>
-        {tpHasError ? <InputError>Take Profit cannot be empty</InputError> : ""}
+
         <div>
           <label>Trade Skip:</label>
-          <Input
-            error={skipHasError}
-            onChange={skipChangedHandler}
-            onBlur={skipBlurHandler}
+          <InputField
+            hook={skipHook}
             value={enteredSkip}
             type="number"
             placeholder="Enter Trade Close Margin"
             step="0.01"
+            message="Trade Skip cannot be empty"
           />
         </div>
-
-        {skipHasError ? (
-          <InputError>Trade Skip cannot be empty</InputError>
-        ) : (
-          ""
-        )}
         <div>
           <label>Pip Margin:</label>
-          <Input
-            error={pipMarginHasError}
-            onChange={pipMarginChangedHandler}
-            onBlur={pipMarginBlurHandler}
+          <InputField
+            hook={pipMarginHook}
             value={enteredPipMargin}
             type="number"
             placeholder="Enter Pip Margin"
             step="0.01"
+            message="Pip Margin cannot be empty"
           />
-          {pipMarginHasError ? (
-            <InputError>Pip Margin cannot be empty</InputError>
-          ) : (
-            ""
-          )}
         </div>
 
         <div>
           <label>Equity:</label>
-          <Input
-            error={equityHasError}
-            onChange={equityChangedHandler}
-            onBlur={equityBlurHandler}
+          <InputField
+            hook={equityHook}
             value={enteredEquity}
             type="number"
             placeholder="Enter Equity"
             step="0.001"
+            message="Equity cannot be empty"
           />
-          {pipMarginHasError ? (
-            <InputError>Trade Close Margin cannot be empty</InputError>
-          ) : (
-            ""
-          )}
         </div>
 
         <div>
           <label>Profit Margin:</label>
-          <Input
-            error={profitMarginHasError}
-            onChange={profitMarginChangedHandler}
-            onBlur={profitMarginBlurHandler}
+          <InputField
+            hook={profitMarginHook}
             value={enteredProfitMargin}
             type="number"
             placeholder="Enter Pip Margin"
             step="0.01"
+            message="Profit Margin cannot be empty"
           />
-          {profitMarginHasError ? (
-            <InputError>Profit Margin cannot be empty</InputError>
-          ) : (
-            ""
-          )}
         </div>
 
         <div>
           <label>Min Combo:</label>
-          <Input
-            error={minComboHasError}
-            onChange={minComboChangedHandler}
-            onBlur={minComboBlurHandler}
+          <InputField
+            hook={minComboHook}
             value={enteredMinCombo}
             type="number"
             placeholder="Enter Min Combo"
             step="0.01"
+            message="Min Combo cannot be empty"
           />
-          {minComboHasError ? (
-            <InputError>Min Combo cannot be empty</InputError>
-          ) : (
-            ""
-          )}
         </div>
 
         <div>
           <label>Status</label>
-          <Input
-            error={statusHasError}
-            onChange={statusChangedHandler}
-            onBlur={statusBlurHandler}
+          <InputField
+            hook={statusHook}
             value={enteredStatus}
             type="text"
             placeholder="Set Bot Status"
+            message="Status cannot be empty"
           />
         </div>
-        {statusHasError ? <InputError>Status cannot be empty</InputError> : ""}
 
         <AddButton disabled={!formIsValid} type="submit">
           Edit

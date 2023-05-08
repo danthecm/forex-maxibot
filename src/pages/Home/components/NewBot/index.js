@@ -1,15 +1,10 @@
 import useInput from "../../../../hooks/use-input";
 import useAxiosPrivate from "../../../../hooks/use-axios-private";
-import {
-  StyledNewBot,
-  Input,
-  InputError,
-  AddButton,
-  Form,
-  Select,
-} from "./Styled";
+import { StyledNewBot, AddButton, Form } from "./Styled";
 import useAuth from "../../../../hooks/use-auth";
 import { newBotReq } from "../../../../services/bot";
+import InputField from "../../../../components/InputField";
+import { InputError, Select } from "../../../../components/FormContorls";
 
 const NewBot = ({ close }) => {
   const { auth } = useAuth();
@@ -26,46 +21,17 @@ const NewBot = ({ close }) => {
     (value) => value.trim() !== "" && value !== "DEFAULT",
     "DEFAULT"
   );
-
-  const {
-    value: enteredGridInt,
-    inputBlurHandler: gridIntBlurHandler,
-    valueChangedHandler: gridIntChangedHandler,
-    isValid: gridIntIsValid,
-    hasError: gridIntHasError,
-  } = useInput((value) => value.trim() !== "");
-
-  const {
-    value: enteredVolume,
-    inputBlurHandler: volumeBlurHandler,
-    valueChangedHandler: volumeChangedHandler,
-    isValid: volumeIsValid,
-    hasError: volumeHasError,
-  } = useInput((value) => value.trim() !== "");
-
-  const {
-    value: enteredTP,
-    inputBlurHandler: tpBlurHandler,
-    valueChangedHandler: tpChangedHandler,
-    isValid: tpIsValid,
-    hasError: tpHasError,
-  } = useInput((value) => value.trim() !== "");
-
-  const {
-    value: enteredProfitMargin,
-    inputBlurHandler: profitMarginBlurHandler,
-    valueChangedHandler: profitMarginChangedHandler,
-    isValid: profitMarginIsValid,
-    hasError: profitMarginHasError,
-  } = useInput((value) => value.trim() !== "");
-
-  const {
-    value: enteredPipMargin,
-    inputBlurHandler: pipMarginBlurHandler,
-    valueChangedHandler: pipMarginChangedHandler,
-    isValid: pipMarginIsValid,
-    hasError: pipMarginHasError,
-  } = useInput((value) => value.trim() !== "");
+  const gridIntHook = useInput((value) => value.trim() !== "");
+  const { value: enteredGridInt, isValid: gridIntIsValid } = gridIntHook;
+  const volumeHook = useInput((value) => value.trim() !== "");
+  const { value: enteredVolume, isValid: volumeIsValid } = volumeHook;
+  const tpHook = useInput((value) => value.trim() !== "");
+  const { value: enteredTP, isValid: tpIsValid } = tpHook;
+  const profitMarginHook = useInput((value) => value.trim() !== "");
+  const { value: enteredProfitMargin, isValid: profitMarginIsValid } =
+    profitMarginHook;
+  const pipMarginHook = useInput((value) => value.trim() !== "");
+  const { value: enteredPipMargin, isValid: pipMarginIsValid } = pipMarginHook;
 
   const formIsValid =
     gridIntIsValid &&
@@ -110,71 +76,49 @@ const NewBot = ({ close }) => {
           <option value="EURJPY">EURJPY</option>
         </Select>
         {symbolHasError ? <InputError>Please select a symbol</InputError> : ""}
-        <Input
-          error={gridIntHasError}
-          onChange={gridIntChangedHandler}
-          onBlur={gridIntBlurHandler}
+        <InputField
+          hook={gridIntHook}
           value={enteredGridInt}
           type="number"
           placeholder="Enter Grid Interval"
+          message="Grid Interval cannot be empty"
         />
-        {gridIntHasError ? (
-          <InputError>Grid Interval cannot be empty</InputError>
-        ) : (
-          ""
-        )}
 
-        <Input
-          error={volumeHasError}
-          onChange={volumeChangedHandler}
-          onBlur={volumeBlurHandler}
+        <InputField
+          hook={volumeHook}
           value={enteredVolume}
           type="number"
           placeholder="Enter Volume / Size"
           step="0.01"
+          message="Volume cannot be empty"
         />
-        {volumeHasError ? <InputError>Volume cannot be empty</InputError> : ""}
 
-        <Input
-          error={tpHasError}
-          onChange={tpChangedHandler}
-          onBlur={tpBlurHandler}
+        <InputField
+          hook={tpHook}
           value={enteredTP}
           type="number"
           placeholder="Enter Take Profit"
           step="0.01"
+          message="Take Profit cannot be empty"
         />
-        {tpHasError ? <InputError>Take Profit cannot be empty</InputError> : ""}
 
-        <Input
-          error={profitMarginHasError}
-          onChange={profitMarginChangedHandler}
-          onBlur={profitMarginBlurHandler}
+        <InputField
+          hook={profitMarginHook}
           value={enteredProfitMargin}
           type="number"
           placeholder="Enter Profit Margin"
           step="0.01"
+          message="Trade Close Margin cannot be empty"
         />
-        {profitMarginHasError ? (
-          <InputError>Trade Close Margin cannot be empty</InputError>
-        ) : (
-          ""
-        )}
 
-        <Input
-          error={pipMarginHasError}
-          onChange={pipMarginChangedHandler}
-          onBlur={pipMarginBlurHandler}
+        <InputField
+          hook={pipMarginHook}
           value={enteredPipMargin}
           type="number"
           placeholder="Enter Pip Margin"
           step="0.01"
+          message="Pip Margin cannot be empty"
         />
-        {pipMarginHasError ? (
-          <InputError>Pip Margin cannot be empty</InputError>
-        ) : (
-          ""
-        )}
 
         <AddButton disabled={!formIsValid} type="submit">
           Add New

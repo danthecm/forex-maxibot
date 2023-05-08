@@ -1,31 +1,34 @@
 import React from "react";
-import { Error } from "../Auth/Styled";
+import { Input, InputError } from "../FormContorls";
 
 const InputField = ({
-  name,
   type,
   hook,
   message,
   placeholder,
   autoComplete,
   pattern,
+  ...otherOptions
 }) => {
-  const { inputBlurHandler, valueChangedHandler, hasError } = hook;
+  const inputBlurHandler = hook?.inputBlurHandler;
+  const valueChangedHandler = hook?.valueChangedHandler;
+  const hasError = hook?.hasError;
+
   return (
     <>
-      <input
+      <Input
         className={hasError ? "invalid" : ""}
         placeholder={placeholder}
         type={type}
-        name={name}
         aria-invalid={hasError}
         aria-describedby={message}
         onChange={valueChangedHandler}
         onBlur={inputBlurHandler}
         autoComplete={autoComplete}
         pattern={pattern}
+        {...otherOptions}
       />
-      {hasError ? <Error>{message}</Error> : ""}
+      {hasError ? <InputError>{message}</InputError> : ""}
     </>
   );
 };
