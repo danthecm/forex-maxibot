@@ -6,6 +6,7 @@ import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register/index";
 import Verify from "../pages/Auth/Verficiation/Verify";
 import Dashboard from "../pages/Home/";
+import PlatformReg from "../pages/Auth/PlatformReg";
 
 const routerConfig = createBrowserRouter([
   {
@@ -39,6 +40,11 @@ const routerConfig = createBrowserRouter([
             element: <Dashboard />,
           },
         ],
+      },
+      {
+        path: "new-platform",
+        element: <Auth />,
+        children: [{ index: true, element: <PlatformReg /> }],
       },
     ],
   },
