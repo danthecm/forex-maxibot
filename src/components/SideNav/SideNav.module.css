@@ -39,6 +39,7 @@
 }
 
 .sidenav:hover .logo__small {
+  transition: opacity 0.5s ease-in-out;
   opacity: 0;
   pointer-events: none;
 }
