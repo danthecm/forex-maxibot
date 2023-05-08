@@ -91,6 +91,7 @@ const EditBot = ({ bot, close, setBots }) => {
             type="text"
             placeholder="Enter Symbol"
             message="Symbol cannot be empty"
+            bg="#f1f1f1"
           />
         </div>
 
@@ -101,7 +102,8 @@ const EditBot = ({ bot, close, setBots }) => {
             value={enteredGridInt}
             type="number"
             placeholder="Enter Grid Interval"
-            message="Grid Int cannot be emptyW"
+            message="Grid Int cannot be empty"
+            bg="#f1f1f1"
           />
         </div>
 
@@ -114,6 +116,7 @@ const EditBot = ({ bot, close, setBots }) => {
             placeholder="Enter Volume/Quantity"
             step="0.01"
             message="Volume cannot be empty"
+            bg="#f1f1f1"
           />
         </div>
 
@@ -126,6 +129,7 @@ const EditBot = ({ bot, close, setBots }) => {
             placeholder="Enter Take Profit"
             step="0.01"
             message="Take Profit cannot be empty"
+            bg="#f1f1f1"
           />
         </div>
 
@@ -138,6 +142,7 @@ const EditBot = ({ bot, close, setBots }) => {
             placeholder="Enter Trade Close Margin"
             step="0.01"
             message="Trade Skip cannot be empty"
+            bg="#f1f1f1"
           />
         </div>
         <div>
@@ -149,6 +154,7 @@ const EditBot = ({ bot, close, setBots }) => {
             placeholder="Enter Pip Margin"
             step="0.01"
             message="Pip Margin cannot be empty"
+            bg="#f1f1f1"
           />
         </div>
 
@@ -161,6 +167,7 @@ const EditBot = ({ bot, close, setBots }) => {
             placeholder="Enter Equity"
             step="0.001"
             message="Equity cannot be empty"
+            bg="#f1f1f1"
           />
         </div>
 
@@ -173,6 +180,7 @@ const EditBot = ({ bot, close, setBots }) => {
             placeholder="Enter Pip Margin"
             step="0.01"
             message="Profit Margin cannot be empty"
+            bg="#f1f1f1"
           />
         </div>
 
@@ -185,6 +193,7 @@ const EditBot = ({ bot, close, setBots }) => {
             placeholder="Enter Min Combo"
             step="0.01"
             message="Min Combo cannot be empty"
+            bg="#f1f1f1"
           />
         </div>
 
@@ -196,6 +205,7 @@ const EditBot = ({ bot, close, setBots }) => {
             type="text"
             placeholder="Set Bot Status"
             message="Status cannot be empty"
+            bg="#f1f1f1"
           />
         </div>
 

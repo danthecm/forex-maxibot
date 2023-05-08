@@ -67,6 +67,7 @@ const NewBot = ({ close }) => {
           onChange={symbolIsChanged}
           value={enteredSymbol}
           error={symbolHasError}
+          bg="#f1f1f1"
         >
           <option value="DEFAULT" disabled hidden>
             --Select Pair---
@@ -82,6 +83,7 @@ const NewBot = ({ close }) => {
           type="number"
           placeholder="Enter Grid Interval"
           message="Grid Interval cannot be empty"
+          bg="#f1f1f1"
         />
 
         <InputField
@@ -91,6 +93,7 @@ const NewBot = ({ close }) => {
           placeholder="Enter Volume / Size"
           step="0.01"
           message="Volume cannot be empty"
+          bg="#f1f1f1"
         />
 
         <InputField
@@ -100,6 +103,7 @@ const NewBot = ({ close }) => {
           placeholder="Enter Take Profit"
           step="0.01"
           message="Take Profit cannot be empty"
+          bg="#f1f1f1"
         />
 
         <InputField
@@ -109,6 +113,7 @@ const NewBot = ({ close }) => {
           placeholder="Enter Profit Margin"
           step="0.01"
           message="Trade Close Margin cannot be empty"
+          bg="#f1f1f1"
         />
 
         <InputField
@@ -118,6 +123,7 @@ const NewBot = ({ close }) => {
           placeholder="Enter Pip Margin"
           step="0.01"
           message="Pip Margin cannot be empty"
+          bg="#f1f1f1"
         />
 
         <AddButton disabled={!formIsValid} type="submit">
