@@ -31,10 +31,6 @@ export const Input = styled.input`
   &[type="number"] {
     -moz-appearance: textfield;
   }
-
-  &[type="text"] {
-    text-transform: capitalize;
-  }
 `;
 
 export const Select = styled.select`
