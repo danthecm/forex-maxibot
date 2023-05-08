@@ -60,6 +60,9 @@ const AddPlatformForm = () => {
         </option>
         <option value="FPMarkets-Live">FPMarkets-Live2</option>
         <option value="FPMarkets-Demo">FPMarkets-Demo</option>
+
+        <option value="AdmiralMarkets-Live">AdmiralMarkets-Live2</option>
+        <option value="AdmiralMarkets-Demo">AdmiralMarkets-Demo</option>
       </Select>
       {serverHasError ? <Error>Please select a symbol</Error> : ""}
       <InputField
