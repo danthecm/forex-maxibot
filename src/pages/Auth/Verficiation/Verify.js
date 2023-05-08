@@ -9,7 +9,6 @@ const Verify = () => {
   let location = useLocation();
   let searchParams = new URLSearchParams(location.search);
   const username = searchParams.get("username");
-  console.log("username: " + username);
   const navigate = useNavigate();
 
   const formSubmitHandler = (e) => {
@@ -19,7 +18,9 @@ const Verify = () => {
       element["code1"].value +
       element["code2"].value +
       element["code3"].value +
-      element["code4"].value;
+      element["code4"].value +
+      element["code5"].value +
+      element["code6"].value;
 
     verifyCodeReq(code, username, setIsFetching, navigate);
   };
@@ -66,6 +67,22 @@ const Verify = () => {
           />
           <InputField
             name="code4"
+            type="text"
+            pattern="\d*"
+            maxLength="1"
+            title="only numbers are allowed"
+            required
+          />
+          <InputField
+            name="code5"
+            type="text"
+            pattern="\d*"
+            maxLength="1"
+            title="only numbers are allowed"
+            required
+          />
+          <InputField
+            name="code6"
             type="text"
             pattern="\d*"
             maxLength="1"
