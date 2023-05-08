@@ -48,13 +48,17 @@ const AddPlatformForm = () => {
     };
     setIsLoading(true);
     console.log("The trade platoform is: ", tradeProfile);
-    try {
-      newProfileReq(axiosPrivate, tradeProfile);
-      setIsLoading(false);
-      navigate("/");
-    } catch (error) {
-      setIsLoading(false);
-    }
+
+    const sendProfileRequest = async () => {
+      try {
+        await newProfileReq(axiosPrivate, tradeProfile);
+        setIsLoading(false);
+        navigate("/");
+      } catch (error) {
+        setIsLoading(false);
+        console.log("There was an error ", error);
+      }
+    };
   };
 
   return (
