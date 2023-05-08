@@ -3,6 +3,7 @@ import { AuthForm, Error } from "../Styled";
 import InputField from "../../InputField";
 import useInput from "../../../hooks/use-input";
 import useAuth from "../../../hooks/use-auth";
+import useAxiosPrivate from "../../../hooks/use-axios-private";
 
 import { AddButton } from "../../../pages/Home/components/NewBot/Styled";
 import { Select } from "../../FormContorls/";
@@ -12,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 const AddPlatformForm = () => {
   const { auth } = useAuth();
   const navigate = useNavigate();
+  const axiosPrivate = useAxiosPrivate();
 
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -46,7 +48,7 @@ const AddPlatformForm = () => {
     };
     setIsLoading(true);
     try {
-      newProfileReq(tradeProfile);
+      newProfileReq(axiosPrivate, tradeProfile);
       setIsLoading(false);
       navigate("/");
     } catch (error) {

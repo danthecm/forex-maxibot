@@ -18,7 +18,7 @@ const PlatformReg = () => {
             <span>Add a Trading Profile</span> to continue
           </p>
           <Card>
-            <AddPlatformForm />{" "}
+            <AddPlatformForm />
           </Card>
         </section>
       </>
