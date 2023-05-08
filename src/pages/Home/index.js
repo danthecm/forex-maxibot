@@ -13,16 +13,26 @@ import filter__icon from "../../assets/Icons/filter.svg";
 import styles from "./Dashboard.module.css";
 import { BOT_URL } from "../../config/urls";
 import useAxiosPrivate from "../../hooks/use-axios-private";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [showModal, setShowModal] = useState(false);
   const { auth } = useAuth();
   const [bots, setBots] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
+  const navigate = useNavigate();
 
   const token = useMemo(() => auth.accessToken, [auth]);
 
   const axiosPrivate = useAxiosPrivate();
+
+  useEffect(() => {
+    const user = auth?.user;
+    if (user.trade_profile.length > 0) {
+      return;
+    }
+    navigate("/new-platform");
+  }, [auth, navigate]);
 
   useEffect(() => {
     setIsFetching(true);
