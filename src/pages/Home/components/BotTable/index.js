@@ -34,7 +34,7 @@ const BotTable = ({ bots, setBots, isFetching }) => {
             </TR>
           ) : bots.length ? (
             bots.map((bot, index) => (
-              <TR key={bot.id}>
+              <TR key={index}>
                 <TD>{index + 1}</TD>
                 <TD>{bot.symbol}</TD>
                 <TD>{bot.equity || "Grid"}</TD>
