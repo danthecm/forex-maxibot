@@ -11,7 +11,7 @@ import { newProfileReq } from "../../../services/trade-profile";
 import { useNavigate } from "react-router-dom";
 
 const AddPlatformForm = () => {
-  const { auth } = useAuth();
+  const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
 
@@ -53,6 +53,13 @@ const AddPlatformForm = () => {
       try {
         await newProfileReq(axiosPrivate, tradeProfile);
         setIsLoading(false);
+        setAuth((auth) => {
+          let user = auth?.user;
+          const trade_profile = [...user?.trade_profile];
+          trade_profile.push(tradeProfile);
+          user = { ...user, trade_profile };
+          return { ...auth, user };
+        });
         navigate("/");
       } catch (error) {
         setIsLoading(false);
