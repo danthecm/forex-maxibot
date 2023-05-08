@@ -59,6 +59,8 @@ const AddPlatformForm = () => {
         console.log("There was an error ", error);
       }
     };
+
+    sendProfileRequest();
   };
 
   return (
