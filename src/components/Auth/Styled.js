@@ -8,7 +8,7 @@ export const Main = styled.main`
   background-size: cover;
   opacity: 98%;
   height: 100vh;
-  grid-template-rows: 0.1fr auto none;
+  grid-template-rows: 0.1fr auto;
   width: 100vw;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -23,6 +23,14 @@ export const Main = styled.main`
   .subText {
     line-height: 30px;
     text-align: justify;
+  }
+
+  @media screen and (max-width: 768px) {
+    .logo {
+      position: static;
+      height: 60px;
+      margin: 20px auto;
+    }
   }
 `;
 
@@ -59,6 +67,33 @@ export const AuthContainer = styled.div`
   .invalid {
     background: url("../../assets/icon-error.svg") no-repeat scroll 97% 10px;
     border: 2px solid hsl(0, 100%, 74%) !important;
+  }
+
+  @media screen and (max-width: 769px) {
+    grid-template-columns: auto;
+    padding: 0 2rem;
+    height: auto;
+    & > div {
+      text-align: center;
+    }
+    .subText {
+      display: none;
+    }
+    .title {
+      display: none;
+    }
+    h2 {
+      font-size: 24px;
+      margin: 10px 0 5px 0;
+      text-align: center;
+    }
+    div > p {
+      margin-bottom: 20px;
+    }
+  }
+
+  @media screen and (max-width: 375px) {
+    padding: 2rem 1rem;
   }
 `;
 
