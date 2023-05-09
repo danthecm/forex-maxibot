@@ -19,8 +19,6 @@ const EditBot = ({ bot, close, setBots }) => {
   const { value: enteredVolume, isValid: volumeIsValid } = volumeHook;
   const tpHook = useInput((value) => value.trim() !== "", `${bot.take_profit}`);
   const { value: enteredTP, isValid: tpIsValid } = tpHook;
-  const skipHook = useInput((value) => value.trim() !== "", `${bot.skip}`);
-  const { value: enteredSkip, isValid: skipIsValid } = skipHook;
   const statusHook = useInput((value) => value.trim() !== "", `${bot.status}`);
   const { value: enteredStatus, isValid: statusIsValid } = statusHook;
 
@@ -50,7 +48,6 @@ const EditBot = ({ bot, close, setBots }) => {
     gridIntIsValid &&
     volumeIsValid &&
     tpIsValid &&
-    skipIsValid &&
     pipMarginIsValid &&
     statusIsValid &&
     equityIsValid &&
@@ -65,7 +62,6 @@ const EditBot = ({ bot, close, setBots }) => {
     }
     const botInfo = {
       grid_interval: enteredGridInt,
-      skip: enteredSkip,
       pip_margin: enteredPipMargin,
       volume: enteredVolume,
       take_profit: enteredTP,
@@ -133,18 +129,6 @@ const EditBot = ({ bot, close, setBots }) => {
           />
         </div>
 
-        <div>
-          <label>Trade Skip:</label>
-          <InputField
-            hook={skipHook}
-            value={enteredSkip}
-            type="number"
-            placeholder="Enter Trade Close Margin"
-            step="0.01"
-            message="Trade Skip cannot be empty"
-            bg="#f1f1f1"
-          />
-        </div>
         <div>
           <label>Pip Margin:</label>
           <InputField
