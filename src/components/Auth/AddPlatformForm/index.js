@@ -47,20 +47,22 @@ const AddPlatformForm = () => {
       user: auth?.user?.id,
     };
     setIsLoading(true);
-    console.log("The trade platoform is: ", tradeProfile);
 
     const sendProfileRequest = async () => {
       try {
         await newProfileReq(axiosPrivate, tradeProfile);
         setIsLoading(false);
-        setAuth((auth) => {
-          let user = auth?.user;
-          const trade_profile = [...user?.trade_profile];
-          trade_profile.push(tradeProfile);
-          user = { ...user, trade_profile };
-          return { ...auth, user };
-        });
+        let user = auth?.user;
+        const trade_profile = [...user?.trade_profile];
+        trade_profile.push(tradeProfile);
+        user = { ...user, trade_profile };
+        const newAuth = { ...auth, user };
+        setAuth(newAuth);
+        console.log("The new auth is ", newAuth);
+        localStorage.setItem("user", JSON.stringify(newAuth));
+        console.log("Redirecting to dashboard");
         navigate("/");
+        console.log("Finished redirecting to dashboard");
       } catch (error) {
         setIsLoading(false);
         console.log("There was an error ", error);
