@@ -20,19 +20,10 @@ const Dashboard = () => {
   const { auth } = useAuth();
   const [bots, setBots] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
-  const navigate = useNavigate();
 
   const token = useMemo(() => auth.accessToken, [auth]);
 
   const axiosPrivate = useAxiosPrivate();
-
-  useEffect(() => {
-    const user = auth?.user;
-    if (user.trade_profile.length > 0) {
-      return;
-    }
-    navigate("/new-platform");
-  }, [auth, navigate]);
 
   useEffect(() => {
     setIsFetching(true);
