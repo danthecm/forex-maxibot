@@ -13,7 +13,7 @@ import filter__icon from "../../assets/Icons/filter.svg";
 import styles from "./Dashboard.module.css";
 import { BOT_URL } from "../../config/urls";
 import useAxiosPrivate from "../../hooks/use-axios-private";
-import { useNavigate } from "react-router-dom";
+
 
 const Dashboard = () => {
   const [showModal, setShowModal] = useState(false);
