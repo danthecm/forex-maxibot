@@ -7,7 +7,13 @@ import {
   VERIFY_URL,
 } from "../config/urls";
 
-export const loginReq = async (userInfo, from, setIsFetching, setAuth, navigate) => {
+export const loginReq = async (
+  userInfo,
+  from,
+  setIsFetching,
+  setAuth,
+  navigate
+) => {
   const loading = toast.loading("Authenticating");
   try {
     const sendData = await axios.post(LOGIN_URL, userInfo, {
@@ -26,10 +32,6 @@ export const loginReq = async (userInfo, from, setIsFetching, setAuth, navigate)
     localStorage.setItem("user", JSON.stringify(user));
     setIsFetching(false);
     setTimeout(() => {
-      if (user.user.trade_profile.length < 0) {
-        navigate("/new-platform", { replace: true });
-        return;
-      }
       navigate(from, { replace: true });
     }, 1000);
   } catch (error) {

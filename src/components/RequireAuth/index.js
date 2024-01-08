@@ -3,10 +3,14 @@ import useAuth from "../../hooks/use-auth";
 
 const RequireAuth = () => {
   const location = useLocation();
-  const {auth} = useAuth();
+  const { auth } = useAuth();
 
   return auth?.user ? (
-    <Outlet />
+    auth?.user?.trade_profile.length <= 0 ? (
+      <Navigate to="/new-platform" state={{ from: location }} replace />
+    ) : (
+      <Outlet />
+    )
   ) : (
     <Navigate to="auth/login/" state={{ from: location }} replace />
   );

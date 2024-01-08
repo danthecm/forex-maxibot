@@ -58,11 +58,10 @@ const AddPlatformForm = () => {
         user = { ...user, trade_profile };
         const newAuth = { ...auth, user };
         setAuth(newAuth);
-        console.log("The new auth is ", newAuth);
         localStorage.setItem("user", JSON.stringify(newAuth));
-        console.log("Redirecting to dashboard");
-        navigate("/");
-        console.log("Finished redirecting to dashboard");
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
       } catch (error) {
         setIsLoading(false);
         console.log("There was an error ", error);
@@ -110,7 +109,7 @@ const AddPlatformForm = () => {
       <InputField
         value={enteredPassword}
         hook={passwordHook}
-        type="text"
+        type="password"
         placeholder="Enter MT5 Password"
         message="MT5 Password cannot be empty"
       />

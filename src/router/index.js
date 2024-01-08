@@ -41,12 +41,12 @@ const routerConfig = createBrowserRouter([
           },
         ],
       },
-      {
-        path: "new-platform",
-        element: <Auth />,
-        children: [{ index: true, element: <PlatformReg /> }],
-      },
     ],
+  },
+  {
+    path: "new-platform",
+    element: <Auth />,
+    children: [{ index: true, element: <PlatformReg /> }],
   },
 ]);
 
