@@ -30,7 +30,7 @@ export const updateBotReq = async (axiosPrivate, bot_id, botInfo, setBots) => {
     await axiosPrivate.patch(`${BOT_URL}${bot_id}/`, botInfo);
     setBots((prev) => {
       const newBot = prev.filter((value) => value.id !== bot_id);
-      newBot.push({ ...newBot, ...botInfo });
+      newBot.push({ ...newBot, ...botInfo, id: bot_id });
       return newBot;
     });
     toast.update(updating, {
