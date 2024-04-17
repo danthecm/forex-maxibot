@@ -17,7 +17,7 @@ const RegisterForm = () => {
     valueChangedHandler: usernameChangedHandler,
     isValid: usernameIsValid,
     hasError: usernameHasError,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput((value) => value.length >= 3);
 
   const {
     value: enteredEmail,
