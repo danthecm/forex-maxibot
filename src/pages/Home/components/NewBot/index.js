@@ -33,12 +33,18 @@ const NewBot = ({ close }) => {
   const pipMarginHook = useInput((value) => value.trim() !== "");
   const { value: enteredPipMargin, isValid: pipMarginIsValid } = pipMarginHook;
 
+  const ratioHook = useInput(
+    (value) => value.trim() !== "" && Number(value) >= 0 && Number(value) <= 100
+  );
+  const { value: enteredRatio, isValid: ratioIsValid } = ratioHook;
+
   const formIsValid =
     gridIntIsValid &&
     volumeIsValid &&
     tpIsValid &&
     pipMarginIsValid &&
     profitMarginIsValid &&
+    ratioIsValid &&
     symbolIsValid;
 
   const formSubmitHandler = (e) => {
@@ -54,6 +60,7 @@ const NewBot = ({ close }) => {
       take_profit: enteredTP,
       status: "running",
       profit_margin: enteredProfitMargin,
+      ratio: enteredRatio,
       profile: auth.user.trade_profile[0].id,
     };
     newBotReq(axiosPrivate, botInfo);
@@ -113,6 +120,15 @@ const NewBot = ({ close }) => {
           placeholder="Enter Profit Margin"
           step="0.01"
           message="Trade Close Margin cannot be empty"
+          bg="#f1f1f1"
+        />
+
+        <InputField
+          hook={ratioHook}
+          value={enteredRatio}
+          type="number"
+          placeholder="Enter Ratio"
+          message="Ratio cannot be empty and must be between 0 and 100"
           bg="#f1f1f1"
         />
 

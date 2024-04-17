@@ -44,6 +44,13 @@ const EditBot = ({ bot, close, setBots }) => {
   );
   const { value: enteredMinCombo, isValid: minComboIsValid } = minComboHook;
 
+  const ratioHook = useInput(
+    (value) =>
+      value.trim() !== "" && Number(value) >= 0 && Number(value) <= 100,
+    `${bot.ratio}`
+  );
+  const { value: enteredRatio, isValid: ratioIsValid } = ratioHook;
+
   const formIsValid =
     gridIntIsValid &&
     volumeIsValid &&
@@ -53,6 +60,7 @@ const EditBot = ({ bot, close, setBots }) => {
     equityIsValid &&
     profitMarginIsValid &&
     minComboIsValid &&
+    ratioIsValid &&
     symbolIsValid;
 
   const formSubmitHandler = (e) => {
@@ -69,6 +77,7 @@ const EditBot = ({ bot, close, setBots }) => {
       equity: enteredEquity,
       profit_margin: enteredProfitMargin,
       min_combo: enteredMinCombo,
+      ratio: enteredRatio,
       symbol: enteredSymbol,
     };
 
@@ -177,6 +186,18 @@ const EditBot = ({ bot, close, setBots }) => {
             placeholder="Enter Min Combo"
             step="0.01"
             message="Min Combo cannot be empty"
+            bg="#f1f1f1"
+          />
+        </div>
+
+        <div>
+          <label>Ratio</label>
+          <InputField
+            hook={ratioHook}
+            value={enteredRatio}
+            type="number"
+            placeholder="Set Bot Ratio"
+            message="Ratio cannot be empty and must be between 0 and 100"
             bg="#f1f1f1"
           />
         </div>
