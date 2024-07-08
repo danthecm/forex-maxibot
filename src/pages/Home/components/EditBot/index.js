@@ -44,6 +44,10 @@ const EditBot = ({ bot, close, setBots }) => {
   );
   const { value: enteredMinCombo, isValid: minComboIsValid } = minComboHook;
 
+  const minMarginLevel = useInput((value) => true, `${bot.min_margin_level}`);
+  const { value: enteredMinMarginLevel, isValid: minMarginLevelIsValid } =
+    minMarginLevel;
+
   const ratioHook = useInput(
     (value) =>
       value.trim() !== "" && Number(value) >= 0 && Number(value) <= 100,
@@ -60,6 +64,7 @@ const EditBot = ({ bot, close, setBots }) => {
     equityIsValid &&
     profitMarginIsValid &&
     minComboIsValid &&
+    minMarginLevelIsValid &&
     ratioIsValid &&
     symbolIsValid;
 
@@ -77,6 +82,7 @@ const EditBot = ({ bot, close, setBots }) => {
       equity: enteredEquity,
       profit_margin: enteredProfitMargin,
       min_combo: enteredMinCombo,
+      min_margin_level: enteredMinMarginLevel,
       ratio: enteredRatio,
       symbol: enteredSymbol,
     };
@@ -186,6 +192,18 @@ const EditBot = ({ bot, close, setBots }) => {
             placeholder="Enter Min Combo"
             step="0.01"
             message="Min Combo cannot be empty"
+            bg="#f1f1f1"
+          />
+        </div>
+
+        <div>
+          <label>Min Margin Level:</label>
+          <InputField
+            hook={minMarginLevel}
+            value={enteredMinMarginLevel}
+            type="number"
+            placeholder="Enter Min Margin Level"
+            message="Min Margin Level cannot be empty"
             bg="#f1f1f1"
           />
         </div>
